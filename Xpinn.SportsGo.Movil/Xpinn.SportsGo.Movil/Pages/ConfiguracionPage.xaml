@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.Pages.ConfiguracionPage"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:app="clr-namespace:Xpinn.SportsGo.Movil"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             Title="{markup:Translate Configuracion}"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="20,20,20,10">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <ffimageloading:CachedImage Source="{Binding Persona.UrlImagenPerfil}" LoadingPlaceholder="{StaticResource RutaDefaultImagenPerfil}"
+                                                HeightRequest="55" WidthRequest="55" DownsampleToViewSize="True" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}" >
+                        <ffimageloading:CachedImage.Triggers>
+                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding Persona.UrlImagenPerfil}" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Source" Value="{StaticResource RutaDefaultImagenPerfil}" />
+                                <Setter Property="Aspect" Value="Fill" />
+                            </DataTrigger>
+                        </ffimageloading:CachedImage.Triggers>
+                    </ffimageloading:CachedImage>
+                    <StackLayout Margin="10,0,0,0">
+                        <Label Text="{Binding NombreDelUsuario}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" >
+                            <Label.Effects>
+                                <effects:SizeFontToFitEffect />
+                            </Label.Effects>
+                        </Label>
+                        <Label Text="{Binding NombreTipoPerfil}" TextColor="Black" FontSize="Small" />
+                    </StackLayout>
+                </StackLayout>
+                <Frame Padding="10" Margin="0,20" CornerRadius="10"
+                       OutlineColor="{StaticResource PrimaryAppColor}" BackgroundColor="{Static app:App.PrimaryColorWithAlpha}" >
+                    <Frame.HasShadow>
+                        <OnPlatform x:TypeArguments="x:Boolean"
+                                iOS="False"
+                                Android="True" />
+                    </Frame.HasShadow>
+                    <StackLayout>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                               Text="{markup:Translate Plan}" FontAttributes="Bold" TextColor="Black" FontSize="Small"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"
+                               Text="{Binding NombreDelPlan}" FontSize="Medium" TextColor="{StaticResource PrimaryAppColor}">
+                            <Label.Effects>
+                                <effects:UnderlineEffect />
+                            </Label.Effects>
+                        </Label>
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                                   Text="{markup:Translate VencePlan}" FontSize="Micro" TextColor="Black" />
+                            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                                   Text="{Binding VencimientoDelPlan}" FontSize="Micro" TextColor="Black" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Label  Margin="0,10,0,0" Text="{markup:Translate ConfiguracionDeLaCuenta}" FontSize="Small" TextColor="{StaticResource PrimaryAppColor}"/>
+                <StackLayout Margin="0,5,0,0" fe:TappedGestureAttached.Command="{Binding VerDatosCuenta}">
+                    <Label Text="{markup:Translate DatosDeLaCuenta}" FontAttributes="Bold" FontSize="Medium" TextColor="Black" />
+                    <Label Text="{markup:Translate DetalleDatosDeLaCuenta}" FontSize="Small" />
+                </StackLayout>
+                <StackLayout Margin="0,8,0,0" IsVisible="False">
+                    <Label Text="{markup:Translate TermasDeLaAplicacion}" FontAttributes="Bold" FontSize="Medium" TextColor="Black" />
+                    <Label Text="{markup:Translate DetalleTemasDeLaAplicacion}" FontSize="Small" />
+                </StackLayout>
+                <StackLayout Margin="0,8,0,0" fe:TappedGestureAttached.Command="{Binding VerDetallePlan}">
+                    <Label Text="{markup:Translate PlanDeLaCuenta}" FontAttributes="Bold" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{markup:Translate DetallePlanDeLaCuenta}" FontSize="Small" LineBreakMode="TailTruncation" />
+                </StackLayout>
+                <StackLayout Margin="0,8,0,0" fe:TappedGestureAttached.Command="{Binding HistorialPagos}">
+                    <Label Text="{markup:Translate HistorialPagos}" FontAttributes="Bold" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{markup:Translate DetalleHistorialPagos}" FontSize="Small" />
+                </StackLayout>
+                <Label Text="{markup:Translate Otros}" FontSize="Small" Margin="0,20,0,0" TextColor="{StaticResource PrimaryAppColor}"/>
+                <StackLayout Margin="0,5,0,0" fe:TappedGestureAttached.Command="{Binding VerTerminosCondiciones}">
+                    <Label Text="{markup:Translate TerminosYCondiciones}" FontAttributes="Bold" FontSize="Medium" TextColor="Black" />
+                    <Label Text="{markup:Translate DetalleTerminosYCondiciones}" FontSize="Small" />
+                </StackLayout>
+                <StackLayout Margin="0,8,0,0">
+                    <Label Text="{markup:Translate VersionApp}" FontAttributes="Bold" FontSize="Medium" TextColor="Black" />
+                    <Label Text="{Binding DetalleDeVersion}" FontSize="Small" />
+                </StackLayout>
+                <Button Margin="0,10,0,0" Text="{markup:Translate CerrarSesion}" FontSize="Medium" BackgroundColor="Transparent" TextColor="Red" Command="{Binding CerrarSesion}"/>
+            </StackLayout>
+        </ScrollView> 
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

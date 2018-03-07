@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- LOADING -->
+@*<div id="ms-preload" class="ms-preload" style="display:block !important;">
+    <div id="status" style="display:block !important;">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+    </div>
+</div>*@
+
+<!-- RELEASE -->
+<div class="noPaddingLeft LeftRightNav panel-group col-xs-3 col-sm-3 col-md-3 col-lg-3 ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="sidebar-nav-fixed  col-xs-3 col-sm-3 col-md-3 col-lg-3 affix" style="padding-left:0px !important">
+        <div class="panel panel-primary">
+            <div class="card card-primary">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title ms-rotate-icon">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <i class="zmdi zmdi-attachment-alt"></i> 
+                            <span ng-bind="'LBL_MENU' | translate"></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div>
+                            <div class="list-group">
+                                <a href="javascript:void(0)" class="list-group-item withripple">
+                                    <i class="color-primary zmdi zmdi-assignment"></i> 
+                                    <span ng-bind="'LBL_NEWS' | translate"></span>
+                                </a>
+                                <a href="~/Chat/" class="list-group-item withripple">
+                                    <i class="color-primary zmdi zmdi-email"></i> 
+                                    <span ng-bind="'LBL_CHAT' | translate"></span>
+                                </a>
+                                <a href="javascript:void(0)" class="list-group-item withripple" ng-bind="'LBL_EXPLORE' | translate">
+                                    <div class="ripple-container"></div>
+                                </a>
+                                <a href="~/Events/" class="list-group-item withripple">
+                                    <i class="color-primary zmdi zmdi-library"></i>
+                                    <span ng-bind="'LBL_EVENTS' | translate"></span>
+                                </a>
+                                <a href="~/Search/" class="list-group-item withripple">
+                                    <i class="color-primary zmdi zmdi-search"></i>
+                                    <span ng-bind="'LBL_SEARCH' | translate"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="HomeCtrl">
+    <!-- NEWS -->
+    <div class="noPaddingLeft col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div>
+            <!-- NEWS -->
+            <news-list></news-list>
+            <div class="text-center">
+                <img src="~/Content/assets/img/balls_loading.gif" ng-hide="New.endList || New.list.length < 3" width="100" height="100" />
+            </div>
+        </div>
+    </div>
+
+    <!-- PUBLICITY -->
+    <div class="noPaddingLeft LeftRightNav col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="sidebar-nav-fixed pull-right affix">
+            <div class="card card-danger" style="min-width: 340px;">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="zmdi zmdi-globe-alt"></i> <span ng-bind="'LBL_PUBLICITY' | translate"></span></h3>
+                </div>
+
+                <div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="{{New.adsRight.indexOf(ad)}}" ng-class='{active:$first}' ng-repeat="ad in New.adsRight"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item" ng-class='{active:$first}' ng-repeat="ad in New.adsRight">
+                            <img ng-src="{{ad.UrlArchivoPublicacion}}" alt="..." style="width: 340px;">
+                            <div class="col-md-12 text-center">
+                                <h3 ng-bind="ad.TituloPublicacion"></h3>
+                                <p ng-bind="ad.DescripcionPublicacion"></p>
+                                <a href="{{ad.UrlRedireccionar === '' ? 'javascript:void(0)' : ad.UrlRedireccionar}}"
+                                   target="{{ad.UrlRedireccionar === '' ? '' : '_blank'}}" class="btn btn-danger btn-raised" ng-bind="'BTN_VISIT_PAGE' | translate"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a href="#carousel-example-generic" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev"><i class="zmdi zmdi-chevron-left"></i></a>
+                    <a href="#carousel-example-generic" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next"><i class="zmdi zmdi-chevron-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <!-- Counter -->
+    <script src="~/Content/assets/js/coming.js"></script>
+    <!-- Translate -->
+    <script src="~/Scripts/app/Home/translations.js"></script>
+    <!-- Video -->
+    <script src="~/Scripts/app/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular/videogular.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-poster/vg-poster.js"></script>
+    <!-- Controller AngularJS-->
+    <script src="~/Scripts/app/Home/homeController.js"></script>    
+}

@@ -1,0 +1,292 @@
+﻿
+<div class="card card-primary" ng-repeat="post in PostsCandidate.list track by $index" style="word-wrap: break-word;">
+    <div class="card-header">
+        <h3 class="card-title" ng-bind="'Publicado en ' + (ConverToDate(post.Creacion) | date : 'longDate')"><i class="zmdi zmdi-graduation-cap"></i> </h3>
+    </div>
+
+    <div class="card-block" ng-init="editPost = false">
+        <div ng-hide="PostsCandidate.isBusy">
+            <a ng-click="ToDelete.assign(post,PostsCandidate.deletePost)" ng-show="infoUser.user.Consecutivo != -1"
+               class="btn-circle btn-circle-raised btn-circle-danger" data-toggle="modal" data-target="#alertWarning" style="float:right;margin-left:5px;">
+                <i class="color-white zmdi zmdi-delete"></i>
+            </a>
+            <button ng-show="infoUser.user.Consecutivo != -1" ng-click="editPost = !editPost" style="float:right;"
+                    class="btn-circle btn-circle-raised btn-circle-warning">
+                <i class="fa fa-edit"></i>
+            </button>
+        </div>
+        <div class="row" ng-show="editPost && infoUser.user.TipoPerfil === 1">
+            <div class="card-block">
+                <!-- Fields for edit -->
+                <div class="col-md-5">
+                    <div class="col-md-12 form-group label-floating" style="margin-bottom:30px;">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-header mr-1 color-royal"></i>
+                            </span>
+                            <label class="control-label" for="ms-form-username" translate="LBL_TITLE"></label>
+                            <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.Titulo" required />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group label-floating" style="margin-top:0;">
+                        <div class="input-group text-center">
+                            <span class="input-group-addon">
+                                <i class="fa fa-align-left mr-1 color-success" style="margin-bottom:30px;"></i>
+                            </span>
+                            <label class="control-label" for="ms-form-biografia" translate="LBL_DESCRIPTION"></label>
+                            <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" ng-model="post.Descripcion"></textarea>
+                            <br />
+                            <div ng-hide="PostsCandidate.isBusy">
+                                <button ngf-select ng-model="picFilePost" accept="video/*"
+                                        class="btn-circle btn-circle-raised btn-circle-warning">
+                                    <i class="fa fa-paperclip"></i>
+                                </button>
+                                <button ng-click="PostsCandidate.updateFile(post, picFilePost);" style="margin-left:3px;"
+                                        class="btn-circle btn-circle-raised btn-circle-success">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center" style="padding:10px;" ng-show="PostsCandidate.isBusy">
+                        <img src="~/Content/assets/img/bar.gif" />
+                    </div>
+                </div>
+                <!-- File for edit -->
+                <div class="col-md-7">
+                    <div ng-hide="picFilePost">
+                        <div ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 2">
+                            <div class="videogular-container">
+                                <videogular vg-theme="(videogularTheme)">
+                                    <vg-media vg-src="(post.UrlArchivo)">
+                                    </vg-media>
+                                    <vg-controls>
+                                        <vg-play-pause-button></vg-play-pause-button>
+                                        <vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
+                                        <vg-scrub-bar>
+                                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                        </vg-scrub-bar>
+                                        <vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
+                                        <vg-volume>
+                                            <vg-mute-button></vg-mute-button>
+                                            <vg-volume-bar></vg-volume-bar>
+                                        </vg-volume>
+                                        <vg-fullscreen-button></vg-fullscreen-button>
+                                    </vg-controls>
+                                    <vg-overlay-play></vg-overlay-play>
+                                    <vg-buffering></vg-buffering>
+                                </videogular>
+                            </div>
+                        </div>
+                        <div ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 1" class="col-sm-6 withripple zoom-img">
+                            <a href="javascript:void(0);">
+                                <img ng-src="{{post.UrlArchivo}}" alt="" class="img-responsive" style="width:100%">
+                            </a>
+                            <div class="ripple-container"></div>
+                        </div>
+                    </div>
+                    <img ngf-src="picFilePost" style="max-width:50%;">
+                    <div ng-show="picFilePost.type.includes('video')">
+                        <video ngf-src="picFilePost" style="width:90%;padding-bottom:15px;" controls></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="editPost && infoUser.user.TipoPerfil === 2">
+            <div class="card-block">
+                <div class="col-md-5">
+                    <!-- Title -->
+                    <div class="col-md-12 form-group label-floating">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-header mr-1 color-royal"></i>
+                            </span>
+                            <label class="control-label" for="ms-form-username">Titulo</label>
+                            <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.Titulo" required />
+                        </div>
+                    </div>
+                    <!-- Country -->
+                    <div class="form-group label-floating col-md-6 col-xs-12">
+                        <label for="select-category" class="col-md-5 control-label">País</label>
+                        <div class="col-md-12">
+                            <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                                        ng-model="post.CodigoPais"
+                                        placeholder="Seleccione">
+                            </oi-select>
+                        </div>
+                    </div>
+                    <!-- Location -->
+                    <div class="col-md-6 form-group label-floating">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-google-maps mr-1 color-danger"></i>
+                            </span>
+                            <label class="control-label" for="ms-form-username">Ubicación</label>
+                            <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.Ubicacion" />
+                        </div>
+                    </div>
+                    <!-- Date Range -->
+                    <div class="col-md-12">
+                        <div class="col-md-6 form-group label-floating is-focused" style="padding:0;">
+                            <div class="input-group">
+                                <label class="control-label" for="ms-form-birthday">Fecha Inicio</label>
+                                <div class="col-md-12 dropdown form-group dropdown-start-parent" style="padding-left:0;">
+                                    <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent" href="#" style="padding:0;">
+                                        <div class="input-group date" style="width: 100%;padding-left: 10px;">
+                                            <input type="text" class="form-control" value="{{post.FechaInicio | date: 'yyyy-MM-dd  hh:mm a'}}" disabled="disabled" style="border-bottom: 2px solid #d2d2d2;">
+                                            @*<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>*@
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="Event.post.FechaInicio"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                                                        data-on-set-time="startDateOnSetTime()"
+                                                        data-before-render="startDateBeforeRender($dates)"
+                                                        modelType="MM-DD-YYYY"></datetimepicker>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group label-floating is-focused" style="padding:0;">
+                            <div class="input-group">
+                                <label class="control-label" for="ms-form-birthday">Fecha Finalización</label>
+                                <div class="col-md-12 dropdown form-group dropdown-end-parent" style="padding-left:0;">
+                                    <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target=".dropdown-end-parent" href="#" style="padding:0;">
+                                        <div class="input-group date" style="width: 100%;">
+                                            <input type="text" class="form-control" value="{{post.FechaTerminacion | date: 'yyyy-MM-dd  hh:mm a'}}" disabled="disabled" style="border-bottom: 2px solid #d2d2d2;">
+                                            @*<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>*@
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="Event.post.FechaTerminacion"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+                                                        data-on-set-time="endDateOnSetTime()"
+                                                        data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Categories -->
+                    <div class="col-md-12 form-group label-floating">
+                            <label for="select-category" class="col-md-5 control-label">Deportes</label>
+                            <div class="col-md-12">
+                                <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                                           ng-model="post.CategoriasEventos"
+                                           multiple
+                                           placeholder="Seleccione">
+                                </oi-select>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-7">
+                    <div class="text-center">
+                        <div ng-hide="picFilePost">
+                            <div ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 2">
+                                <div class="videogular-container">
+                                    <videogular vg-theme="bower_components/videogular-themes-default/videogular.css">
+                                        <vg-media vg-src="(post.UrlArchivo)">
+                                        </vg-media>
+                                        <vg-controls>
+                                            <vg-play-pause-button></vg-play-pause-button>
+                                            <vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
+                                            <vg-scrub-bar>
+                                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                            </vg-scrub-bar>
+                                            <vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
+                                            <vg-volume>
+                                                <vg-mute-button></vg-mute-button>
+                                                <vg-volume-bar></vg-volume-bar>
+                                            </vg-volume>
+                                            <vg-fullscreen-button></vg-fullscreen-button>
+                                        </vg-controls>
+                                        <vg-overlay-play></vg-overlay-play>
+                                        <vg-buffering></vg-buffering>
+                                    </videogular>
+                                </div>
+                            </div>
+                            <div ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 1" class="col-sm-6 withripple zoom-img">
+                                <a href="javascript:void(0);">
+                                    <img ng-src="{{post.UrlArchivo}}" alt="" class="img-responsive" style="width:100%">
+                                </a>
+                                <div class="ripple-container"></div>
+                            </div>
+                        </div>
+                        <img ngf-src="picFilePost" style="max-width:50%;">
+                        <div ng-show="picFilePost.type.includes('video')">
+                            <video ngf-src="picFilePost" style="width:90%;padding-bottom:15px;" controls></video>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-md-12 form-group label-floating" style="margin-top:15px;">
+                        <div class="input-group text-center">
+                            <span class="input-group-addon">
+                                <i class="fa fa-align-left mr-1 color-success" style="margin-bottom:30px;"></i>
+                            </span>
+                            <label class="control-label" for="ms-form-biografia">Descripcion</label>
+                            <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" ng-model="post.Descripcion"></textarea>
+                            <br />
+                            <div ng-hide="PostsCandidate.isBusy">
+                                <button ngf-select="" ng-model="picFilePost" accept="image/*,audio/*,video/*"
+                                        class="btn btn-raised btn-warning">{{'BTN_UPLOAD_FILE' | translate}}
+                                </button>
+                                <button ng-click="PostsCandidate.updateEventFile(post,picFilePost)" style="margin-left:3px;"
+                                        class="btn btn-raised btn-success">{{'BTN_SAVE' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center" style="padding:10px;" ng-show="PostsCandidate.isBusy">
+                            <img src="~/Content/assets/img/bar.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <hr class="color" style="width:100%"/>
+            </div>
+
+    </div>
+
+    <div class="row" ng-hide="editPost">
+        <div class="col-sm-6" ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 2">
+            <div class="videogular-container">
+                <videogular vg-theme="bower_components/videogular-themes-default/videogular.css">
+                    <vg-media vg-src="(post.UrlArchivo)">
+                    </vg-media>
+                    <vg-controls>
+                        <vg-play-pause-button></vg-play-pause-button>
+                        <vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
+                        <vg-scrub-bar>
+                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        </vg-scrub-bar>
+                        <vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
+                        <vg-volume>
+                            <vg-mute-button></vg-mute-button>
+                            <vg-volume-bar></vg-volume-bar>
+                        </vg-volume>
+                        <vg-fullscreen-button></vg-fullscreen-button>
+                    </vg-controls>
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
+                </videogular>
+            </div>
+        </div>
+        <div ng-if="post.UrlArchivo.substr(post.UrlArchivo.length - 1) == 1" class="col-sm-6 withripple zoom-img">
+            <a href="javascript:void(0);">
+                <img ng-src="{{post.UrlArchivo}}" alt="" class="img-responsive" style="width:100%">
+            </a>
+            <div class="ripple-container"></div>
+        </div>
+        <div class="col-sm-6" style="margin-top:1%;">
+            @*<div ng-class="'col-sm-6': post.UrlArchivo, 'col-sm-12':  post.UrlArchivo.length > 0" style="margin-top:1%;">*@
+            <h1 class="text-center color-danger">{{post.Titulo}}</h1>
+            <div class="card-block text-left" style="padding-top:0;">
+                <h2 class="color-black">{{post.Descripcion}}</h2>
+                <h4 ng-if="post.Ubicacion" class="color-info"><span translate="LBL_LOCATION"></span>: <span style="font-size:15px;color:black;" ng-bind="post.Ubicacion"></span></h4>
+                <h4 ng-if="post.FechaInicio" class="color-info"><span translate="LBL_DATE_START"></span>: <span style="font-size:15px;color:black;" ng-bind="post.FechaInicio | date : 'dd/MM/yyyy'"></span></h4>
+                <h4 ng-if="post.FechaTerminacion" class="color-info"><span translate="LBL_DATE_END"></span>: <span style="font-size:15px;color:black;" ng-bind="post.FechaTerminacion | date : 'dd/MM/yyyy'"></span></h4>
+            </div>
+        </div>
+    </div>
+</div>

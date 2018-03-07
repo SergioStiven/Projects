@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.ContactosViewCell"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+
+    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="ContactoSeleccionado_OnTapped" />
+        </StackLayout.GestureRecognizers>
+        <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand" DownsampleToViewSize="True"
+                                    x:Name="UrlImagenPerfil" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}"
+                                    HeightRequest="60" WidthRequest="60" Margin="0,0,10,0" LoadingPlaceholder="{StaticResource RutaDefaultImagenPerfil}" />
+            <StackLayout HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+            <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                                       Text="{Binding PersonasContacto.NombreYApellido}" TextColor="Black" FontAttributes="Bold" FontSize="Medium"/>
+            <StackLayout Orientation="Horizontal">
+                <ffimageloading:CachedImage VerticalOptions="CenterAndExpand" Margin="0,0,5,0"
+                                            x:Name="UrlImagenPais" HeightRequest="25" WidthRequest="35" DownsampleToViewSize="True"
+                                            Aspect="Fill" Style="{StaticResource RemoteImageStyle}" />
+                    <Label Text="{Binding PersonasContacto.Paises.DescripcionIdiomaBuscado}" VerticalOptions="Center" TextColor="#9E9E9E" FontSize="Small" />
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{86B9A8C5-D120-4795-888C-30EE771D1071}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xpinn.SportsGo.DomainEntities</RootNamespace>
+    <AssemblyName>Xpinn.SportsGo.DomainEntities</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EF Extended Mapped Entities\Anuncios.cs" />
+    <Compile Include="EF Extended Mapped Entities\AnunciosContenidos.cs" />
+    <Compile Include="EF Extended Mapped Entities\AnunciosPaises.cs" />
+    <Compile Include="EF Extended Mapped Entities\Archivos.cs" />
+    <Compile Include="EF Extended Mapped Entities\Candidatos.cs" />
+    <Compile Include="EF Extended Mapped Entities\CandidatosResponsables.cs" />
+    <Compile Include="EF Extended Mapped Entities\CandidatosVideos.cs" />
+    <Compile Include="EF Extended Mapped Entities\Categorias.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasAnuncios.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasCandidatos.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasEventos.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasGrupos.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasNoticias.cs" />
+    <Compile Include="EF Extended Mapped Entities\CategoriasRepresentantes.cs" />
+    <Compile Include="EF Extended Mapped Entities\Chats.cs" />
+    <Compile Include="EF Extended Mapped Entities\ChatsMensajes.cs" />
+    <Compile Include="EF Extended Mapped Entities\Contactos.cs" />
+    <Compile Include="EF Extended Mapped Entities\FacturaFormato.cs" />
+    <Compile Include="EF Extended Mapped Entities\Grupos.cs" />
+    <Compile Include="EF Extended Mapped Entities\GruposEventos.cs" />
+    <Compile Include="EF Extended Mapped Entities\GruposEventosAsistentes.cs" />
+    <Compile Include="EF Extended Mapped Entities\Habilidades.cs" />
+    <Compile Include="EF Extended Mapped Entities\HabilidadesCandidatos.cs" />
+    <Compile Include="EF Extended Mapped Entities\HistorialPagosPersonas.cs" />
+    <Compile Include="EF Extended Mapped Entities\ImagenesPerfilAdministradores.cs" />
+    <Compile Include="EF Extended Mapped Entities\Monedas.cs" />
+    <Compile Include="EF Extended Mapped Entities\Noticias.cs" />
+    <Compile Include="EF Extended Mapped Entities\Notificaciones.cs" />
+    <Compile Include="EF Extended Mapped Entities\Paises.cs" />
+    <Compile Include="EF Extended Mapped Entities\Personas.cs" />
+    <Compile Include="EF Extended Mapped Entities\Planes.cs" />
+    <Compile Include="EF Extended Mapped Entities\PlanesUsuarios.cs" />
+    <Compile Include="EF Extended Mapped Entities\Representantes.cs" />
+    <Compile Include="EF Extended Mapped Entities\TerminosCondiciones.cs" />
+    <Compile Include="EF Extended Mapped Entities\Usuarios.cs" />
+    <Compile Include="EF Mapped Entities\Anunciantes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Anuncios.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\AnunciosContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\AnunciosPaises.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Archivos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\ArchivosTipos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Candidatos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CandidatosResponsables.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CandidatosVideos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Categorias.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasAnuncios.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasCandidatos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasEventos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasGrupos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasNoticias.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\CategoriasRepresentantes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Chats.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\ChatsEstado.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\ChatsMensajes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Contactos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\EstadoPago.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\FacturaFormato.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\FormatoEmail.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Generos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Grupos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\GruposEventos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\GruposEventosAsistentes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Habilidades.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\HabilidadesCandidatos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\HabilidadesContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\HabilidadesTipos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\HistorialPagosPersonas.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Idiomas.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\ImagenesPerfilAdministradores.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Monedas.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Noticias.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\NoticiasContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\NoticiasPaises.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Notificaciones.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Paises.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\PaisesContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Periodicidades.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Personas.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Planes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\PlanesContenidos.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\PlanesUsuarios.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Representantes.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\RssFeeds.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\SportsGoDataModel.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="EF Mapped Entities\TerminosCondiciones.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\TipoNotificacion.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\TipoPublicacion.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\TiposFormatosEmail.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\TiposPerfiles.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF Mapped Entities\Usuarios.cs">
+      <DependentUpon>SportsGoDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xpinn.SportsGo.Util.Portable\Xpinn.SportsGo.Util.Portable.csproj">
+      <Project>{B6187674-C17F-4422-915D-DE97758A3532}</Project>
+      <Name>Xpinn.SportsGo.Util.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpinn.SportsGo.Util\Xpinn.SportsGo.Util.csproj">
+      <Project>{8287DD45-2196-416A-8811-B8AC4A7886C1}</Project>
+      <Name>Xpinn.SportsGo.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EF Mapped Entities\SportsGoDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SportsGoDataModel.cs</LastGenOutput>
+      <CustomToolNamespace>Xpinn.SportsGo.DomainEntities</CustomToolNamespace>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+</Project>

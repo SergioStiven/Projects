@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+            xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+            xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+            xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+            xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+            xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+            xmlns:util="clr-namespace:Xpinn.SportsGo.Util.Portable;assembly=Xpinn.SportsGo.Util.Portable"
+            x:Class="Xpinn.SportsGo.Movil.Pages.BuscadorPerfilesPage"
+            BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+            NavigationPage.BackButtonTitle=""
+            Title="{markup:Translate Busqueda}" >
+
+    <AbsoluteLayout>
+        <controls:InfiniteListView x:Name="ListaBuscador" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                   ItemsSource="{Binding Busqueda}" LoadMoreCommand="{Binding LoadMoreBusqueda}" RowHeight="100">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:InfiniteListView.Header>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <SearchBar Text="{Binding TextoBuscador, Mode=TwoWay}" Placeholder="{markup:Translate BuscaAqui}" PlaceholderColor="Gray"
+                               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                               CancelButtonColor="Red" SearchCommand="{Binding LoadMoreBusqueda}"/>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                                 IsVisible="{Binding BuscandoCandidatos}">
+                        <Button Text="{Binding TextoBotonFiltrarCandidatos}" TextColor="#FFFFFF" FontSize="Small"
+                                BorderRadius="3" BackgroundColor="{StaticResource PrimaryAppColor}"
+                                VerticalOptions="CenterAndExpand" WidthRequest="150" HorizontalOptions="CenterAndExpand" 
+                                Command="{Binding FiltrarCandidatos}" />
+                        <StackLayout IsVisible="{Binding EstaFiltrandoCandidatos}" VerticalOptions="CenterAndExpand">
+                            <Grid HorizontalOptions="FillAndExpand" Padding="10,0,10,0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="65"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="65"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" 
+                                       Text="{markup:Translate Altura}" FontAttributes="Bold" TextColor="Black"
+                                       VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <forms:RangeSlider Grid.Row="1" Grid.Column="0" 
+                                                   MinimumValue="130" MaximumValue="220" LowerValue="{Binding MinimaAltura, Mode=TwoWay}" UpperValue="{Binding MaximaAltura, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" 
+                                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextSize="13" ShowTextAboveThumbs="True" WidthRequest="180" />
+                                <Label Grid.Row="0" Grid.Column="2" 
+                                       Text="{markup:Translate Peso}" FontAttributes="Bold" TextColor="Black"
+                                       VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <forms:RangeSlider Grid.Row="1" Grid.Column="2" 
+                                                   MinimumValue="20" MaximumValue="120" LowerValue="{Binding MinimoPeso, Mode=TwoWay}" UpperValue="{Binding MaximoPeso, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" 
+                                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextSize="13" ShowTextAboveThumbs="True" WidthRequest="180" />
+                                <Label Grid.Row="2" Grid.Column="0" 
+                                       Text="{markup:Translate Edad}" FontAttributes="Bold" TextColor="Black"
+                                       VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <forms:RangeSlider Grid.Row="3" Grid.Column="0" 
+                                                   MinimumValue="0"  MaximumValue="80" LowerValue="{Binding MinimaEdad, Mode=TwoWay}" UpperValue="{Binding MaximaEdad, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" 
+                                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextSize="13" ShowTextAboveThumbs="True" WidthRequest="180" />
+                                <Label Grid.Row="2" Grid.Column="2" 
+                                       Text="{markup:Translate Pais}" FontAttributes="Bold" TextColor="Black"
+                                       VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <Picker Grid.Row="3" Grid.Column="2" 
+                                        ItemsSource="{Binding Paises}" ItemDisplayBinding="{Binding DescripcionIdiomaBuscado}" SelectedItem="{Binding PaisSeleccionado}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                                 Orientation="Horizontal" IsVisible="{Binding BuscandoEventos}" Margin="10,0,10,0">
+                        <Grid HorizontalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate FechaInicio}" FontAttributes="Bold" TextColor="Black"
+                                   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                            <DatePicker Grid.Row="1" Grid.Column="0" MinimumDate="{x:Static util:AppConstants.MinimumDate}" MaximumDate="{x:Static util:AppConstants.MaximumDate}" 
+                                        Date="{Binding FechaInicio, Mode=TwoWay}" Format="{x:Static util:AppConstants.DateFormat}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="{markup:Translate FechaInicio}" FontAttributes="Bold" TextColor="Black"
+                                   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                            <DatePicker Grid.Row="1" Grid.Column="2" MinimumDate="{x:Static util:AppConstants.MinimumDate}" MaximumDate="{x:Static util:AppConstants.MaximumDate}" 
+                                        Date="{Binding FechaFinal, Mode=TwoWay}" Format="{x:Static util:AppConstants.DateFormat}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="{markup:Translate HoraInicial}" FontAttributes="Bold" TextColor="Black"
+                                   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                            <TimePicker Grid.Row="3" Grid.Column="0" TextColor="Black" Format="hh:mm tt" Time="{Binding HoraInicial}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                            <Label Grid.Row="2" Grid.Column="2" Text="{markup:Translate HoraFinal}" FontAttributes="Bold" TextColor="Black"
+                                   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                            <TimePicker Grid.Row="3" Grid.Column="2" TextColor="Black" Format="hh:mm tt" Time="{Binding HoraFinal}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                        </Grid>
+                    </StackLayout>
+                    <fe:SegmentedButtonGroup OnColor="{StaticResource PrimaryAppColor}" OffColor="{StaticResource PagePrimaryBackgroundColor}" 
+                                             HorizontalOptions="CenterAndExpand" SelectedIndex="{Binding SelectIndexSegmentBar, Mode=TwoWay}" Margin="5"
+                                             CornerRadius="5" HeightRequest="35">
+                        <fe:SegmentedButtonGroup.LabelStyle>
+                            <Style TargetType="Label">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="FontAttributes" Value="Bold" />
+                                <Setter Property="Margin" Value="5,0" />
+                            </Style>
+                        </fe:SegmentedButtonGroup.LabelStyle>
+                        <fe:SegmentedButtonGroup.SegmentedButtons>
+                            <fe:SegmentedButton Title="{markup:Translate Deportistas}" />
+                            <fe:SegmentedButton Title="{markup:Translate Grupos}"/>
+                            <fe:SegmentedButton Title="{markup:Translate Eventos}"/>
+                        </fe:SegmentedButtonGroup.SegmentedButtons>
+                    </fe:SegmentedButtonGroup>
+                </StackLayout>
+            </controls:InfiniteListView.Header>
+            <controls:InfiniteListView.ItemTemplate>
+                <DataTemplate>
+                    <viewcells:BuscadorPerfilesViewCell 
+                        RegistroSeleccionado="{Binding Source={x:Reference ListaBuscador}, Path=BindingContext.RegistroSeleccionado}"/>
+                </DataTemplate>
+            </controls:InfiniteListView.ItemTemplate>
+        </controls:InfiniteListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

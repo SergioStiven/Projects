@@ -1,0 +1,27 @@
+﻿@media screen and (min-width: 320px) {
+    #carousel-filters{
+       display:block;
+    }
+    .filters{
+       display:none;
+    }
+}
+
+
+@media (min-width: 768px) {
+    #carousel-filters{
+       display:none;
+    }
+    .filters{
+       display:block;
+    }
+}
+
+@media (min-width: 992px) {
+    #carousel-filters{
+       display:none;
+    }
+    .filters{
+       display:block;
+    }
+}

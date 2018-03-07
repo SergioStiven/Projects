@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.ChatViewCell"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension">
+
+    <ViewCell.ContextActions>
+        <MenuItem Clicked="BorrarChat_OnClicked" Text="{markup:Translate Borrar}" IsDestructive="True" />
+    </ViewCell.ContextActions>
+    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="IrConversacion_OnTapped"/>
+        </StackLayout.GestureRecognizers>
+            <StackLayout.Triggers>
+            <DataTrigger TargetType="StackLayout" Binding="{Binding EsNuevoMensaje, Mode=TwoWay}" Value="True">
+                <Setter Property="BackgroundColor" Value="#BDBDBD" />
+            </DataTrigger>
+        </StackLayout.Triggers>
+        <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand" LoadingPlaceholder="{StaticResource RutaDefaultImagenPerfil}"
+                                    x:Name="UrlImagenPerfil" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}"
+                                    HeightRequest="60" WidthRequest="60" Margin="0,0,10,0" DownsampleToViewSize="True" />
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                           Text="{Binding PersonasNoOwner.NombreYApellido}" TextColor="Black" FontSize="Medium" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                           Text="{Binding UltimoMensaje.FechaMensaje, StringFormat='{0:MM/dd/yy}'}" TextColor="Black" FontSize="Small" />
+            </StackLayout>
+            <Label Text="{Binding UltimoMensaje.MensajeParaMostrar}" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation" >
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding EsNuevoMensaje, Mode=TwoWay}" Value="True">
+                        <Setter Property="FontAttributes" Value="Bold" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

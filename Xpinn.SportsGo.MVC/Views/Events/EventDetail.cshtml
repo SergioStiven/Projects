@@ -1,0 +1,44 @@
+﻿
+<div class="row">
+    <a href="javascript:void(0)" ng-click="Event.returnToList()">
+        <span aria-hidden="true">«</span> <span ng-bind="'BTN_BACK' | translate"></span>
+    </a>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card card-flat bg-transparent">
+            <div class="card-block color-white">
+                <header class="text-center mb-2">
+                    <img ng-if="Event.eventDetail.TipoArchivo === 1" style="width:450px;" ng-src="{{Event.eventDetail.UrlArchivo}}" />
+                    <video ng-if="Event.eventDetail.TipoArchivo === 2" style="width:450px;" ng-src="{{Event.eventDetail.UrlArchivo}}" controls />
+                    <h2 class="no-m ms-site-title color-primary center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5" 
+                        ng-bind="Event.eventDetail.NumeroEventosAsistentes + ' ' + ('LBL_GOING' | translate)">
+                    </h2>
+                    <div ng-show="Event.viewButtonsAttendEvent">
+                        <a ng-show="!Event.IWillAttend" ng-click="Event.saveAssistantEvent(Event.eventDetail)"
+                           href="javascript:void(0)"
+                           class="btn btn-success btn-raised">
+                            <i class="zmdi zmdi-plus-1"></i> <span ng-bind="'BTN_GOING' | translate"></span><div class="ripple-container"></div>
+                        </a>
+                        <a ng-show="Event.IWillAttend" ng-click="Event.deleteAssistantEvent(Event.eventDetail)"
+                           href="javascript:void(0)" class="btn btn-danger btn-raised">
+                            <i class="zmdi zmdi-neg-1"></i> <span ng-bind="'BTN_NOT_GOING' | translate"></span><div class="ripple-container"></div>
+                        </a>
+                    </div>
+                </header>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card index-1 animated zoomInRight animation-delay-7">
+            <div class="card-block-big">
+                <h1 class="color-primary" ng-bind="Event.eventDetail.Titulo"></h1>
+                <p class="lead" ng-bind="Event.eventDetail.Descripcion"></p>
+                <div id="ms-countdown"></div>
+                <h4 class="color-info"><span ng-bind="'LBL_LOCATION' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="Event.eventDetail.Ubicacion"></span></h4>
+                <h4 class="color-info"><span ng-bind="'LBL_DATE_START' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="convertToDate(Event.eventDetail.FechaInicio) | date : 'medium'"></span></h4>
+                <h4 class="color-info"><span ng-bind="'LBL_DATE_END' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="convertToDate(Event.eventDetail.FechaTerminacion) | date : 'medium'"></span></h4>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Xpinn.SportsGo.Entities.PayUModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <form method="post" id="payUForm" action="@Model.Url">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.HiddenFor(model => model.merchantId)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.accountId)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.description)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.referenceCode)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.amount)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.tax)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.taxReturnBase)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.currency)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.buyerEmail)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.signature)
+                </dt>
+                <dt>
+                    @Html.HiddenFor(model => model.test)
+                </dt>
+                <dt>
+                    <input type="hidden" id="confirmationUrl" name="confirmationUrl" value="@Url.Action("Confirmacion", "Payment", null, Request.Url.Scheme)" />
+                </dt>
+            </dl>
+        </div>
+    </form>
+    <script src="~/Scripts/app/lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var auto = setTimeout(function ()
+            {
+                $("#payUForm").submit();
+            }, 100);
+        }); payUForm
+    </script>
+</body>
+</html>

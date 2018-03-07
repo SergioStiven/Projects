@@ -1,0 +1,27 @@
+﻿
+<div ng-hide="Event.showEventDetail">
+    <!-- Filters -->
+    <filters-events on-filter="Event.searchEvent(Event.getMyAssistantEventsList)"
+                    on-clear-filter="Event.clearFilters()"
+                    country-for-search="Event.filter.CountriesForSearch"
+                    category-for-search="Event.filter.CategoriesForSearch"
+                    name-for-search="Event.filter.IdentificadorParaBuscar"></filters-events>
+
+    <div class="list-group">
+        <div class="panel-body" style="padding:0px;">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="event in Event.myAssistantEventsList">
+                    <img ng-src="{{event.GruposEventos.Grupos.Personas.UrlImagenPerfil == '' ? '../Content/assets/img/demo/avatar.png' : event.GruposEventos.Grupos.Personas.UrlImagenPerfil}}" style="float:left;width:100px; height:100px; border-radius:50%;" />
+                    <div style="float:left; margin-left:10px;max-width: 80%;overflow: hidden;text-overflow: ellipsis;">
+                        <a ng-click="Event.getEventDetail(event.GruposEventos)" href="javascript:void(0)"><h2 class="color-info" ng-bind="event.GruposEventos.Titulo"></h2></a>
+                        <em class="lead" ng-bind="event.GruposEventos.Descripcion" style="white-space: nowrap;"></em>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Event detail -->
+<div ng-show="Event.showEventDetail">
+    <event-detail></event-detail>
+</div>

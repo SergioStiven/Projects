@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "976322421795",
+    "firebase_url": "https://sportsgo-96140.firebaseio.com",
+    "project_id": "sportsgo-96140",
+    "storage_bucket": "sportsgo-96140.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976322421795:android:70f6f4c65c2ec5f1",
+        "android_client_info": {
+          "package_name": "com.xpinn.sportsgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976322421795-hgmp2mohngc7vpa5hijc7g0qq49c0me2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEZY2bpnmOTCGu92dpFc-iCq2gPMq1H4s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,638 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+<style>
+    textarea { 
+   /* will prevent resizing horizontally */
+   resize:vertical;
+}
+</style>
+<div class="col-md-12 text-left" ng-controller="ListController">
+    <h1 class="color-primary" translate="LBL_LISTS"></h1>
+  
+    <!-- Alert -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image categorie -->
+    <div class="modal modal-primary" id="modalImageCategory" tabindex="-1" role="dialog" aria-labelledby="modalImageCategoryLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalImageCategoryLabel" translate="LBL_SPORTS"></h3>
+                </div>
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFileCategory" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center ">
+                            <div ngf-drop ng-model="picFileCategory" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFileCategory | ngfDataUrl" result-image-size="500"
+                                            result-image="categoriesInfo.image">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div>
+                                <img ng-src="{{categoriesInfo.image}}" style="width:100%" id="imageCategory" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="categoriesInfo.updateImage(categoriesInfo.image, picFileCategory.name)" 
+                            ng-disabled="categoriesInfo.isBusy" class="btn btn-success">
+                        <img ng-show="categoriesInfo.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                        {{categoriesInfo.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal abilities / category -->
+    <div class="modal modal-primary" id="modalAbilities" tabindex="-1" role="dialog" aria-labelledby="modalAbilitiesLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalAbilitiesLabel" translate="LBL_ABILITIES"></h3>
+                </div>
+                <div class="modal-body dark" style="max-height: 80vh !important; overflow-y: auto;">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th class="text-center" translate="LBL_TYPE"></th>
+                                    <th class="text-right">
+                                        <a href="javascript:void(0)" ng-click="abilitiesInfo.addAbilitie()" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                                            <i class="{{ !abilitiesInfo.add ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="abilitiesInfo.add">
+                                    <td class="col-md-6">
+                                        <div class="form-group label-floating" ng-repeat="lenguage in lenguages.list" style="margin:0;padding:0;margin-top:10px">
+                                            <div class="input-group" style="width:100%">
+                                                <label class="control-label" for="detailCountry-description{{lenguage.Consecutivo}}">{{lenguage.Descripcion}}</label>
+                                                <input type="text" id="detailCountry-description{{lenguage.Consecutivo}}" class="form-control input-float"
+                                                       ng-model="abilitiesInfo.abilitieTemp.HabilidadesContenidos[lenguage.Consecutivo-1].Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-5" style="vertical-align:middle;">
+                                        <div class="form-group" style="margin:0;padding:0;">
+                                            <div class="col-md-12">
+                                                <select ng-model="abilitiesInfo.abilitieTemp.TipoHabilidad" class="form-control form-color-dark">
+                                                    <option style="background-color:#424242;" ng-repeat="option in abilitiesInfo.typesAbility track by option.CodigoTipoHabilidad" 
+                                                            ng-value="option.CodigoTipoHabilidad">{{option.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1 text-right" style="vertical-align:middle;">
+                                        <a ng-click="abilitiesInfo.save()" class="btn btn-success" style="margin:0" translate="BTN_ADD"></a>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="abilities in abilitiesInfo.list">
+                                    <td class="col-md-4">
+                                        <input type="text" class="input-text-invisible" ng-model="abilities.HabilidadesContenidos[0].Descripcion" />
+                                    </td>
+                                    <td class="col-md-4">
+                                        <div class="form-group" style="margin:0;padding:0;">
+                                            <div class="col-md-12">
+                                                <select name="ngvalueselect" ng-model="abilities.CodigoTipoHabilidad" class="form-control form-color-dark">
+                                                    <option style="background-color:#424242;" ng-repeat="option in abilitiesInfo.typesAbility" ng-value="option.CodigoTipoHabilidad">{{option.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-4 text-right"><a ng-click="abilitiesInfo.update(abilities)" class="btn btn-info" style="margin:0" translate="BTN_UPDATE"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ability detail -->
+    <div class="modal modal-primary" id="modalAbilityDetail" tabindex="-1" role="dialog" aria-labelledby="modalAbilityDetailLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalAbilityDetailLabel">Habilidad</h3>
+                </div>
+                <div class="modal-body dark">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-10">
+                                        <div class="form-group label-floating is-focused" ng-repeat="detail in abilitiesInfo.abilityDetil.HabilidadesContenidos" style="margin:0;padding:0;margin-top:10px;">
+                                            <div class="input-group" style="width:100%">
+                                                <label class="control-label" for="detailCountry-description{{detail.Consecutivo}}">{{lenguageText(detail.CodigoIdioma)}}</label>
+                                                <input type="text" id="detailCountry-description{{detail.Consecutivo}}" class="form-control input-float"
+                                                       ng-model="detail.Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center"><a ng-click="abilitiesInfo.update(abilitiesInfo.abilityDetil)" class="btn btn-info" style="margin:0" translate="BTN_UPDATE"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal categories -->
+    <div class="modal modal-primary" id="modalCategorie" tabindex="-1" role="dialog" aria-labelledby="modalCategorieLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalCategorieLabel" translate="LBL_SPORTS"></h3>
+                </div>
+                <div class="modal-body dark">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th translate="LBL_LANGUAGE"></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="category in categoriesInfo.listDetail">
+                                    <td class="col-md-8">
+                                        <input type="text" class="input-text-invisible" ng-model="category.Descripcion" />
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{lenguageText(category.CodigoIdioma)}}
+                                    </td>
+                                    <td class="col-md-2 text-right"><a ng-click="categoriesInfo.update(category)" class="btn btn-info" style="margin:0" translate="BTN_UPDATE"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal countries -->
+    <div class="modal modal-primary" id="modalCountry" tabindex="-1" role="dialog" aria-labelledby="modalCountryLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalCountryLabel" translate="LBL_COUNTRIES"></h3>
+                </div>
+                <div class="modal-body dark">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_COUNTRY"></th>
+                                    <th translate="LBL_COIN"></th>
+                                    <th translate="LBL_ABBREVIATION"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-6">
+                                        <div class="form-group label-floating is-focused" ng-repeat="detail in countriesInfo.detail.PaisesContenidos" style="margin:0;padding:0;margin-top:10px">
+                                            <div class="input-group">
+                                                <label class="control-label" for="detailCountry-description{{detail.Consecutivo}}">{{lenguageText(detail.CodigoIdioma)}}</label>
+                                                <input type="text" id="detailCountry-description{{detail.Consecutivo}}" class="form-control input-float" ng-model="detail.Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-4" style="vertical-align:middle;">
+                                        <div class="form-group label-floating is-focused" style="margin:0;padding:0;">
+                                            <select ng-model="countriesInfo.detail.Monedas"
+                                                    ng-options="option as option.Descripcion for option in currenciesInfo.list track by option.Consecutivo"
+                                                    @*ng-selected="countriesInfo.detail.Monedas.Consecutivo"*@
+                                                    class="form-control form-color-dark text-center">
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 text-center" style="vertical-align:middle">
+                                        {{countriesInfo.detail.Monedas.AbreviaturaMoneda}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center"><a ng-click="countriesInfo.update()" class="btn btn-info" style="margin:0" translate="BTN_UPDATE"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image country -->
+    <div class="modal modal-primary" id="modalImageCountry" tabindex="-1" role="dialog" aria-labelledby="modalImageCountryLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalImageCountryLabel" translate="LBL_COUNTRY"></h3>
+                </div>
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFileCountry" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center ">
+                            <div ngf-drop ng-model="picFileCountry" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFileCountry  | ngfDataUrl" result-image-size="500"
+                                            result-image="croppedDataUrlCountry" ng-init="croppedDataUrlCountry=''">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div>
+                                <img ng-src="{{croppedDataUrlCountry}}" style="width:100%" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="countriesInfo.updateImage(croppedDataUrlCountry, picFileCountry.name)" class="btn  btn-success" translate="BTN_SAVE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tables -->
+    <div class="panel-group ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        <!-- Categories -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <i class="zmdi zmdi-collection-text"></i> <span translate="LBL_SPORTS"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th translate="LBL_ABILITIES"></th>
+                                    <th translate="LBL_IMAGE"></th>
+                                    <th class="text-right">
+                                        <a href="javascript:void(0)" ng-click="categoriesInfo.addCategory()" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                                            <i class="{{ !categoriesInfo.add ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- new category -->
+                                <tr ng-show="categoriesInfo.add">
+                                    <td class="col-md-8">
+                                        <div class="form-group label-floating" ng-repeat="lenguage in lenguages.list" style="margin:0;padding:0;margin-top:10px">
+                                            <div class="input-group" style="width:100%">
+                                                <label class="control-label" for="detailCountry-description{{lenguage.Consecutivo}}">{{lenguage.Descripcion}}</label>
+                                                <input type="text" id="detailCountry-description{{lenguage.Consecutivo}}" class="form-control input-float"
+                                                       ng-model="categoriesInfo.categoryTemp.CategoriasContenidos[lenguage.Consecutivo-1].Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2"></td>
+                                    <td class="col-md-2 text-center" style="vertical-align:middle;">
+                                        <a data-toggle="modal" data-target="#modalImageCategory" style="cursor:pointer">
+                                            <img ng-src="{{imageDefault}}" width="50" height="50" style="border-radius:5px;">
+                                        </a>
+                                    </td>
+                                    <td class="col-md-2 text-right"><a style="margin:0" href="#modalAbilities" ng-click="categoriesInfo.save()" class="btn btn-success">Guardar</a></td>
+                                </tr>
+                               <!-- List of categories -->
+                                <tr ng-repeat="category in categoriesInfo.list">
+                                    <td class="col-md-7">{{category.CategoriasContenidos[0].Descripcion}}</td>
+                                    <td class="col-md-2">
+                                        <input type="button" ng-click="categoriesInfo.getAbilities(category)" ng-disabled="categoriesInfo.add" value="{{'BTN_SEE' | translate}}" class="btn btn-info"  style="margin:0" />
+                                    </td>
+                                    <td class="col-md-1">
+                                        <a ng-click="categoriesInfo.showModalImageCategory(category)" style="cursor:pointer">
+                                            <img ng-src="{{category.UrlArchivo}}" width="50" height="50" style="border-radius:5px;" />
+                                        </a>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <a ng-click="categoriesInfo.showCategoryById(category)" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-edit color-warning"></i>
+                                        </a>
+                                        <a ng-click="ToDelete.assign(category,categoriesInfo.delete)" data-toggle="modal" data-target="#alertWarning" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-delete color-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abilities -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingAbility">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a ng-click="abilitiesInfo.resetListAbilities()" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseAbilities" aria-expanded="false" aria-controls="collapseAbility">
+                        <i class="zmdi zmdi-collection-item"></i> <span translate="LBL_ABILITIES"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseAbilities" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headinAbility">
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="inputSearchAbility" class="col-md-2 control-label" translate="LBL_SPORTS"></label>
+
+                            <div class="col-md-10">
+                                <select ng-model="abilitiesInfo.currentCategory" ng-change="abilitiesInfo.getByCategory(abilitiesInfo.currentCategory)" class="form-control form-color-dark">
+                                    <option value="" style="display:none;">{{'PLACEHOLDER_DROPDOWNLIST' | translate}}</option>
+                                    <option ng-repeat="option in categoriesInfo.list track by option.Consecutivo" ng-value="option">
+                                        {{option.CategoriasContenidos[0].Descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th translate="LBL_TYPE"></th>
+                                    <th class="text-right">
+                                        <a href="javascript:void(0)" ng-click="abilitiesInfo.addAbilitie()" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                                            <i class="{{ !abilitiesInfo.add ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="abilitiesInfo.add">
+                                    <td class="col-md-6">
+                                        <div class="form-group label-floating" ng-repeat="lenguage in lenguages.list" style="margin:0;padding:0;margin-top:10px">
+                                            <div class="input-group" style="width:100%">
+                                                <label class="control-label" for="detailCountry-description{{lenguage.Consecutivo}}">{{lenguage.Descripcion}}</label>
+                                                <input type="text" id="detailCountry-description{{lenguage.Consecutivo}}" class="form-control input-float"
+                                                       ng-model="abilitiesInfo.abilitieTemp.HabilidadesContenidos[lenguage.Consecutivo-1].Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-5" style="vertical-align:middle;">
+                                        <div class="form-group" style="margin:0;padding:0;">
+                                            <div class="col-md-12">
+                                                <select ng-model="abilitiesInfo.abilitieTemp.TipoHabilidad" class="form-control form-color-dark">
+                                                    <option style="background-color:#424242;" ng-repeat="option in abilitiesInfo.typesAbility track by option.CodigoTipoHabilidad"
+                                                            ng-value="option.CodigoTipoHabilidad">
+                                                        {{option.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1 text-right" style="vertical-align:middle;">
+                                        <a ng-click="abilitiesInfo.save()" class="btn btn-success" style="margin:0" translate="BTN_ADD"></a>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="abilitiy in abilitiesInfo.list">
+                                    <td class="col-md-5">
+                                        <input type="text" class="input-text-invisible" ng-model="abilitiy.HabilidadesContenidos[0].Descripcion" />
+                                    </td>
+                                    <td class="col-md-5">
+                                        <div class="form-group" style="margin:0;padding:0;">
+                                            <div class="col-md-12">
+                                                {{abilitiesInfo.getTypeAbility(abilitiy.CodigoTipoHabilidad)}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <a ng-click="abilitiesInfo.showAbility(abilitiy)"  data-toggle="modal" data-target="#modalAbilityDetail" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-edit color-warning"></i>
+                                        </a>
+                                        <a ng-click="ToDelete.assign(abilitiy,abilitiesInfo.delete)" data-toggle="modal" data-target="#alertWarning" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-delete color-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countries -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingCountry">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry">
+                        <i class="zmdi zmdi-globe"></i> <span translate="LBL_COUNTRIES"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseCountry" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCountry">
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th ng-bind="('LBL_COIN' | translate) + ' ' + ('LBL_DESCRIPTION' | translate)"></th>
+                                    <th ng-bind="('LBL_COIN' | translate) + ' ' + ('LBL_ABBREVIATION' | translate)"></th>
+                                    <th translate="LBL_IMAGE"></th>
+                                    <th class="text-right">
+                                        <a href="javascript:void(0)" ng-click="countriesInfo.addCountry()" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                                            <i class="{{ !countriesInfo.add ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- new country -->
+                                <tr ng-show="countriesInfo.add">
+                                    <td class="col-md-4">
+                                        <div class="form-group label-floating is-focused" ng-repeat="lenguage in lenguages.list" style="margin:0;padding:0;margin-top:10px">
+                                            <div class="input-group">
+                                                <label class="control-label" for="detailCountry-description{{lenguage.Consecutivo}}">{{lenguage.Descripcion}}</label>
+                                                <input type="text" id="detailCountry-description{{lenguage.Consecutivo}}" class="form-control input-float" 
+                                                       ng-model="countriesInfo.countryTemp.PaisesContenidos[lenguage.Consecutivo-1].Descripcion" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-4" style="vertical-align:middle;">
+                                        <div class="form-group label-floating is-focused" style="margin:0;padding:0;">
+                                            <select ng-model="countriesInfo.countryTemp.Monedas"
+                                                    ng-options="option as option.Descripcion for option in countriesInfo.listCurrencies track by option.Consecutivo"
+                                                    class="form-control form-color-dark text-center">
+                                                <option style="display:none" value="" translate="PLACEHOLDER_DROPDOWNLIST"></option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 text-center" style="vertical-align:middle">
+                                        {{countriesInfo.countryTemp.Monedas.AbreviaturaMoneda}}
+                                    </td>
+                                    <td class="col-md-2 text-center" style="vertical-align:middle;">
+                                        <a data-toggle="modal" data-target="#modalImageCountry" style="cursor:pointer">
+                                            <img ng-src="{{imageDefault}}" width="50" height="50" style="border-radius:5px;">
+                                        </a>
+                                    </td>
+                                    <td class="col-md-1 style="vertical-align:middle;""><a ng-click="countriesInfo.save()" style="margin:0;" class="btn btn-success" translate="BTN_SAVE"></a></td>
+                                </tr>
+                                <!-- List of countries -->
+                                <tr ng-repeat="country in countriesInfo.list">
+                                    <td class="col-md-4"><input type="text" class="input-text-invisible" ng-model="country.PaisesContenidos[0].Descripcion" /></td>
+                                    <td class="col-md-3"><input type="text" class="input-text-invisible" ng-model="country.Monedas.Descripcion" /></td>
+                                    <td class="col-md-2"><input type="text" class="input-text-invisible" ng-model="country.Monedas.AbreviaturaMoneda" /></td>
+                                    <td class="col-md-1">
+                                        <a ng-click="countriesInfo.showModalImageCountry(country,$index)" style="cursor:pointer">
+                                            <img ng-src="{{country.UrlArchivo}}" width="50" height="50" style="border-radius:5px;" />
+                                        </a>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <a ng-click="countriesInfo.showCountryById(country)" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-edit color-warning"></i>
+                                        </a>
+                                        <a ng-click="ToDelete.assign(country,countriesInfo.delete)" data-toggle="modal" data-target="#alertWarning" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-delete color-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Currencies -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingCountry">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCurrencies" aria-expanded="false" aria-controls="collapseCurrency">
+                        <i class="zmdi zmdi-money"></i> <span translate="LBL_COIN"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseCurrencies" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCurrency">
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate="LBL_DESCRIPTION"></th>
+                                    <th translate="LBL_ABBREVIATION"></th>
+                                    <th translate="LBL_EXCHANGE"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- List of countries -->
+                                <tr ng-repeat="currency in currenciesInfo.list">
+                                    <td><input type="text" class="input-text-invisible" ng-model="currency.Descripcion" /></td>
+                                    <td><input type="text" class="input-text-invisible" ng-model="currency.AbreviaturaMoneda" /></td>
+                                    <td><input type="text" class="input-text-invisible" ng-model="currency.CambioMoneda" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terms and Conditions -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingTerms">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTerms" aria-expanded="false" aria-controls="collapseTerms">
+                        <i class="zmdi zmdi-format-align-left"></i> <span translate="LBL_TERMS"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTerms" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTerms">
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-10 col-sm-10" translate="LBL_DESCRIPTION"></th>
+                                    <th class="col-md-2 col-sm-2 text-center" translate="LBL_OPTIONS"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-10 col-sm-10">
+                                        <h3 class="color-white" translate="LBL_SPANISH"></h3>
+                                        <textarea rows="10" class="input-text-invisible" ng-model="termsAndConditions.list[0].Texto" placeholder=""></textarea>
+                                        <h3 class="color-white" translate="LBL_ENGLISH"></h3>
+                                        <textarea rows="10" class="input-text-invisible" ng-model="termsAndConditions.list[1].Texto" placeholder=""></textarea>
+                                        <h3 class="color-white" translate="LBL_PORTUGUESE"></h3>
+                                        <textarea rows="10" class="input-text-invisible" ng-model="termsAndConditions.list[2].Texto" placeholder=""></textarea>
+                                    </td>
+                                    <td class="col-md-2 col-sm-2" style="vertical-align:middle">
+                                        <a ng-click="termsAndConditions.update()" style="margin:0" class="btn btn-raised btn-success" translate="BTN_UPDATE"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section ANGULARJS{
+    <!-- Controller -->
+    <script src="~/Scripts/app/Administration/listController.js"></script>
+}

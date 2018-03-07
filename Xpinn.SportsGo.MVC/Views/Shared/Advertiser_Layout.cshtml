@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#333">
+    <title>Material Style</title>
+    <meta name="description" content="Sports Go">
+    <meta name="keywords" content="Sports">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/style.light-blue-500.min.css" />
+    <link rel="stylesheet" href="~/Content/administration.css" />
+    <link href="~/Content/select.min.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="app">
+
+    <div id="ms-preload" class="ms-preload">
+        <div id="status">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-dark panel-black col-xs-3 col-sm-3 col-md-3 col-lg-3" id="menu-left" style="padding:0; height:100vh;">
+        <div ng-controller="MasterController" class="panel-heading noBorderRadius" style="height:15vh;">
+            <span style="float:right"><a href="~/Authenticate/Logoff" class="color-info" title="Salir"><i class="color-primary zmdi zmdi-sign-in"></i></a></span>
+            <h1 class="color-primary col-md-10">SportsGo</h1>
+            <div class="popover_parent col-md-2">
+                <a href="javascript:void(0);" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8">
+                    <i data-toggle="tooltip" data-placement="bottom" title="Mis notificaciones" class="zmdi zmdi-notifications-active tooltip-dark"></i>
+                </a>
+                <div class="popover list-group" style="background-color:rgba(243, 241, 241, 0.95);border-radius:5px;overflow-y: auto;max-height: 60vh;">
+                    <a href="javascript:void(0);" class="list-group-item withripple"
+                       ng-click="Notifications.redirectToUrl(notification)" ng-repeat="notification in Notifications.list" style="border-radius:5px;padding:10px 5px;">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img ng-src="{{ notification.UrlArchivo }}" style="width:30px;height:30px;border-radius:50%;" />
+                            </div>
+                            <div class="col-md-10">
+                                <span style="font-size:12px;font-weight:bolder;" ng-bind="notification.Titulo"></span><br />
+                                <span style="font-size:12px;" ng-bind="notification.Descripcion"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0);" class="list-group-item withripple text-center" style="border-radius:5px;"
+                       ng-show="Notifications.showButtonSeeMore" ng-click="Notifications.get(true)">Ver más...</a>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="MenuController" class="panel-body" style="height:85vh;">
+            <div class="list-group" style="border:0;">
+                <p style="color:#898989" translate="LBL_DASHBOARD"></p>
+                <hr style="margin:0" />
+                <a href="~/Advertisements/Dashboard/" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-chart-donut"></i>
+                    <span translate="LBL_METRICS"></span>
+                </a>
+                <p style="color:#898989" translate="LBL_SETTINGS"></p>
+                <hr style="margin:0" />
+                <a href="~/Advertisements/CreateAdvertiser" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-cloud-upload"></i>
+                    <span translate="LBL_POST_AD"></span>
+                </a>
+                <a href="~/Advertisements/" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-collection-video"></i>
+                    <span translate="LBL_MY_ADS"></span>
+                </a>
+                <a href="~/Advertisements/SignInAdvertiser" class="list-group-item withripple">
+                    <i class="color-primary zmdi zmdi-pin-account"></i>
+                    <span translate="LBL_MY_PROFILE"></span>
+                </a>
+                <a href="~/Advertisements/Pricing/" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-money"></i>
+                    <span translate="LBL_MANAGE_PLANS"></span>
+                </a>
+                <a href="~/Advertisements/HistoryOfMyPlans/" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-time-restore-setting"></i>
+                    <span translate="LBL_PAYMENT_HISTORY"></span>
+                </a>
+                <a href="~/Advertisements/Settings/" class="list-group-item">
+                    <i class="color-primary zmdi zmdi-settings"></i>
+                    <span translate="LBL_SETTINGS"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+        
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 backcolor-dark container-dark" style="overflow:auto;" id="containerDark" scroll>
+        <br />
+        <div class="backcolor-dark navResponsive" ng-controller="MasterController">
+            <button id="nav-toggle"></button>
+            <div class="popover_parent" style="float:right;margin:10px 30px;">
+                <a href="javascript:void(0);" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8">
+                    <i data-toggle="tooltip" data-placement="bottom" title="Mis notificaciones" class="zmdi zmdi-notifications-active tooltip-dark"></i>
+                </a>
+                <div class="popover list-group" style="background-color:rgba(243, 241, 241, 0.95);border-radius:5px;overflow-y: auto;max-height: 60vh;">
+                    <a href="javascript:void(0);" class="list-group-item withripple"
+                       ng-click="Notifications.redirectToUrl(notification)" ng-repeat="notification in Notifications.list" style="border-radius:5px;padding:10px 5px;">
+
+                        <img ng-src="{{ notification.UrlArchivo }}" style="width:30px;height:30px;border-radius:50%;float:left;margin: 0px 2px 15px 0px;" />
+                        <span style="font-size:12px;font-weight:bolder;" ng-bind="notification.Titulo"></span><br />
+                        <span style="font-size:12px;" ng-bind="notification.Descripcion"></span>
+
+                    </a>
+                    <a href="javascript:void(0);" class="list-group-item withripple text-center" style="border-radius:5px;"
+                       ng-show="Notifications.showButtonSeeMore" ng-click="Notifications.get(true)">Ver más...</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navMenu">
+            <a href="~/Advertisements/Dashboard/"><i class="zmdi zmdi-chart-donut"></i></a>
+            <a href="~/Advertisements/CreateAdvertiser"><i class="zmdi zmdi-cloud-upload"></i></a>
+            <a href="~/Advertisements/"><i class="zmdi zmdi-collection-video"></i></a>
+            <a href="~/Advertisements/SignInAdvertiser"><i class="zmdi zmdi-pin-account"></i></a>
+            <a href="~/Advertisements/Pricing/"><i class="zmdi zmdi-money"></i></a>
+            <a href="~/Advertisements/HistoryOfMyPlans/"><i class="zmdi zmdi-time-restore-setting"></i></a>
+            <a href="~/Advertisements/Settings/"><i class="zmdi zmdi-settings"></i></a>
+            <a href="~/Authenticate/Logoff/"><i class="zmdi zmdi-sign-in"></i></a>
+        </nav>
+        <div class="content-responsive">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/Content/assets/js/plugins.min.js"></script>
+    <script src="~/Scripts/app/lib/moment.js"></script>
+    <script src="~/Content/assets/js/app.min.js"></script>
+    <script src="~/Scripts/app/lib/angular.min.js"></script>
+    <!-- SingalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+
+    <script src="~/Scripts/app/lib/select-tpls.min.js"></script>
+    <script src="~/Scripts/app/lib/angular-translate.js"></script>
+    <script src="~/Scripts/app/Advertiser/translations.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', ["pascalprecht.translate"]);
+    </script>
+    <!-- Upload JS -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    <!-- Edit size image -->
+    <script src="~/Scripts/app/lib/ui-cropper.js"></script>
+    <script src="~/Scripts/app/masterDark.js"></script>
+    @RenderSection("ANGULARJS", required: false)
+    <script src="~/Scripts/app/service.js"></script>
+    <script>
+        $(function () {
+            $('#nav-toggle').on('click', function () {
+                $('body').toggleClass('nav-open');
+            });
+        });
+        $('.popover_parent a').on('click', function () {
+            $('.popover_parent > a').not(this).parent().removeClass('active');
+            $(this).parent().toggleClass('active');
+        });
+
+        //Hide the dropdown when clicked off
+        $(document).on('click touchstart', function (event) {
+            if (!$(event.target).closest('.popover_parent').length) {
+                // Hide the menus.
+                $('.popover_parent.active').removeClass('active');
+            }
+        });
+    </script>
+
+</body>
+</html>

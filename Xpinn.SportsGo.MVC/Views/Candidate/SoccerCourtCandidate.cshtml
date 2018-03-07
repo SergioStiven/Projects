@@ -1,0 +1,97 @@
+﻿<style>
+.sportsFields {
+    position: relative;
+}
+
+.sportsFields > img {
+    vertical-align: top;
+    width: 100%;
+    max-height: 100%;
+}
+
+.sportsFields > a {
+    width: 11%;
+    height: 17%;
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sportsFields > a:hover {
+    background: rgba(0,0,0,0.5);
+}
+
+.sportsFields > .selected {
+    background: rgba(255,255,0,0.7);
+}
+
+.sportsFields > a.arquero {
+    top: 42%;
+    left: 3%;
+}
+
+.sportsFields > a.defensaIzq {
+    top: 12%;
+    left: 14.5%;
+}
+
+.sportsFields > a.defensaCentro1 {
+    top: 30%;
+    left: 14.5%;
+}
+
+.sportsFields > a.defensaCentro2 {
+    top: 53%;
+    left: 14.5%;
+}
+
+.sportsFields > a.defensaDer {
+    top: 72%;
+    left: 14.5%;
+}
+
+.sportsFields > a.medioIzq {
+    top: 12%;
+    left: 45%;
+}
+
+.sportsFields > a.medioCentro1 {
+    top: 30%;
+    left: 45%;
+}
+
+.sportsFields > a.medioCentro2 {
+    top: 53%;
+    left: 45%;
+}
+
+.sportsFields > a.medioDer {
+    top: 72%;
+    left: 45%;
+}
+
+.sportsFields > a.delanteroIzq {
+    top: 32%;
+    left: 74%;
+}
+
+.sportsFields > a.delanteroDer {
+    top: 51%;
+    left: 74%;
+}
+</style>
+
+<div class="sportsFields">
+    <img src="~/Content/assets/img/Soccer.png" />
+    <a class="arquero" ng-class="{'selected' : Categories.category.PosicionCampo === 1}" ng-click="Categories.category.PosicionCampo = 1"></a> <!-- Arquero -->
+    <a class="defensaIzq" ng-class="{'selected' : Categories.category.PosicionCampo === 2}" ng-click="Categories.category.PosicionCampo = 2"></a> <!-- Lateral Izquierdo -->
+    <a class="defensaCentro1" ng-class="{'selected' : Categories.category.PosicionCampo === 3}" ng-click="Categories.category.PosicionCampo = 3"></a> <!-- Defensa Central -->
+    <a class="defensaCentro2" ng-class="{'selected' : Categories.category.PosicionCampo === 4}" ng-click="Categories.category.PosicionCampo = 4"></a> <!-- Defensa Central -->
+    <a class="defensaDer" ng-class="{'selected' : Categories.category.PosicionCampo === 5}" ng-click="Categories.category.PosicionCampo = 5"></a> <!-- Lateral Derecho -->
+    <a class="medioIzq" ng-class="{'selected' : Categories.category.PosicionCampo === 6}" ng-click="Categories.category.PosicionCampo = 6"></a> <!-- Centrocampiista Izquierdo -->
+    <a class="medioCentro1" ng-class="{'selected' : Categories.category.PosicionCampo === 7}" ng-click="Categories.category.PosicionCampo = 7"></a> <!-- Mediocentro organizador -->
+    <a class="medioCentro2" ng-class="{'selected' : Categories.category.PosicionCampo === 8}" ng-click="Categories.category.PosicionCampo = 8"></a> <!-- Mediopunta centro -->
+    <a class="medioDer" ng-class="{'selected' : Categories.category.PosicionCampo === 9}" ng-click="Categories.category.PosicionCampo = 9"></a> <!-- Centrocampiista Derecho -->
+    <a class="delanteroIzq" ng-class="{'selected' : Categories.category.PosicionCampo === 10}" ng-click="Categories.category.PosicionCampo = 10"></a> <!-- Delantero Izquierdo -->
+    <a class="delanteroDer" ng-class="{'selected' : Categories.category.PosicionCampo === 11}" ng-click="Categories.category.PosicionCampo = 11"></a> <!-- Delantero Derecho -->
+</div> 

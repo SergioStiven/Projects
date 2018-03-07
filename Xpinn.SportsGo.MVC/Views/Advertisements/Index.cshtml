@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Advertiser_Layout.cshtml";
+}
+
+ <!-- List Posts -->
+<h3 class="color-primary right-line" translate="LBL_MY_PUBLICATIONS"></h3>
+
+<div class="card-block" ng-controller="AdvertiserController">
+    <!-- container -->
+    <div class="">
+        <news-list></news-list>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <!-- Upload JS -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    <!-- Create Images & Videos -->
+    <script src="~/Scripts/app/lib/ui-cropper.js"></script>
+    <!-- View Videos -->
+    <script src="~/Scripts/app/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular/videogular.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-poster/vg-poster.js"></script>
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Advertiser/advertiser.js"></script>
+}
+

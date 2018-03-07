@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2fabad2af4c5438fbfd7fe81d4cd7156" Name="Diagram1" ZoomLevel="50">
+        <EntityTypeShape EntityType="SportsGoModel.Anunciantes" Width="1.5" PointX="13.5" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Anuncios" Width="1.5" PointX="15.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.AnunciosContenidos" Width="1.5" PointX="3" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.AnunciosPaises" Width="1.5" PointX="8.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Archivos" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.ArchivosTipos" Width="1.5" PointX="1.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Candidatos" Width="1.5" PointX="16.5" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CandidatosResponsables" Width="1.5" PointX="14.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CandidatosVideos" Width="1.5" PointX="18.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Categorias" Width="1.5" PointX="15.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasAnuncios" Width="1.5" PointX="18" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasCandidatos" Width="1.5" PointX="18.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasContenidos" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasEventos" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasGrupos" Width="1.5" PointX="15.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasRepresentantes" Width="1.5" PointX="15.75" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Chats" Width="2.25" PointX="18.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.ChatsEstado" Width="1.5" PointX="16.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.ChatsMensajes" Width="2.5" PointX="22.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Generos" Width="1.5" PointX="14.25" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Grupos" Width="1.5" PointX="13.5" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.GruposEventos" Width="1.5" PointX="6" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.GruposEventosAsistentes" Width="1.5" PointX="13.625" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Habilidades" Width="1.5" PointX="18.75" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.HabilidadesCandidatos" Width="1.5" PointX="21" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.HabilidadesContenidos" Width="1.5" PointX="3" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.HabilidadesTipos" Width="1.5" PointX="16.5" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Idiomas" Width="1.5" PointX="0.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Monedas" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Paises" Width="1.5" PointX="6" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.PaisesContenidos" Width="1.5" PointX="8.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Periodicidades" Width="1.5" PointX="2.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Personas" Width="2.125" PointX="11.25" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Planes" Width="1.5" PointX="4.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.PlanesContenidos" Width="1.5" PointX="6" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.PlanesUsuarios" Width="1.5" PointX="6.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Representantes" Width="1.5" PointX="13.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.TiposPerfiles" Width="1.5" PointX="2.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsGoModel.Usuarios" Width="1.5" PointX="9" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="SportsGoModel.FK_Anunciante_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Anuncios_Anunciantes" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasAnuncios_Anuncios" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_ContenidoAnuncios_Anuncios" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PaisesAnuncios_Anuncios" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_ContenidoAnuncios_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PaisesAnuncios_Paises" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Archivos_TiposAdjuntos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Paises_Archivos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_ArchivosBanner" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_ArchivosPerfil" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Planes_Archivos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Candidatos_Generos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Candidatos_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Candidatos_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasCandidatos_Candidatos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_VideosCandidatos_Candidatos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasAnuncios_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasCandidatos_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasContenidos_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasEventos_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasGrupos_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasRepresentantes_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Habilidades_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_HabilidadesCandidatos_CategoriasCandidatos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasContenidos_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasEventos_Eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasGrupos_Grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasRepresentantes_Representantes" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Chat_EstadoChat" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Chat_PersonasNoOwner" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Chat_PersonasOwner" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_ChatMensajes_ChatEnvia" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_ChatMensajes_ChatRecibe" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Eventos_Grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Grupos_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Eventos_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Eventos_Paises" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_GruposEventosAsistentes_GruposEventos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_GruposEventosAsistentes_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Habilidades_HabilidadesTipos" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_HabilidadesCandidatos_Habilidades" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_HabilidadesContenidos_Habilidades" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_HabilidadesContenidos_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Paises_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PaisesContenidos_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PlanesContenidos_Idiomas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Paises_Monedas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PaisesContenidos_Paises" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_Paises" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Planes_Periodicidades" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Representantes_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Planes_TiposPerfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PlanesContenidos_Planes" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_PlanesUsuarios_Planes" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Usuarios_PlanesUsuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Usuarios_TiposPerfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsGoModel.FK_Anuncios_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_CandidatosVideos_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_Categorias_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_GruposEventos_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_Personas_TiposPerfiles" />
+        <EntityTypeShape EntityType="SportsGoModel.Contactos" Width="2.125" PointX="14.125" PointY="42.125" />
+        <AssociationConnector Association="SportsGoModel.FK_ListasContactos_PersonasContacto1" />
+        <AssociationConnector Association="SportsGoModel.FK_ListasContactos_PersonasOwner1" />
+        <EntityTypeShape EntityType="SportsGoModel.CategoriasNoticias" Width="1.5" PointX="19" PointY="11.875" />
+        <EntityTypeShape EntityType="SportsGoModel.Noticias" Width="1.5" PointX="6" PointY="15.75" />
+        <EntityTypeShape EntityType="SportsGoModel.NoticiasContenidos" Width="1.5" PointX="11.25" PointY="17.375" />
+        <EntityTypeShape EntityType="SportsGoModel.NoticiasPaises" Width="1.5" PointX="8.25" PointY="16.25" />
+        <AssociationConnector Association="SportsGoModel.FK_Noticias_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasNoticias_Categorias" />
+        <AssociationConnector Association="SportsGoModel.FK_CategoriasNoticias_Noticias" />
+        <AssociationConnector Association="SportsGoModel.FK_NoticiasContenidos_Idiomas" />
+        <AssociationConnector Association="SportsGoModel.FK_NoticiasContenidos_Noticias" />
+        <AssociationConnector Association="SportsGoModel.FK_NoticiasPaises_Noticias" />
+        <AssociationConnector Association="SportsGoModel.FK_NoticiasPaises_Paises" />
+        <EntityTypeShape EntityType="SportsGoModel.ImagenesPerfilAdministradores" Width="1.5" PointX="11.25" PointY="14.375" />
+        <AssociationConnector Association="SportsGoModel.FK_ImagenesPerfilAdministradores_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_ImagenesPerfilAdministradores_Usuarios" />
+        <EntityTypeShape EntityType="SportsGoModel.TerminosCondiciones" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SportsGoModel.FormatoEmail" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="SportsGoModel.FK_FormatoEmail_Idiomas" />
+        <EntityTypeShape EntityType="SportsGoModel.TipoPublicacion" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="SportsGoModel.FK_Anuncios_TipoPublicacion" />
+        <AssociationConnector Association="SportsGoModel.FK_Noticias_TipoPublicacion" />
+        <AssociationConnector Association="SportsGoModel.FK_Noticias_Usuarios" />
+        <EntityTypeShape EntityType="SportsGoModel.Notificaciones" Width="2.75" PointX="19.125" PointY="8.125" />
+        <EntityTypeShape EntityType="SportsGoModel.TipoNotificacion" Width="1.5" PointX="16.875" PointY="7.75" />
+        <AssociationConnector Association="SportsGoModel.FK_Notificaciones_Planes" />
+        <AssociationConnector Association="SportsGoModel.FK_Notificaciones_TipoNoficacion" />
+        <AssociationConnector Association="SportsGoModel.FK_Notificaciones_PersonasAgregada1" />
+        <AssociationConnector Association="SportsGoModel.FK_Notificaciones_PersonasQueAgrego1" />
+        <AssociationConnector Association="SportsGoModel.FK_TerminosCondiciones_Idiomas" />
+        <EntityTypeShape EntityType="SportsGoModel.EstadoPago" Width="1.5" PointX="19.875" PointY="4.875" />
+        <EntityTypeShape EntityType="SportsGoModel.FacturaFormato" Width="1.5" PointX="8.25" PointY="13.375" />
+        <AssociationConnector Association="SportsGoModel.FK_FacturaFormato_Paises" />
+        <AssociationConnector Association="SportsGoModel.FK_FacturaFormato_Idiomas" />
+        <AssociationConnector Association="SportsGoModel.FK_Notificaciones_GruposEventos" />
+        <EntityTypeShape EntityType="SportsGoModel.TiposFormatosEmail" Width="1.5" PointX="3.375" PointY="3.875" />
+        <AssociationConnector Association="SportsGoModel.FK_FormatoEmail_TiposFormatosEmail" />
+        <EntityTypeShape EntityType="SportsGoModel.RssFeeds" Width="1.5" PointX="3" PointY="31.375" />
+        <AssociationConnector Association="SportsGoModel.FK_RssFeeds_Idiomas" />
+        <EntityTypeShape EntityType="SportsGoModel.HistorialPagosPersonas" Width="1.5" PointX="23.125" PointY="11.875" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_Archivos" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_EstadoPago" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_Monedas" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_Paises" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_Personas" />
+        <AssociationConnector Association="SportsGoModel.FK_HistorialPagosPersonas_Planes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<renderers:NoSleepContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:models="clr-namespace:Xpinn.SportsGo.Movil.Models"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             x:Class="Xpinn.SportsGo.Movil.Pages.InformacionPerfilPage"
+             x:Name="ContentPageInformacion"
+             Title="{Binding TituloPage}"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <models:CategoriasModel x:Key="categoriaEmptyModel"/>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryAppColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="BorderRadius" Value="1" />
+                <Setter Property="Margin" Value="20,10,20,0" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAppColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding CrearPerfil}" Parent="{x:Reference ContentPageInformacion}" IsVisible="{Binding EsPrimerRegistro}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="0,0,0,20">
+            <StackLayout>
+                <StackLayout HeightRequest="300">
+                    <AbsoluteLayout HeightRequest="300">
+                        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.70" AbsoluteLayout.LayoutFlags="All">
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding InteractuarFotoBanner}" />
+                            </AbsoluteLayout.GestureRecognizers>
+                            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" LoadingPlaceholder="{StaticResource RutaDefaultImagenBanner}"
+                                                        Source="{Binding ImagenBanner, Mode=TwoWay}" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}" DownsampleToViewSize="True">
+                                <ffimageloading:CachedImage.Triggers>
+                                    <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding ImagenBanner, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Source" Value="{StaticResource RutaDefaultImagenBanner}" />
+                                    </DataTrigger>
+                                </ffimageloading:CachedImage.Triggers>
+                            </ffimageloading:CachedImage>
+                            <ContentView AbsoluteLayout.LayoutBounds="1, 1, 0.20, 0.10" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#BDBDBD"
+                                         IsVisible="{Binding EsMiPersonaOPrimerRegistro}">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding InteractuarFotoBanner}"/>
+                                </ContentView.GestureRecognizers>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <ffimageloading:CachedImage Source="ic_camera.png" VerticalOptions="Center" />
+                                    <Label Text="{markup:Translate Foto}" TextColor="#000000" VerticalOptions="Center" FontSize="Micro"/>
+                                </StackLayout>
+                            </ContentView>
+                        </AbsoluteLayout>
+                        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0.5, 1, 0.40, 0.50" AbsoluteLayout.LayoutFlags="All"
+                                        Padding="2" BackgroundColor="#FFFFFF" HeightRequest="40" WidthRequest="40">
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding InteractuarFotoPerfil}" />
+                            </AbsoluteLayout.GestureRecognizers>
+                            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" LoadingPlaceholder="{StaticResource RutaDefaultImagenPerfil}"
+                                                        Source="{Binding ImagenPerfil, Mode=TwoWay}" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}"
+                                                        HeightRequest="40" WidthRequest="40" DownsampleToViewSize="True">
+                                <ffimageloading:CachedImage.Triggers>
+                                    <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding ImagenPerfil, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Source" Value="{StaticResource RutaDefaultImagenPerfil}" />
+                                    </DataTrigger>
+                                </ffimageloading:CachedImage.Triggers>
+                            </ffimageloading:CachedImage>
+                            <ContentView AbsoluteLayout.LayoutBounds="1, 1, 0.50, 0.15" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#BDBDBD"
+                                         IsVisible="{Binding EsMiPersonaOPrimerRegistro}" >
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding InteractuarFotoPerfil}" />
+                                </ContentView.GestureRecognizers>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <ffimageloading:CachedImage Source="ic_camera.png" VerticalOptions="Center" />
+                                    <Label Text="{markup:Translate Foto}" TextColor="#000000" VerticalOptions="Center" FontSize="Micro"/>
+                                </StackLayout>
+                            </ContentView>
+                        </AbsoluteLayout>
+                    </AbsoluteLayout>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding NombreTitulo, Mode=OneWay}" Margin="0,10,0,0" TextColor="#424242" FontSize="Large" FontAttributes="Bold" 
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" Margin="0,20,0,0">
+                        <ffimageloading:CachedImage Source="ic_deportes.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate Deportes}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <controls:HorizontalScrollView x:Name="ListaCategorias" ItemsSource="{Binding Categorias}" Padding="10,10,7,0" HeightRequest="80">
+                        <controls:HorizontalScrollView.ItemTemplate>
+                            <DataTemplate>
+                                <ffimageloading:CachedImage HeightRequest="70" WidthRequest="70" Source="{Binding UrlArchivo, Mode=OneWay}" Aspect="Fill" DownsampleToViewSize="True">
+                                    <ffimageloading:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ListaCategorias}, Path=BindingContext.IrCategoria}" CommandParameter="{Binding .}" />
+                                    </ffimageloading:CachedImage.GestureRecognizers>
+                                </ffimageloading:CachedImage>
+                            </DataTemplate>
+                        </controls:HorizontalScrollView.ItemTemplate>
+                    </controls:HorizontalScrollView>
+                    <Button Text="{markup:Translate AgregarDeporte}" Command="{Binding IrCategoria}" CommandParameter="{StaticResource categoriaEmptyModel}"
+                            Style="{StaticResource buttonStyle}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" Margin="0,20,0,0">
+                        <ffimageloading:CachedImage Source="ic_info_personal.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate InformacionPersonal}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <Button Text="{markup:Translate VerInformacionPersonal}" Command="{Binding IrPersona}" Style="{StaticResource buttonStyle}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding EsMiPersonaOPrimerRegistro, Mode=OneWay}" Value="True">
+                                <Setter Property="Text" Value="{markup:Translate EditarInformacionPersonal}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</renderers:NoSleepContentPage>

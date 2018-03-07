@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             x:Class="Xpinn.SportsGo.Movil.Pages.TipoCuentaPerfilPage"
+             Title="{markup:Translate Perfil}"
+             NavigationPage.BackButtonTitle="">
+
+    <Grid BackgroundColor="Transparent" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <AbsoluteLayout Grid.Column="0" Grid.Row="0">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Aspect="Fill"  
+                                        Source="{Binding Candidato.ImageUrl, Mode=OneWay}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Candidato}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <StackLayout AbsoluteLayout.LayoutBounds="0.70, 0.5, 0.45, 0.3" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Candidato}" />
+                </StackLayout.GestureRecognizers>
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Text="{markup:Translate Deportistas}" FontSize="Medium" FontAttributes="Bold" TextColor="White" />
+                <Label HorizontalOptions="Center" VerticalOptions="Center"
+                       Text="{Binding NumeroCandidatos}" FontSize="Small" FontAttributes="Bold" TextColor="White" />
+            </StackLayout>
+        </AbsoluteLayout>
+        <AbsoluteLayout Grid.Column="0" Grid.Row="1">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Aspect="Fill" 
+                                        Source="{Binding Grupo.ImageUrl, Mode=OneWay}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Grupo}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <StackLayout AbsoluteLayout.LayoutBounds="0.70, 0.5, 0.45, 0.3" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Grupo}" />
+                </StackLayout.GestureRecognizers>
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Text="{markup:Translate Grupos}" FontSize="Medium" FontAttributes="Bold" TextColor="White" />
+                <Label HorizontalOptions="Center" VerticalOptions="Center"
+                       Text="{Binding NumeroGrupos}" FontSize="Small" FontAttributes="Bold" TextColor="White" />
+            </StackLayout>
+        </AbsoluteLayout>
+        <AbsoluteLayout Grid.Column="0" Grid.Row="2">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Aspect="Fill" 
+                                        Source="{Binding Representante.ImageUrl, Mode=OneWay}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Representante}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <StackLayout AbsoluteLayout.LayoutBounds="0.70, 0.5, 0.45, 0.3" AbsoluteLayout.LayoutFlags="All">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CrearCuenta}" CommandParameter="{Binding Representante}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Text="{markup:Translate Representantes}" FontSize="Medium" FontAttributes="Bold" TextColor="White" />
+                <Label HorizontalOptions="Center" VerticalOptions="Center"
+                       Text="{Binding NumeroRepresentantes}" FontSize="Small" FontAttributes="Bold" TextColor="White" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </Grid>
+
+</ContentPage>

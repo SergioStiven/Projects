@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Advertiser_Layout.cshtml";
+}
+
+<style>
+    input, textarea {
+        color: white !important;
+    }
+    h1 {
+        color: white !important;
+    }
+</style>
+<div class="" ng-controller="PricingController">
+   
+    <my-plan ng-show="Plans.isMyPlan"></my-plan>
+    
+    <div class="col-md-12" ng-hide="Plans.isMyPlan">
+        <div ng-hide="Plans.manualPlan">
+            <list-of-plans></list-of-plans>
+        </div>
+        <div ng-show="Plans.manualPlan">
+            <pay-manual></pay-manual>
+        </div>
+    </div>
+ 
+</div>
+@section ANGULARJS{
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Advertiser/PricingAdvertiser.js"></script>
+}

@@ -1,0 +1,86 @@
+﻿<style>
+
+.sportsFields {
+    position: relative;
+}
+
+.sportsFields > img {
+    vertical-align: top;
+    width: 100%;
+    max-height: 100%;
+}
+
+.sportsFields > a {
+    width: 9%;
+    height: 12%;
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sportsFields > a:hover {
+    background: rgba(0,0,0,0.5);
+}
+
+.sportsFields > .selected {
+    background: rgba(255,255,0,0.7);
+}
+
+.sportsFields > a.receptor {
+    top: 84.3%;
+    left: 4.5%;
+}
+
+.sportsFields > a.lanzador {
+    top: 66%;
+    left: 18.6%;
+}
+
+.sportsFields > a.primeraB {
+    top: 78%;
+    left: 35%;
+}
+
+.sportsFields > a.segundaB {
+    top: 52%;
+    left: 36.5%;
+}
+
+.sportsFields > a.campoCorto {
+    top: 42.5%;
+    left: 27.7%;
+}
+
+.sportsFields > a.terceraB {
+    top: 44%;
+    left: 9.4%;
+}
+
+.sportsFields > a.jardineroIzq {
+    top: 9.2%;
+    left: 30.3%;
+}
+
+.sportsFields > a.jardineroCent {
+    top: 21%;
+    left: 62%;
+}
+
+.sportsFields > a.jardineroDer {
+    top: 56%;
+    left: 70.5%;
+}
+</style>
+
+<div class="sportsFields">
+    <img src="~/Content/assets/img/Baseball_court.png" />
+    <a class="receptor" ng-class="{'selected' : Categories.category.PosicionCampo === 1}" ng-click="Categories.category.PosicionCampo = 1"></a> <!-- Receptor -->
+    <a class="lanzador" ng-class="{'selected' : Categories.category.PosicionCampo === 2}" ng-click="Categories.category.PosicionCampo = 2"></a> <!-- Lanzador -->
+    <a class="primeraB" ng-class="{'selected' : Categories.category.PosicionCampo === 3}" ng-click="Categories.category.PosicionCampo = 3"></a> <!-- Primera Base -->
+    <a class="segundaB" ng-class="{'selected' : Categories.category.PosicionCampo === 4}" ng-click="Categories.category.PosicionCampo = 4"></a> <!-- Segunda Base -->
+    <a class="campoCorto" ng-class="{'selected' : Categories.category.PosicionCampo === 5}" ng-click="Categories.category.PosicionCampo = 5"></a> <!-- Campo Corto -->
+    <a class="terceraB" ng-class="{'selected' : Categories.category.PosicionCampo === 6}" ng-click="Categories.category.PosicionCampo = 6"></a> <!-- Tercera Base -->
+    <a class="jardineroIzq" ng-class="{'selected' : Categories.category.PosicionCampo === 7}" ng-click="Categories.category.PosicionCampo = 7"></a> <!-- Jardinero Izquierdo -->
+    <a class="jardineroCent" ng-class="{'selected' : Categories.category.PosicionCampo === 8}" ng-click="Categories.category.PosicionCampo = 8"></a> <!-- Jardinero Central -->
+    <a class="jardineroDer" ng-class="{'selected' : Categories.category.PosicionCampo === 9}" ng-click="Categories.category.PosicionCampo = 9"></a> <!-- Jardinero Derecho -->
+</div>

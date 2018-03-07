@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SportsGo</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/style.light-blue-500.min.css" />
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="ConfirmationOfRegistrationController">
+    <div id="ms-preload" class="ms-preload">
+        <div id="status">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-full-page bg-primary back-fixed">
+        <div class="mw-500 absolute-center">
+            <header class="text-center mb-2">
+                <span class="ms-icon ms-icon-white ms-icon-circle ms-icon-xxlg mb-4" style="margin-top:5%;margin-bottom:0px !important;width:120px;height:120px;font-size:120px;"><i class="zmdi zmdi-check color-success"></i></span>
+                <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5" style="font-size:5em;word-spacing: -20px;">
+                    Sports<span>Go</span>
+                </h1>
+            </header>
+            <div class="card animated zoomInUp animation-delay-7 color-primary withripple">
+                <div class="card-block">
+                    <div class="text-center color-dark">
+                        <h1 class="color-primary text-big" ng-bind="'LBL_TITLE_CONFIRMATION_REGISTRATION' | translate"></h1>
+                        <p class="lead lead-sm" ng-bind="'LBL_DESCRIPTION_CONFIRMATION_REGISTRATION' | translate"></p>
+                        <form>
+                            <a href="~/Authenticate/Logoff/" class="btn btn-raised btn-primary btn-block" ng-bind="'BTN_GO_HOME' | translate"></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Plugins for design -->
+    <script src="~/Content/assets/js/plugins.min.js"></script>
+    <script src="~/Content/assets/js/app.min.js"></script>
+    <script src="~/Content/assets/js/coming.js"></script>
+    <!-- AngularJS library-->
+    <script src="~/Scripts/app/lib/angular.min.js"></script>
+    <!-- SingalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!-- Translate -->
+    <script src="~/Scripts/app/Authenticate/translations.js"></script>
+    <script src="~/Scripts/app/lib/angular-translate.js"></script>
+    <!-- Select & Select multiple -->
+    <script src="~/Scripts/app/Authenticate/ConfirmationOfRegistrationController.js"></script>
+    <script src="~/Scripts/app/service.js"></script>
+
+</body>
+</html>

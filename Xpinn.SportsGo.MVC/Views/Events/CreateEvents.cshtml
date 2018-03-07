@@ -1,0 +1,127 @@
+﻿
+<form class="form-horizontal">
+    <fieldset>
+        <!-- Drag and drop & preview file -->
+        <div class="form-group is-empty">
+            <div class="file-upload">
+                <div ng-hide="Event.picFilePost" ngf-select="" 
+                        ngf-drop="" 
+                        ng-model="Event.picFilePost"
+                        ngf-accept="acceptSelect" 
+                        ng-disabled="disabled" 
+                        ngf-capture="capture" 
+                        ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', pattern:'image/*,audio/*,video/*,text/*'}" 
+                        ngf-allow-dir="allowDir" 
+                        class="image-upload-wrap" 
+                        ngf-drop-available="dropAvailable">
+                    <h3 class="color-primary" ng-bind="'LBL_DRAGOVER' | translate"></h3>
+                </div>
+                <div class="text-center">
+                    <img ngf-src="Event.picFilePost" style="max-width:50%;">
+                    <div ng-show="Event.picFilePost.type.includes('video')">
+                        <video ngf-src="Event.picFilePost" style="width:90%;padding-bottom:15px;" controls></video>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button ng-click="Event.picFilePost = !Event.picFilePost" ng-show="Event.picFilePost" class="btn btn-raised btn-danger" ng-bind="'BTN_CANCEL' | translate"></button>
+                </div>
+            </div>
+        </div>
+        <!-- Title -->
+        <div class="form-group is-empty">
+            <label for="inputName" class="col-md-2 control-label" ng-bind="'LBL_NAME' | translate"></label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="inputName" placeholder="" ng-model="Event.post.Titulo">
+            </div>
+        </div>
+        <!-- date time picker range -->
+        <div class="col-md-12 form-group is-empty" style="margin-top: 10px;">
+            <div class="col-md-6 col-xs-12 col-sm-6" style="padding:0;">
+                <label for="dtp-start-date" class="col-md-4 control-label" ng-bind="'LBL_DATE_START' | translate"></label>
+                <div class="col-md-8 dropdown form-group dropdown-start-parent" style="margin-top: 0;padding-right:0;">
+                    <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent" href="#" style="padding:0;">
+                        <div class="input-group date" style="width: 100%;padding-left: 10px;">
+                            <input type="text" class="form-control" value="{{Event.post.FechaInicio | date: 'yyyy-MM-dd  hh:mm a'}}" disabled="disabled" style="border-bottom: 2px solid #d2d2d2;">
+                            @*<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>*@
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="Event.post.FechaInicio"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                                        data-on-set-time="startDateOnSetTime()"
+                                        data-before-render="startDateBeforeRender($dates)"
+                                        min-date="minDate"
+                                        modelType="MM-DD-YYYY"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-6 is-empty" style="padding:0;">
+                <label for="dtp-end-date" class="col-md-3 control-label" style="text-align: left;" ng-bind="'LBL_DATE_END' | translate"></label>
+                <div class="col-md-8 dropdown form-group dropdown-end-parent" style="margin-top: 0;padding-right:0;padding-left:0;">
+                    <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target=".dropdown-end-parent" href="#" style="padding:0;">
+                        <div class="input-group date" style="width: 100%;">
+                            <input type="text" class="form-control" value="{{Event.post.FechaTerminacion | date: 'yyyy-MM-dd  hh:mm a'}}" disabled="disabled" style="border-bottom: 2px solid #d2d2d2;">
+                            @*<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>*@
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="Event.post.FechaTerminacion"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+                                        data-on-set-time="endDateOnSetTime()"
+                                        data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Country & Location -->
+        <div class="col-md-12 form-group is-empty">
+            <div class="col-md-6 col-xs-12" style="margin-bottom:15px;padding:0;">
+                <div class="input-group" style="width:100%">
+                    <label for="select-country" class="col-md-4 control-label" ng-bind="'LBL_COUNTRY' | translate"></label>
+                    <div class="col-md-8">
+                        <oi-select oi-options="item.DescripcionIdiomaBuscado for item in Event.countries track by item.Consecutivo"
+                                    ng-model="Event.post.Pais"
+                                    placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12" style="margin-bottom:15px;padding:0;">
+                <div class="input-group" style="width:100%">
+                    <label for="inputEmail" class="col-md-2 control-label" ng-bind="'LBL_LOCATION' | translate"></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="" ng-model="Event.post.Ubicacion">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Categories -->
+        <div class="form-group is-empty"  style="position:initial !important;">
+            <label for="select-category" class="col-md-2 control-label" ng-bind="'LBL_SPORTS' | translate"></label>
+            <div class="col-md-9">
+                <oi-select oi-options="item.DescripcionIdiomaBuscado for item in Event.categories track by item.Consecutivo"
+                           ng-model="Event.post.CategoriasEventos"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="form-group is-empty">
+            <label for="textArea" class="col-md-2 control-label" ng-bind="'LBL_DESCRIPTION' | translate"></label>
+            <div class="col-md-9">
+                <textarea class="form-control" rows="3" id="textArea" placeholder="" ng-model="Event.post.Descripcion"></textarea>
+            </div>
+        </div>
+        <!-- Buttons save & cancel -->
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-2">
+                <button type="submit" class="btn btn-raised btn-primary" ng-click="Event.uploadFile()">
+                    <img ng-show="Event.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                    {{Event.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="Event.clearFields()" ng-bind="'BTN_CANCEL' | translate"></button>
+            </div>
+        </div>
+    </fieldset>
+</form>

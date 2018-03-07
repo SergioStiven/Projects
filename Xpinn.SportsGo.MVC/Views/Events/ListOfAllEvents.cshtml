@@ -1,0 +1,82 @@
+﻿<style>
+/*videogular vg-overlay-play .play:before, [videogular] vg-overlay-play .play:before {
+    content: none;
+}*/
+</style>
+<div ng-hide="Event.showEventDetail">
+
+    <!-- Filters -->
+    <filters-events on-filter="Event.searchEvent(Event.get)" 
+                    on-clear-filter="Event.clearFilters()" 
+                    country-for-search="Event.filter.CountriesForSearch" 
+                    category-for-search="Event.filter.CategoriesForSearch"
+                    name-for-search="Event.filter.IdentificadorParaBuscar"></filters-events>
+
+    <!-- buttons previous and next -->
+    <div class="row" style="padding-bottom:20px">
+        <div class="col-md-12">
+            <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                <a href="javascript:void(0)" ng-click="Event.getBeforeEvents()">
+                    <span aria-hidden="true">«</span> <span ng-bind="'BTN_PREVIOUS' | translate"></span>
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                <a href="javascript:void(0)" ng-click="Event.getNextEvents()">
+                    <span ng-bind="'BTN_NEXT' | translate"></span> <span aria-hidden="true">»</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- cards of all events -->
+    <div class="row masonry-container">
+        <div class="masonry-item col-md-4 col-sm-6 col-xs-12 wow fadeInUp animation-delay-4" ng-repeat="event in Event.list">
+            <div class="card card-primary">
+                <div class="card-header" ng-click="Event.getEventDetail(event)">
+                    <h3 class="card-title" ng-bind="' '+event.Titulo">
+                        <i class="zmdi zmdi-graduation-cap"></i>
+                    </h3>
+                </div>
+                <div ng-if="event.TipoArchivo === 1" class="withripple zoom-img" ng-click="Event.getEventDetail(event)">
+                    <a href="javascript:void(0);">
+                        <img ng-src="{{event.UrlArchivo}}" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div ng-if="event.TipoArchivo === 2">
+                    <div class="videogular-container">
+                        <videogular vg-theme="(videogularTheme)">
+                            <vg-media vg-src="(event.UrlArchivo)">
+                            </vg-media>
+                            <vg-overlay-play></vg-overlay-play>
+                        </videogular>
+                    </div>
+                    @*<video ng-src="{{event.UrlArchivo}}" controls style="width:100%"></video>*@
+                </div>
+                <div class="card-block text-center" ng-click="Event.getEventDetail(event)">
+                    <a href="javascript:void(0)"><h4 class="color-info" ng-bind="event.Descripcion"></h4></a>
+                    <p ng-bind="event.Ubicacion"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- buttons previous and next -->
+    <div class="row" style="padding-bottom:20px">
+        <div class="col-md-12">
+            <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                <a href="javascript:void(0)" ng-click="Event.getBeforeEvents()">
+                    <span aria-hidden="true">«</span> <span ng-bind="'BTN_PREVIOUS' | translate"></span>
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                <a href="javascript:void(0)" ng-click="Event.getNextEvents()">
+                    <span ng-bind="'BTN_NEXT' | translate"></span> <span aria-hidden="true">»</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Event detail -->
+<div ng-show="Event.showEventDetail">
+    <event-detail></event-detail>
+</div>

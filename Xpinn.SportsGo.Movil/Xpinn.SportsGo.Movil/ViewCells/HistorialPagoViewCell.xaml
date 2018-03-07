@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.HistorialPagoViewCell"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension">
+
+    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="RegistroSeleccionado_OnTapped"/>
+        </StackLayout.GestureRecognizers>
+        <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand" DownsampleToViewSize="True" 
+                                                      x:Name="UrlArchivo" Aspect="Fill" Style="{StaticResource RemoteImageStyle}"
+                                                      HeightRequest="65" WidthRequest="65" Margin="0,0,10,0" />
+            <StackLayout HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+            <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                   Text="{Binding HistorialPago.Planes.DescripcionIdiomaBuscado}" TextColor="Black" FontAttributes="Bold" FontSize="Medium"/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                <renderers:IconView Source="selected_circle.png" Foreground="{Binding ColorDeEstado}" 
+                                    VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="0,0,5,0"
+                                    HeightRequest="20" WidthRequest="20" />
+                <Label Text="{Binding NombreEstado}" TextColor="{Binding ColorDeEstado}" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Small" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{markup:Translate FechaEstado}" TextColor="Black" VerticalOptions="Center" FontSize="Micro" />
+                <Label Text="{Binding HistorialPago.FechaPago, StringFormat='{0:MM/dd/yy}'}" TextColor="Black" VerticalOptions="Center" FontSize="Micro" />
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</ViewCell>

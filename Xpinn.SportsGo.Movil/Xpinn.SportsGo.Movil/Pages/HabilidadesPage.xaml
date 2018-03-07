@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             x:Class="Xpinn.SportsGo.Movil.Pages.HabilidadesPage"
+             Title="{markup:Translate Habilidades}"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding GuardarHabilidades}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Spacing="3">
+                <SearchBar Text="{Binding HabilidadBusqueda, Mode=TwoWay}" Placeholder="{markup:Translate BuscaPorHabilidadesRelevantes}" CancelButtonColor="Red" PlaceholderColor="Gray" />
+                <StackLayout Margin="3,3,3,0">
+                    <Label Text="{Binding NumerosHabilidadesSeleccionadas}" FontSize="Small" TextColor="{StaticResource PrimaryAppColor}" 
+                           HorizontalOptions="Center" />
+                    <Label Text="{markup:Translate HabilidadesSeleccionadas}" FontSize="Micro" TextColor="#9E9E9E" 
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <StackLayout Margin="3,3,3,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="{Binding NumeroEstrellasGastadas}" FontSize="Small" TextColor="{Binding NumeroEstrellasGastadasColor}" 
+                               HorizontalOptions="Center" />
+                        <Label Text="{Binding NumeroEstrellasMaximasFormated}" FontSize="Small" TextColor="Red" 
+                               HorizontalOptions="Center" />
+                    </StackLayout>
+                    <Label Text="{markup:Translate EstrellasGastadas}" FontSize="Micro" TextColor="#9E9E9E" 
+                           HorizontalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout>
+                <fe:SegmentedButtonGroup OnColor="{StaticResource PrimaryAppColor}" OffColor="{StaticResource PagePrimaryBackgroundColor}" 
+                                         HorizontalOptions="CenterAndExpand" SelectedIndex="{Binding SelectIndexSegmentBar, Mode=TwoWay}" Margin="5"
+                                         CornerRadius="5" HeightRequest="{Binding HeightRequest}">
+                    <fe:SegmentedButtonGroup.LabelStyle>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                            <Setter Property="Margin" Value="5,0" />
+                        </Style>
+                    </fe:SegmentedButtonGroup.LabelStyle>
+                    <fe:SegmentedButtonGroup.SegmentedButtons>
+                        <fe:SegmentedButton Title="{markup:Translate Tecnicas}" />
+                        <fe:SegmentedButton Title="{markup:Translate Tacticas}"/>
+                        <fe:SegmentedButton Title="{markup:Translate Fisicas}"/>
+                    </fe:SegmentedButtonGroup.SegmentedButtons>
+                </fe:SegmentedButtonGroup>
+                <ListView x:Name="ListaSeleccionarHabilidades" SeparatorColor="Transparent" SeparatorVisibility="None" ItemsSource="{Binding Habilidades}" HasUnevenRows="True" RowHeight="45">
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                    </x:Arguments>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <viewcells:HabilidadesViewCell 
+                                ToogleAgregarEntidad="{Binding Source={x:Reference ListaSeleccionarHabilidades}, Path=BindingContext.ToogleAgregarEntidad}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

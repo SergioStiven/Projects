@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.ConversacionViewCell"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    
+    <StackLayout Orientation="Horizontal" Padding="10">
+        <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand" 
+                                    x:Name="UrlImagenPerfil" Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}"
+                                    HeightRequest="40" WidthRequest="40" Margin="0,0,10,0" DownsampleToViewSize="True" />
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Spacing="2">
+            <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                   x:Name="Nombre" TextColor="Black" FontSize="Small" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                <Label HorizontalOptions="Start" VerticalOptions="Center"
+                                           Text="{Binding ChatMensaje.FechaMensaje, StringFormat='{0:g}'}" TextColor="Black" FontSize="Micro" >
+            </Label>
+            <Label Text="{Binding ChatMensaje.Mensaje}" TextColor="Black" FontSize="Small" />
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/search.css" rel="stylesheet" />
+<link href="~/Content/filtersEvents.css" rel="stylesheet" />
+<link href="~/Content/rzslider.css" rel="stylesheet" />
+
+<div ng-controller="searchController" >
+    @*<input type="hidden" id="toSearchHeader" value="@Html.Raw(ViewBag.toSearchHeader)" />*@
+    <div class="card nav-tabs-ver-container">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav nav-tabs-ver nav-tabs-ver-default" role="tablist">
+                    <li role="presentation"  class="active"><a ng-click="Search.clearFiltersAndSearchByProfile(1)" href="#candidatos" aria-controls="candidatos" role="tab" data-toggle="tab"><i class="zmdi zmdi-account-circle"></i> <span ng-bind="'LBL_ATHLETES' | translate"></span></a></li>
+                    <li role="presentation"><a ng-click="Search.clearFiltersAndSearchByProfile(2)" href="#candidatos" aria-controls="candidatos" role="tab" data-toggle="tab"><i class="zmdi zmdi-accounts-outline"></i> <span ng-bind="'LBL_GROUPS' | translate"></span></a></li>
+                    <li role="presentation"><a ng-click="Search.clearFiltersAndSearchByProfile(3)" href="#candidatos" aria-controls="candidatos" role="tab" data-toggle="tab"><i class="zmdi zmdi-calendar-note"></i> <span ng-bind="'LBL_EVENTS' | translate"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-md-9 nav-tabs-ver-container-content">
+                <div class="card-block">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="candidatos" ng-show="!loadingPage">
+                            <div ng-if="!Search.OperationIsAuthorizedByPlan">
+                                @Html.Partial("~/Views/Shared/Unauthorized.cshtml")
+                            </div>
+                            <div ng-if="Search.OperationIsAuthorizedByPlan">
+                                <div ng-hide="Events.showEvent">
+                                    <!-- Filters -->
+                                    <filters-candidate ng-if="Search.currentProfile === 1"
+                                                       on-filter="Search.get(Search.currentProfile)"
+                                                       on-clear-filter="Search.clearFiltersAndSearchByProfile(Search.currentProfile)"
+                                                       country-for-search="Search.filter.CountriesForSearch"
+                                                       category-for-search="Search.filter.CategoriesForSearch"
+                                                       name-for-search="Search.filter.IdentificadorParaBuscar"
+                                                       weight-start-for-search="Search.filter.PesoInicial"
+                                                       weight-end-for-search="Search.filter.PesoFinal"
+                                                       height-start-for-search="Search.filter.EstaturaInicial"
+                                                       height-end-for-search="Search.filter.EstaturaFinal"></filters-candidate>
+
+                                    <filters-groups-and-events ng-if="Search.currentProfile !== 1"
+                                                               on-filter="Search.get(Search.currentProfile)"
+                                                               on-clear-filter="Search.clearFiltersAndSearchByProfile(Search.currentProfile)"
+                                                               country-for-search="Search.filter.CountriesForSearch"
+                                                               category-for-search="Search.filter.CategoriesForSearch"
+                                                               name-for-search="Search.filter.IdentificadorParaBuscar"></filters-groups-and-events>
+                                    <!-- End Filters -->
+                                    <!-- List -->
+                                    <div class="list-group">
+                                        <div class="panel-body" style="padding:0px;">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="result in Search.list | filter:Search.filter.CiudadResidencia:strict">
+                                                    <img ng-src="{{result.Personas.UrlImagenPerfil == '' ? '../Content/assets/img/demo/avatar.png' : result.Personas.UrlImagenPerfil}}" style="float:left;width:100px; height:100px; border-radius:50%;" />
+                                                    <div style="float:left; margin-left:10px;max-width: 80%;overflow: hidden;text-overflow: ellipsis;">
+                                                        <a ng-click="Search.viewProfile(result)" href="javascript:void(0)"><h2 class="color-info" ng-bind="result.Personas.Nombres + ' ' + (result.Personas.Apellidos == null ? '': result.Personas.Apellidos)"></h2></a>
+                                                        <em class="lead" ng-bind="result.Personas.CiudadResidencia" style="white-space: nowrap;"></em>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- End List -->
+                                </div>
+
+                                <!-- Event -->
+                                <div ng-if="Events.showEvent">
+                                    <div class="row">
+                                        <a href="javascript:void(0)" ng-click="Events.showEvent = false">
+                                            <span aria-hidden="true">«</span> <span ng-bind="'BTN_BACK' | translate"></span>
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card card-flat bg-transparent">
+                                                <div class="card-block color-white">
+                                                    <header class="text-center mb-2">
+                                                        <img style="width:90%;" ng-src="{{Events.selectedEvent.UrlArchivo}}" />
+                                                        <video ng-src="Events.selectedEvent.UrlArchivo"></video>
+                                                        <h2 class="no-m ms-site-title color-primary center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5"
+                                                            ng-bind="Events.selectedEvent.NumeroEventosAsistentes + ' ' + ('LBL_GOING' | translate)"></h2>
+                                                    </header>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card index-1 animated zoomInRight animation-delay-7">
+                                                <div class="card-block-big">
+                                                    <h1 class="color-primary" ng-bind="Events.selectedEvent.Titulo"></h1>
+                                                    <p class="lead" ng-bind="Events.selectedEvent.Descripcion"></p>
+                                                    <div id="ms-countdown"></div>
+                                                    <h4 class="color-info"><span ng-bind="'LBL_LOCATION' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="Events.selectedEvent.Ubicacion"></span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Event -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Search/translations.js"></script>
+    <!-- Slider -->
+    <script src="~/Scripts/app/lib/rzslider.min.js"></script>
+    <script src="~/Scripts/app/Search/searchController.js"></script>
+}

@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             x:Class="Xpinn.SportsGo.Movil.Pages.PosicionJugadorPage"
+             x:Name="ContentPagePosicionJugador">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="IconPositionStyle" TargetType="renderers:IconView">
+                <Setter Property="Source" Value="selected_circle.png"/>
+                <Setter Property="Foreground" Value="Red"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="WidthRequest" Value="20"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding GuardarPosicion}" 
+                                      Parent="{x:Reference ContentPagePosicionJugador}" IsVisible="{Binding PosicionModel.EsMiPersonaORegistro}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" 
+                        Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                        IsVisible="{Binding PosicionModel.CategoriaParaUbicar.EsFutbol}">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"  
+                                        Source="FutbolCampo.png" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+            <!--Posicion Portero-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.50, 0.90, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 1}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="1">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Posicion Defensas-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.20, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 2}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="2">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"  
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 3}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="3">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.60, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 4}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="4">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.80, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 5}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="5">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Posicion MedioCampos-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.20, 0.50, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 6}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="6">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.50, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 7}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="7">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.60, 0.50, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 8}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="8">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.80, 0.50, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}" 
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 9}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="9">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Posicion Delanteros-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.25, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 10}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="10">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.60, 0.25, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 11}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="11">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+            
+        </AbsoluteLayout>
+
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" 
+                        Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                        IsVisible="{Binding PosicionModel.CategoriaParaUbicar.EsVolleyBall}">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"  
+                                        Source="VolleyballCampo.png" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            
+            <!--Primera linea izquierda-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.30, 0.80, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 1}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="1">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Primera linea medio-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.50, 0.80, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 2}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="2">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Primera linea derecha-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.70, 0.80, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 3}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="3">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Segunda linea izquierda-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.30, 0.60, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 4}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="4">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Segunda linea medio-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.50, 0.60, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 5}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="5">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--Segunda linea derecha-->
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.70, 0.60, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 6}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="6">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" 
+                        Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                        IsVisible="{Binding PosicionModel.CategoriaParaUbicar.EsBasketBall}">
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"  
+                                        Source="BasketballCampo.png" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.60, 0.95, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 1}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="1">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.25, 0.85, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 2}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="2">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.80, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 3}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="3">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.70, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 4}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="4">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.50, 0.65, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 5}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="5">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+        </AbsoluteLayout>
+
+        <!-- BaseBall -->
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" 
+                        Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                        IsVisible="{Binding PosicionModel.CategoriaParaUbicar.EsBaseBall}">
+
+            <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"  
+                                        Source="BaseballCampo.png" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.09, 0.96, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 1}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="1">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <!--<renderers:IconView AbsoluteLayout.LayoutBounds="0.19, 0.75, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"-->  
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.27, 0.84, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 2}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="2">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.52, 0.93, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 3}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="3">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.52, 0.78, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 4}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="4">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.66, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 5}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="5">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.10, 0.66, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 6}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="6">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.40, 0.20, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 7}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="7">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.70, 0.30, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 8}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="8">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+            <renderers:IconView AbsoluteLayout.LayoutBounds="0.80, 0.55, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"  
+                                Style="{StaticResource IconPositionStyle}"
+                                fe:TappedGestureAttached.Command="{Binding PosicionSeleccionada}"
+                                fe:TappedGestureAttached.CommandParameter="{sys:Int32 9}" >
+                <renderers:IconView.Triggers>
+                    <DataTrigger TargetType="renderers:IconView" Binding="{Binding NumeroPosicion, Mode=TwoWay}" Value="9">
+                        <Setter Property="Foreground" Value="Yellow" />
+                    </DataTrigger>
+                </renderers:IconView.Triggers>
+            </renderers:IconView>
+
+        </AbsoluteLayout>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

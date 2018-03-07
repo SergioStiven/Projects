@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.ListaPlanesViewCell"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension">
+    
+    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="RegistroSeleccionado_OnTapped"/>
+        </StackLayout.GestureRecognizers>
+        <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand" DownsampleToViewSize="True" 
+                                    x:Name="UrlArchivo" Aspect="Fill" Style="{StaticResource RemoteImageStyle}"
+                                    HeightRequest="60" WidthRequest="60" Margin="0,0,10,0" />
+            <StackLayout HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+            <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                                       Text="{Binding DescripcionIdiomaBuscado}" TextColor="Black" FontAttributes="Bold" FontSize="Medium"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{markup:Translate Precio}" TextColor="Black" VerticalOptions="Center" FontSize="Small" />
+                <Label x:Name="AbreviaturaMoneda" TextColor="Black" VerticalOptions="Center" FontSize="Small"/>
+                <Label Text="{Binding Precio}" TextColor="Black" VerticalOptions="Center" FontSize="Small" />
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

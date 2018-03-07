@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SportsGo</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/style.light-blue-500.min.css" />
+    <link href="~/Content/select.min.css" rel="stylesheet" />
+    <style>
+        oi-select .select-search{
+            border: none;
+            border-bottom: 2px solid #d9d9d9;
+        }
+    </style>
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="AuthenticateController">
+    <div id="ms-preload" class="ms-preload">
+        <div id="status">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-primary" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="myModalTerms">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="myModalLabel6" translate="LBL_TERMSCONDITIONS"></h3>
+                </div>
+                <div class="modal-body">
+                    <p ng-bind="User.termsAndConditions.Texto"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-full-page ms-hero-bg-default ms-hero-img-airplane back-fixed" id="divBanner">
+        <div class="mw-500 absolute-center" style="top:7%;bottom:0;">
+            <div class="card color-dark shadow-6dp animated fadeIn animation-delay-7">
+                <div class="ms-hero-bg-primary ms-hero-img-mountain" id="divHeaderForm">
+                    <h2 class="text-center no-m pt-4 pb-4 color-white index-1">SportsGo</h2>
+                </div>
+                <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 nav-tabs-transparent indicator-primary" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" class="withoutripple">
+                            <i class="zmdi zmdi-account"></i> {{ 'LBL_LOGIN' | translate}}
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" class="withoutripple">
+                            <i class="zmdi zmdi-account-add"></i> {{ 'LBL_REGISTER' | translate}}
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#ms-recovery-tab" aria-controls="ms-recovery-tab" role="tab" data-toggle="tab" class="withoutripple">
+                            <i class="zmdi zmdi-key"></i> {{ 'LBL_RECOVERY_PASS' | translate}}
+                        </a>
+                    </li>
+                </ul>
+                <div class="card-block">
+                    <div class="tab-content">
+                        <!-- Login -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="ms-login-tab">
+                            <form>
+                                <fieldset>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-account"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-user">{{'LBL_USERNAME' | translate}}</label>
+                                            <input type="text" id="ms-form-user" ng-model="User.infoUser.Usuario" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-lock"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-pass">{{'LBL_PASSWORD' | translate}}</label>
+                                            <input type="password" id="ms-form-pass" ng-model="User.infoUser.Clave" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-xs-5">
+                                            <div class="form-group no-mt">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input ng-model="User.infoUser.EsRecordarClave" type="checkbox"> {{'LBL_REMEMBER' | translate}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <button ng-click="User.login()" ng-disabled="User.isBusy" class="btn btn-raised btn-primary pull-right">
+                                                <img ng-show="User.isBusy" src="~/Content/assets/img/ring.gif" width="25" />    
+                                                {{User.isBusy ? ('BTN_LOGGING' | translate) : ('BTN_LOGIN' | translate)}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <div class="text-center" style="display:none;">
+                                <h3>Inicia sesión con</h3>
+                                <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-facebook">
+                                    <i class="zmdi zmdi-facebook"></i> Facebook
+                                </a>
+                                <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-twitter">
+                                    <i class="zmdi zmdi-twitter"></i> Twitter
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Register -->
+                        <div role="tabpanel" class="tab-pane fade" id="ms-register-tab">
+                            <form name="formRegister" autocomplete="off">
+                                <fieldset>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-account"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-user">{{'LBL_USERNAME' | translate}}</label>
+                                            <input type="text" id="ms-form-user" ng-model="User.userForRegistration.Usuario" class="form-control" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-email"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-email">{{'LBL_EMAIL' | translate}}</label>
+                                            <input type="email" id="ms-form-email" ng-model="User.userForRegistration.Email" ng-change="User.validateEmail()" class="form-control" value="" autocomplete="off">
+                                            <span class="help-block color-danger" style="top:35px" ng-show="!User.validateEmail()">{{'NOTI_INVALID_EMAIL' | translate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-pin-account"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-profile" style="top:-30px;left: 0;font-size: 12px;line-height: 1.07143;">{{'LBL_PROFILE' | translate}}  </label>
+                                            <oi-select oi-options="item.DescripcionIdiomaBuscado for item in Lists.profiles track by item.Consecutivo"
+                                                       ng-model="User.userForRegistration.Profile"
+                                                       placeholder="Seleccione">
+                                            </oi-select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-globe"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-language" style="top:-30px;left: 0;font-size: 12px;line-height: 1.07143;">{{'LBL_LANGUAGE' | translate}}  </label>
+                                            <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in Lists.languages track by item.Consecutivo"
+                                                       ng-model="User.userForRegistration.PersonaDelUsuario.CodigoIdioma"
+                                                       ng-change="changeLanguage()"
+                                                       id="ms-form-profile">
+                                            </oi-select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-lock"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-pass">{{'LBL_PASSWORD' | translate}}</label>
+                                            <input type="password" id="ms-form-pass" ng-model="User.userForRegistration.Clave" class="form-control" value="" autocomplete="new-password">
+                                            <p style="line-height:1em;" class="help-block">{{'NOTI_INVALID_PASSWORD' | translate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-lock"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-pass">{{'LBL_RE_TYPE_PASSWORD' | translate}}</label>
+                                            <input type="password" id="ms-form-pass" ng-model="User.userForRegistration.ClaveConfirmacion" class="form-control" autocomplete="new-password">
+                                            <p style="line-height:1em;" class="help-block">{{'NOTI_INVALID_PASSWORD' | translate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:15px;"> 
+                                        <div class="col-md-10 col-xs-12">
+                                            <div class="form-group no-mt">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="User.userForRegistration.AcceptTerms"> 
+                                                        <a data-target="#modalTerms" data-toggle="modal">{{'LBL_ACCEPT_TERMSCONDITIONS' | translate}}</a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-12">
+                                            <button ng-click="User.register()" class="btn btn-raised btn-primary pull-right">
+                                                {{'BTN_REGISTER' | translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        
+                        <!-- Recover Passwod -->
+                        <div role="tabpanel" class="tab-pane fade" id="ms-recovery-tab">
+                            <form>
+                                <fieldset>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-account"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-user">{{'LBL_USERNAME' | translate}}</label>
+                                            <input type="text" id="ms-form-user" class="form-control" ng-model="User.infoUser.Usuario">
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="zmdi zmdi-email"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-email">{{'LBL_EMAIL' | translate}}</label>
+                                            <input type="email" id="ms-form-email" class="form-control" ng-model="User.infoUser.Email">
+                                        </div>
+                                    </div>
+                                    <button ng-click="User.recoverPassword()" ng-disabled="User.isBusy" class="btn btn-raised btn-block btn-primary">
+                                        <img ng-show="User.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                                        {{User.isBusy ? ('BTN_SEND_PASSWORD' | translate) : ('BTN_SEND_PASSWORD' | translate)}}
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/assets/js/plugins.min.js"></script>
+    <script src="~/Content/assets/js/app.min.js"></script>
+    <script src="~/Scripts/app/lib/angular.min.js"></script>
+    <!-- SingalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!-- Translate -->
+    <script src="~/Scripts/app/Authenticate/translations.js"></script>
+    <script src="~/Scripts/app/lib/angular-translate.js"></script>
+    <!-- Select & Select multiple -->
+    <script src="~/Scripts/app/lib/select-tpls.min.js"></script>
+    <script src="~/Scripts/app/Authenticate/AuthenticateController.js"></script>
+    <script src="~/Scripts/app/service.js"></script>
+</body>
+</html>

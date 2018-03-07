@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             x:Class="Xpinn.SportsGo.Movil.Pages.NotificacionesPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Notificaciones}">
+
+    <AbsoluteLayout>
+        <controls:InfiniteListView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                   IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshCommand="{Binding RefreshCommand}"
+                                   x:Name="ListaTimeLine" HasUnevenRows="True" LoadMoreCommand="{Binding LoadMoreTimeLine}"
+                                   ItemsSource="{Binding TimeLine}" SeparatorVisibility="None" SeparatorColor="Transparent">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:InfiniteListView.ItemTemplate>
+                <DataTemplate>
+                    <viewcells:NotificacionesViewCell 
+                        InteractuarNotificacion="{Binding Source={x:Reference ListaTimeLine}, Path=BindingContext.InteractuarNotificacion}"/>
+                </DataTemplate>
+            </controls:InfiniteListView.ItemTemplate>
+        </controls:InfiniteListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

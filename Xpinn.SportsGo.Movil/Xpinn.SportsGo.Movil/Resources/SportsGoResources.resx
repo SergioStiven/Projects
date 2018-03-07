@@ -1,0 +1,1228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AgregarDeporte" xml:space="preserve">
+    <value> + Add Sport</value>
+    <comment>String para el boton en informacion de perfil para crear un deporte</comment>
+  </data>
+  <data name="Altura" xml:space="preserve">
+    <value>Height (cm)</value>
+    <comment>String para el titulo del label para la altura</comment>
+  </data>
+  <data name="Apellido" xml:space="preserve">
+    <value>Lastname</value>
+    <comment>String para el titulo del label para el apellido en informacion perfil</comment>
+  </data>
+  <data name="Borrar" xml:space="preserve">
+    <value>Delete</value>
+    <comment>String para ser usado para indicar operacion de borrado</comment>
+  </data>
+  <data name="BorrarFoto" xml:space="preserve">
+    <value>Delete photo</value>
+    <comment>String para el texto del action sheet para borrar la foto</comment>
+  </data>
+  <data name="BuscaPorHabilidadesRelevantes" xml:space="preserve">
+    <value>Search for relevant skills</value>
+    <comment>String para el placeholder del search bar de la seleccion de habilidades</comment>
+  </data>
+  <data name="CamaraNoDisponible" xml:space="preserve">
+    <value>Camera no available :(</value>
+    <comment>String para el texto de la alerta para indicar que no hay camara disponible</comment>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>String para el texto de una aleta para indicar el boton de cancelar la accion</comment>
+  </data>
+  <data name="Ciudad" xml:space="preserve">
+    <value>City</value>
+    <comment>String para el titulo del label para la ciudad en informacion perfil</comment>
+  </data>
+  <data name="ConexionPerdida" xml:space="preserve">
+    <value>It looks like you're not connected to the internet!.</value>
+    <comment>String para el label que aparece cuando no hay conexion</comment>
+  </data>
+  <data name="Contraseña" xml:space="preserve">
+    <value>Password</value>
+    <comment>String para el placeholder del entry de la contraseña</comment>
+  </data>
+  <data name="CrearCuenta" xml:space="preserve">
+    <value>Create an Account</value>
+    <comment>String para el boton para crear una cuenta de la pantalla de inicio</comment>
+  </data>
+  <data name="CrearDeporte" xml:space="preserve">
+    <value>Create Sport</value>
+    <comment>String para el label del titulo de page para crear el deporte</comment>
+  </data>
+  <data name="CrearPerfil" xml:space="preserve">
+    <value>Create Profile</value>
+    <comment>String para el titulo de informacion perfil para crear perfil</comment>
+  </data>
+  <data name="DebesRegistrarHabilidad" xml:space="preserve">
+    <value>You must register at least one skill!.</value>
+    <comment>String para la alerta que debe registrar al menos una habilidad</comment>
+  </data>
+  <data name="DebesSeleccionarDeporte" xml:space="preserve">
+    <value>You must select a sport!.</value>
+    <comment>String para  la alerta que debe seleccionar un deporte</comment>
+  </data>
+  <data name="Deportes" xml:space="preserve">
+    <value>Sports</value>
+    <comment>String para la label titulo de informacion del perfil para el deporte</comment>
+  </data>
+  <data name="EditarDeporte" xml:space="preserve">
+    <value>Edit Sport</value>
+    <comment>String para el label del titulo de page para editar el deporte</comment>
+  </data>
+  <data name="EditarInformacionPersonal" xml:space="preserve">
+    <value>+ Edit Information</value>
+    <comment>String para label del boton para editar la informacion personal</comment>
+  </data>
+  <data name="EditarPerfil" xml:space="preserve">
+    <value>Edit Profile</value>
+    <comment>String para el titulo de informacion perfil para editar perfil</comment>
+  </data>
+  <data name="ElegirFoto" xml:space="preserve">
+    <value>Pick photo</value>
+    <comment>String para el texto del action sheet para elegir la foto</comment>
+  </data>
+  <data name="EntraAqui" xml:space="preserve">
+    <value>Enter Here!.</value>
+    <comment>String para el label para logearse en la pantalla de inicio</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>String para el titulo de la alerta para mostrar un error</comment>
+  </data>
+  <data name="ErrorAsignarImagenes" xml:space="preserve">
+    <value>There was an error saving your images !.</value>
+    <comment>String para el label de la alerta para mostrar un error asignando las imagenes de perfil o banner</comment>
+  </data>
+  <data name="ErrorEliminarDeporte" xml:space="preserve">
+    <value>Failed to remove the sport!.</value>
+    <comment>String para la alerta que no se pudo eliminar el deporte</comment>
+  </data>
+  <data name="ErrorEliminarHabilidad" xml:space="preserve">
+    <value>Failed to remove the skill!.</value>
+    <comment>String para la alerta que no se pudo eliminar la habilidad</comment>
+  </data>
+  <data name="ErrorEliminarImagenes" xml:space="preserve">
+    <value>There was an error deleting your images !.</value>
+    <comment>String para el label de la alerta para mostrar un error eliminando las imagenes de perfil o banner</comment>
+  </data>
+  <data name="ErrorGuardarDeporte" xml:space="preserve">
+    <value>Failed to save the sport!.</value>
+    <comment>String para la alerta que no se pudo guardar el deporte</comment>
+  </data>
+  <data name="ErrorGuardarHabilidades" xml:space="preserve">
+    <value>Failed to save skills!.</value>
+    <comment>String para la alerta que no se pudo guardar las habilidades</comment>
+  </data>
+  <data name="ErrorIniciarSesion" xml:space="preserve">
+    <value>Something happened, could not login!.</value>
+    <comment>String para la descripcion de la alerta que no se pudo iniciar sesion</comment>
+  </data>
+  <data name="ErrorListarDeportes" xml:space="preserve">
+    <value>Failed to query sports!.</value>
+    <comment>String para la alerta que no se pudo encontrar los deportes</comment>
+  </data>
+  <data name="ErrorListarHabilidades" xml:space="preserve">
+    <value>Failed to query skills!.</value>
+    <comment>String para la alerta que no se pudo consultar las habilidades</comment>
+  </data>
+  <data name="ErrorPrimerRegistro" xml:space="preserve">
+    <value>There was an error saving your registration!.</value>
+    <comment>String para el label de la alerta para mostrar un error en el primer registro</comment>
+  </data>
+  <data name="EscribeTuApellido" xml:space="preserve">
+    <value>Enter your lastname here!.</value>
+    <comment>String para el placeholder del apellido en informacion perfil</comment>
+  </data>
+  <data name="EscribeTuCiudad" xml:space="preserve">
+    <value>Enter your city here!.</value>
+    <comment>String para el placeholder de la ciudad en informacion perfil</comment>
+  </data>
+  <data name="EscribeTuNombre" xml:space="preserve">
+    <value>Enter your name here!.</value>
+    <comment>String para el placeholder del nombre en informacion perfil</comment>
+  </data>
+  <data name="EscribeTuNombreContacto" xml:space="preserve">
+    <value>Enter your contact name here!</value>
+    <comment>String para el placeholder del nombre de contacto</comment>
+  </data>
+  <data name="EscribeTuNumeroIdentificacion" xml:space="preserve">
+    <value>Write your ID here!.</value>
+    <comment>String para el placeholder del numero de identificacion</comment>
+  </data>
+  <data name="EscribeTuSkype" xml:space="preserve">
+    <value>Enter your Skype here</value>
+    <comment>String para el placeholder del skype en informacion perfil</comment>
+  </data>
+  <data name="EscribeTuTelefono" xml:space="preserve">
+    <value>Write your phone here!</value>
+    <comment>String para el placeholder del numero de telefono</comment>
+  </data>
+  <data name="Español" xml:space="preserve">
+    <value>Spanish</value>
+    <comment>String para lo que sea que quiera saber la descripcion de español</comment>
+  </data>
+  <data name="FechaNacimiento" xml:space="preserve">
+    <value>Birth date</value>
+    <comment>String para el titulo del label para la fecha de nacimiento</comment>
+  </data>
+  <data name="Fisicas" xml:space="preserve">
+    <value>Physical</value>
+    <comment>String para el segment control para mostrar el tipo habilidad fisica</comment>
+  </data>
+  <data name="Foto" xml:space="preserve">
+    <value>Photo</value>
+    <comment>String para el label que indica para subir una foto</comment>
+  </data>
+  <data name="GaleriaNoDisponible" xml:space="preserve">
+    <value>Gallery no available :(</value>
+    <comment>String para el texto de la alerta para indicar que no hay galeria disponible</comment>
+  </data>
+  <data name="Guardar" xml:space="preserve">
+    <value>Save</value>
+    <comment>String para ser usado para indicar operacion de guardado</comment>
+  </data>
+  <data name="Habilidades" xml:space="preserve">
+    <value>Skills</value>
+    <comment>String para el titulo de informacion categoria de habilidades</comment>
+  </data>
+  <data name="HabilidadesActuales" xml:space="preserve">
+    <value>Current skills</value>
+    <comment>String para el titulo de la listview para las habildiades del candidato</comment>
+  </data>
+  <data name="HabilidadesSeleccionadas" xml:space="preserve">
+    <value>Selected Skills</value>
+    <comment>String para el label en seleccion de habilidades para saber cuantas hay seleccionadas</comment>
+  </data>
+  <data name="Hombre" xml:space="preserve">
+    <value>Man</value>
+    <comment>String para el titulo del label para el genero de hombre</comment>
+  </data>
+  <data name="Idioma" xml:space="preserve">
+    <value>Language</value>
+    <comment>String para el titulo del label para el idioma en informacion perfil</comment>
+  </data>
+  <data name="InformacionPerfil" xml:space="preserve">
+    <value>Profile Information</value>
+    <comment>String para el titulo de seccion en informacion perfil</comment>
+  </data>
+  <data name="InformacionPersonal" xml:space="preserve">
+    <value>Personal Information</value>
+    <comment>String para el label titulo de informacion del perfil para la info de persona</comment>
+  </data>
+  <data name="InformacionRegion" xml:space="preserve">
+    <value>Region Information</value>
+    <comment>String para el titulo de seccion en informacion perfil</comment>
+  </data>
+  <data name="Ingles" xml:space="preserve">
+    <value>English</value>
+    <comment>String para lo que sea que quiera saber la descripcion de ingles</comment>
+  </data>
+  <data name="Ingresar" xml:space="preserve">
+    <value>Sign In</value>
+    <comment>String para los botones para inicio de sesion</comment>
+  </data>
+  <data name="MisHabilidades" xml:space="preserve">
+    <value>My Skills</value>
+    <comment>String para el grupo en seleccion de habilidades para las habilidades seleccionadas</comment>
+  </data>
+  <data name="MostrarMenos" xml:space="preserve">
+    <value>Show less</value>
+    <comment>String para el label del footer del listview para mostrar menos</comment>
+  </data>
+  <data name="MostrarTodo" xml:space="preserve">
+    <value>Show all</value>
+    <comment>String para el label del footer del listview para mostrar todo</comment>
+  </data>
+  <data name="Mujer" xml:space="preserve">
+    <value>Woman</value>
+    <comment>String para el titulo del label para el genero de mujer</comment>
+  </data>
+  <data name="NoCamara" xml:space="preserve">
+    <value>No Camera</value>
+    <comment>String para el titulo de la alerta para indicar que no hay camara disponible</comment>
+  </data>
+  <data name="NoGaleria" xml:space="preserve">
+    <value>No Gallery</value>
+    <comment>String para el titulo de la alerta para indicar que no hay galeria disponible</comment>
+  </data>
+  <data name="Nombre" xml:space="preserve">
+    <value>Name</value>
+    <comment>String para el titulo del label para el nombre en informacion perfil</comment>
+  </data>
+  <data name="NombreContacto" xml:space="preserve">
+    <value>Name Contact</value>
+    <comment>String para el titulo del label para el nombre de contacto del grupo</comment>
+  </data>
+  <data name="NoSePudoPickearFoto" xml:space="preserve">
+    <value>Unable to pick photos. Go to settings?</value>
+    <comment>String para el texto de la alerta para indicar que el permiso de pickear la foto fue denegado</comment>
+  </data>
+  <data name="NoSePudoPickearVideo" xml:space="preserve">
+    <value>Unable to pick video. Go to settings?</value>
+    <comment>String para el texto de la alerta para indifcar que el permiso para pickear el video fue denegado</comment>
+  </data>
+  <data name="NoSePudoTomarFoto" xml:space="preserve">
+    <value>Unable to take photos. Go to settings?</value>
+    <comment>String para el texto de la alerta para indicar que el permiso fue denegado</comment>
+  </data>
+  <data name="NosePudoTomarVideo" xml:space="preserve">
+    <value>Unable to take videos. Go to settings?</value>
+    <comment>String para el texto de la alerta para indicar que el permiso para tomar el video fue denegado</comment>
+  </data>
+  <data name="NumeroIdentificacion" xml:space="preserve">
+    <value>ID number</value>
+    <comment>String para el titulo del label para el numero de identificacion</comment>
+  </data>
+  <data name="OlvidoContraseña" xml:space="preserve">
+    <value>Forgot your password?</value>
+    <comment>String para el label de olvido la contraseña</comment>
+  </data>
+  <data name="Pais" xml:space="preserve">
+    <value>Country</value>
+    <comment>String para el titulo del label para el pais en informacion perfil</comment>
+  </data>
+  <data name="Perfil" xml:space="preserve">
+    <value>Profile</value>
+    <comment>String para el titulo de la pantalla de tipo de perfil</comment>
+  </data>
+  <data name="PermisoDenegado" xml:space="preserve">
+    <value>Permission Denied</value>
+    <comment>String para el titulo de la alerta para indicar que el permiso fue denegado</comment>
+  </data>
+  <data name="Peso" xml:space="preserve">
+    <value>Weight (Kg)</value>
+    <comment>String para el titulo del label para el peso</comment>
+  </data>
+  <data name="Portugues" xml:space="preserve">
+    <value>Portuguese</value>
+    <comment>String para lo que sea que quiera saber la descripcion de portugues</comment>
+  </data>
+  <data name="Recuerdame" xml:space="preserve">
+    <value>Do you want to remember me?</value>
+    <comment>String para el switch para recordar el inicio</comment>
+  </data>
+  <data name="SinNombre" xml:space="preserve">
+    <value>No Name</value>
+    <comment>String para el texto del nombre por default</comment>
+  </data>
+  <data name="Tacticas" xml:space="preserve">
+    <value>Tactics</value>
+    <comment>String para el segment control para mostrar el tipo habilidad tactica</comment>
+  </data>
+  <data name="Tecnicas" xml:space="preserve">
+    <value>Techniques</value>
+    <comment>String para el segment control para mostrar el tipo habilidad tecnica</comment>
+  </data>
+  <data name="Telefono" xml:space="preserve">
+    <value>Phone</value>
+    <comment>String para el titulo del label para el numero de telefono</comment>
+  </data>
+  <data name="TituloAlerta" xml:space="preserve">
+    <value>Alert</value>
+    <comment>String para el titulo de la alerta </comment>
+  </data>
+  <data name="TomarFoto" xml:space="preserve">
+    <value>Take photo</value>
+    <comment>String para el texto del action sheet para tomar la foto</comment>
+  </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>Username</value>
+    <comment>String para el placeholder del entry del usuario</comment>
+  </data>
+  <data name="UsuarioNoExiste" xml:space="preserve">
+    <value>This user does not exist!.</value>
+    <comment>String para el mensaje de la alerta que el usuario no existe</comment>
+  </data>
+  <data name="UsuarioRepetido" xml:space="preserve">
+    <value>This user already exists!.</value>
+    <comment>String para el mensaje de la alerta que el usuario ya esta repetido</comment>
+  </data>
+  <data name="VerDeporte" xml:space="preserve">
+    <value>View Sport</value>
+    <comment>String para el label del titulo de page para ver el deporte</comment>
+  </data>
+  <data name="VerInformacionPersonal" xml:space="preserve">
+    <value> + See Information </value>
+    <comment>String para label del boton para ver la informacion personal</comment>
+  </data>
+  <data name="VerPerfil" xml:space="preserve">
+    <value>View Profile</value>
+    <comment>String para el titulo de informacion perfil para ver perfil</comment>
+  </data>
+  <data name="YaTienesUnaCuenta" xml:space="preserve">
+    <value>Already have an account?</value>
+    <comment>String para el label de pregunta en la pantalla de inicio</comment>
+  </data>
+  <data name="Biografia" xml:space="preserve">
+    <value>Biography</value>
+    <comment>String para el label de biografia en la pantalla de informacion de perfil</comment>
+  </data>
+  <data name="Genero" xml:space="preserve">
+    <value>Gender</value>
+    <comment>String para el label de genero en la pantalla de informacion de perfil</comment>
+  </data>
+  <data name="ErrorGuardarInformacionPersonal" xml:space="preserve">
+    <value>There was an error saving your information!.</value>
+    <comment>String para mostrar el error de que no se pudo guardar la persona</comment>
+  </data>
+  <data name="FaltaDatosPerfil" xml:space="preserve">
+    <value>Missing data to fill out your profile information!.</value>
+    <comment>String para la descripcion de la alerta que faltan datos por llenar del perfil</comment>
+  </data>
+  <data name="FaltaDatosPersona" xml:space="preserve">
+    <value>Missing data to fill out your personal information!.</value>
+    <comment>String para la descripcion de la alerta que faltan datos por llenar</comment>
+  </data>
+  <data name="FaltaDatosDeporte" xml:space="preserve">
+    <value>You must register at least one sport !.</value>
+    <comment>String para la alerta para decir que debe registrar al menos un deporte</comment>
+  </data>
+  <data name="AgregarEvento" xml:space="preserve">
+    <value>+ Add Event</value>
+    <comment>String para el boton para agregar un evento</comment>
+  </data>
+  <data name="AgregarVideo" xml:space="preserve">
+    <value>+ Add Video</value>
+    <comment>String para el boton para agregar un video</comment>
+  </data>
+  <data name="Configuracion" xml:space="preserve">
+    <value>Configuration</value>
+    <comment>String para el label que muestra configuracion</comment>
+  </data>
+  <data name="Deportistas" xml:space="preserve">
+    <value>Athletes</value>
+    <comment>String para el label del segment control para deportista</comment>
+  </data>
+  <data name="Eventos" xml:space="preserve">
+    <value>Events</value>
+    <comment>String para el label del segment control para eventos</comment>
+  </data>
+  <data name="Grupos" xml:space="preserve">
+    <value>Groups</value>
+    <comment>String para el label del segment control para grupo</comment>
+  </data>
+  <data name="Representantes" xml:space="preserve">
+    <value>Representative</value>
+    <comment>String para el menu inicial que indica que es representante</comment>
+  </data>
+  <data name="BuscaPorLosDeportesDeTuInteres" xml:space="preserve">
+    <value>Search for the sports of your interest!.</value>
+    <comment>String para el label del titulo del buscador para complementar</comment>
+  </data>
+  <data name="Usuarios" xml:space="preserve">
+    <value>Users</value>
+    <comment>String para metricas de usuarios</comment>
+  </data>
+  <data name="Descripcion" xml:space="preserve">
+    <value>Description</value>
+    <comment>String para el label que indica la descripcion</comment>
+  </data>
+  <data name="Titulo" xml:space="preserve">
+    <value>Title</value>
+    <comment>String para el label que indica el titulo</comment>
+  </data>
+  <data name="ElegirVideo" xml:space="preserve">
+    <value>Pick video</value>
+    <comment>String para la opcion en el action sheet para elegir un video</comment>
+  </data>
+  <data name="TomarVideo" xml:space="preserve">
+    <value>Take video</value>
+    <comment>String para la opcion en el action sheet para grabar un video</comment>
+  </data>
+  <data name="ErrorPrimerLogeo" xml:space="preserve">
+    <value>The user has been created but it was not possible to make the first login :( Reopen the application and try to login with your new user !.</value>
+    <comment>String para mostrar error en primer logeo</comment>
+  </data>
+  <data name="EscribeTuEmail" xml:space="preserve">
+    <value>Enter your email here!.</value>
+    <comment>String para el placeholder para escribir el email</comment>
+  </data>
+  <data name="ErrorArchivo" xml:space="preserve">
+    <value>There was an error processing your file!.</value>
+    <comment>String para el error de que no se pudo procesar el archivo</comment>
+  </data>
+  <data name="ErrorPublicacion" xml:space="preserve">
+    <value>There was an error processing your post!.</value>
+    <comment>String para la alerta que hubo un error al procesar la publicacion</comment>
+  </data>
+  <data name="FaltaDatosPublicacion" xml:space="preserve">
+    <value>Missing data to fill out your post!.</value>
+    <comment>String para la alerta que faltan datos para llenar en la publicacion</comment>
+  </data>
+  <data name="FaltaVideoPublicacion" xml:space="preserve">
+    <value>Missing a video to fill out your post!.</value>
+    <comment>String para la alerta que falta un video para llenar en la publicacion</comment>
+  </data>
+  <data name="CambiarArchivo" xml:space="preserve">
+    <value>Change File?</value>
+    <comment>String para cambiar el archivo de una publicacion</comment>
+  </data>
+  <data name="FechaFinal" xml:space="preserve">
+    <value>Final date</value>
+    <comment>String para el label de titulo para fecha final</comment>
+  </data>
+  <data name="FechaInicio" xml:space="preserve">
+    <value>Start date</value>
+    <comment>String para el label de titulo para fecha inicio</comment>
+  </data>
+  <data name="Ubicacion" xml:space="preserve">
+    <value>Location</value>
+    <comment>String para el label de titulo para la ubicacion</comment>
+  </data>
+  <data name="EligeTuDeporteInteres" xml:space="preserve">
+    <value>Choose your sport of interest!.</value>
+    <comment>String para el titulo para elegir el deporte de interes</comment>
+  </data>
+  <data name="BuscaAqui" xml:space="preserve">
+    <value>Search Here!.</value>
+    <comment>String para el placeholder del searchbar del buscado</comment>
+  </data>
+  <data name="Busqueda" xml:space="preserve">
+    <value>Search</value>
+    <comment>String para titulo de page para la busqueda</comment>
+  </data>
+  <data name="CrearPublicacion" xml:space="preserve">
+    <value>Create Post</value>
+    <comment>String para el titulo de page para crear publicacion</comment>
+  </data>
+  <data name="EditarPublicacion" xml:space="preserve">
+    <value>Edit Post</value>
+    <comment>String para el titulo de page para editar publicacion</comment>
+  </data>
+  <data name="IniciaSesion" xml:space="preserve">
+    <value>Sign In</value>
+    <comment>String para el titulo de page para el inicio de sesion</comment>
+  </data>
+  <data name="Mensajeria" xml:space="preserve">
+    <value>Messenger</value>
+    <comment>String para titulo de page para el messenger</comment>
+  </data>
+  <data name="Noticias" xml:space="preserve">
+    <value>News</value>
+    <comment>String para el titulo de page para la noticia</comment>
+  </data>
+  <data name="Notificaciones" xml:space="preserve">
+    <value>Notifications</value>
+    <comment>String para el titulo de page para las notificaciones</comment>
+  </data>
+  <data name="Publicacion" xml:space="preserve">
+    <value>Post</value>
+    <comment>String para el titulo de page para ver publicacion</comment>
+  </data>
+  <data name="Registrate" xml:space="preserve">
+    <value>Sign Up</value>
+    <comment>String para el titulo de page para el inicio de sesion</comment>
+  </data>
+  <data name="AceptaTerminos" xml:space="preserve">
+    <value>Accept terms and conditions, see here!.</value>
+    <comment>String para el checkbox para aceptar terminos y condiciones</comment>
+  </data>
+  <data name="TerminosYCondiciones" xml:space="preserve">
+    <value>Terms and conditions of use</value>
+    <comment>String para el titulo de la pagina de terminos y condiciones</comment>
+  </data>
+  <data name="DebesAceptarTerminos" xml:space="preserve">
+    <value>You must accept the terms and conditions of use !.</value>
+    <comment>String de alerta para indicar que debe aceptar los terminos</comment>
+  </data>
+  <data name="Publicidad" xml:space="preserve">
+    <value>Advertising</value>
+    <comment>String para el label que muestra que es una publicidad</comment>
+  </data>
+  <data name="NuevoChat" xml:space="preserve">
+    <value>New Chat</value>
+    <comment>String para icono de toolbar para hacer un nuevo chat</comment>
+  </data>
+  <data name="Contactos" xml:space="preserve">
+    <value>Contacts</value>
+    <comment>String para titulo de page para listar los contactos del chat</comment>
+  </data>
+  <data name="Publicaciones" xml:space="preserve">
+    <value>Publications</value>
+    <comment>String para el segment control para mostrar las publicaciones</comment>
+  </data>
+  <data name="AgregarContacto" xml:space="preserve">
+    <value>Add Person</value>
+    <comment>String para icono para agregar contacto</comment>
+  </data>
+  <data name="EliminarContacto" xml:space="preserve">
+    <value>Delete Person</value>
+    <comment>String para icono para eliminar contacto</comment>
+  </data>
+  <data name="ResponsableCandidato" xml:space="preserve">
+    <value>Responsible of the Sportsman</value>
+    <comment>String para titulo de seccion para la informacion del responsable candidato</comment>
+  </data>
+  <data name="FaltanDatosResponsable" xml:space="preserve">
+    <value>There are missing data to fill the responsible of the athlete!.</value>
+    <comment>String para alerta que faltan datos por llenar para el responsable del deportista</comment>
+  </data>
+  <data name="EscribeApellidoResponsable" xml:space="preserve">
+    <value>Write the lastname here!.</value>
+    <comment>String para placeholder para el apellido del responsable</comment>
+  </data>
+  <data name="EscribeEmailResponsable" xml:space="preserve">
+    <value>Write the email here!</value>
+    <comment>String para placeholder para el email del responsable</comment>
+  </data>
+  <data name="EscribeNombreResponsable" xml:space="preserve">
+    <value>Write the name here!.</value>
+    <comment>String para placeholder para el nombre del responsable</comment>
+  </data>
+  <data name="EscribeSkypeResponsable" xml:space="preserve">
+    <value>Write the skype here!</value>
+    <comment>String para placeholder para el skype del responsable</comment>
+  </data>
+  <data name="EscribeTelefonoFijo" xml:space="preserve">
+    <value>Write the landline phone here!</value>
+    <comment>String para placeholder para el telefono fijo del responsable</comment>
+  </data>
+  <data name="EscribeTelefonoMovil" xml:space="preserve">
+    <value>Write the mobile phone here!</value>
+    <comment>String para placeholder para el telefono movil del responsable</comment>
+  </data>
+  <data name="TelefonoFijo" xml:space="preserve">
+    <value>Landline phone</value>
+    <comment>String para titulo de telefono movil en informacion del responsable candidato</comment>
+  </data>
+  <data name="TelefonoMovil" xml:space="preserve">
+    <value>Mobile phone</value>
+    <comment>String para titulo de telefono fijo en informacion del responsable candidato</comment>
+  </data>
+  <data name="Cargando" xml:space="preserve">
+    <value>Loading!.</value>
+    <comment>String para dialogo de carga</comment>
+  </data>
+  <data name="ErrorBorrarChat" xml:space="preserve">
+    <value>Error deleting chat!.</value>
+    <comment>String para mostrar error que no se pudo borrar el chat</comment>
+  </data>
+  <data name="Asistiran" xml:space="preserve">
+    <value>Will attend</value>
+    <comment>String para label de titulo para indicar cuantos asisten</comment>
+  </data>
+  <data name="Asistiras" xml:space="preserve">
+    <value>Will you attend?</value>
+    <comment>String para titulo de boton para saber si asistir</comment>
+  </data>
+  <data name="NoAsistiras" xml:space="preserve">
+    <value>Will you not attend?</value>
+    <comment>String para titulo de boton para desasistir</comment>
+  </data>
+  <data name="HoraFinal" xml:space="preserve">
+    <value>Final Time</value>
+    <comment>String para el label para titulo de hora final</comment>
+  </data>
+  <data name="HoraInicial" xml:space="preserve">
+    <value>Start Time</value>
+    <comment>String para el label para titulo de hora inicial</comment>
+  </data>
+  <data name="EstrellasGastadas" xml:space="preserve">
+    <value>Spent Stars</value>
+    <comment>String para label para las estrellas gastadas</comment>
+  </data>
+  <data name="Personas" xml:space="preserve">
+    <value>People</value>
+    <comment>String para el titulo de page para mostrar las personas</comment>
+  </data>
+  <data name="VerAsistentes" xml:space="preserve">
+    <value>See Assistants</value>
+    <comment>String para el titulo del boton para ver a los asistentes del evento</comment>
+  </data>
+  <data name="AutenticacionSportsGo" xml:space="preserve">
+    <value>Authentication with SportsGo</value>
+    <comment>String para razon de la alerta de la huella</comment>
+  </data>
+  <data name="Cuenta" xml:space="preserve">
+    <value>Account</value>
+    <comment>String para titulo de page para la cuenta</comment>
+  </data>
+  <data name="DemasiadosIntentos" xml:space="preserve">
+    <value>Too Many Attempts!</value>
+    <comment>String para alerta para cuando se hubo muchos intentos en la huella</comment>
+  </data>
+  <data name="EmailYaExiste" xml:space="preserve">
+    <value>Email already exists!.</value>
+    <comment>String para alerta para decir que el email ya existe</comment>
+  </data>
+  <data name="ErrorModificarUsuario" xml:space="preserve">
+    <value>Error modifying account!.</value>
+    <comment>String para alerta que no se pudo modificar la cuenta</comment>
+  </data>
+  <data name="ErrorValidarEmail" xml:space="preserve">
+    <value>Error validating email!.</value>
+    <comment>String para alerta para decir que hubo un error al validar el email</comment>
+  </data>
+  <data name="ErrorValidarUsuario" xml:space="preserve">
+    <value>Error validating user!.</value>
+    <comment>String para alerta para cuando ocurrio un error al validar el usuario en recuperacion</comment>
+  </data>
+  <data name="EscribeEmailUsuario" xml:space="preserve">
+    <value>Type your email, username and the option with which you want to recover!.</value>
+    <comment>String para el titulo para informar que debe hacer para recuperar la clave</comment>
+  </data>
+  <data name="EscribeTuClave" xml:space="preserve">
+    <value>Enter your password here!</value>
+    <comment>String para el placeholder del email en configuracion de la cuenta</comment>
+  </data>
+  <data name="EscribeTuUsuario" xml:space="preserve">
+    <value>Enter your username here!</value>
+    <comment>String para el placeholder del usuario en configuracion de la cuenta</comment>
+  </data>
+  <data name="InformacionCuenta" xml:space="preserve">
+    <value>Account Information</value>
+    <comment>String para titulo de region para la informacion de la cuenta</comment>
+  </data>
+  <data name="NoSePudoValidarHuella" xml:space="preserve">
+    <value>Could not validate the footprint or have it not associated with the account !.</value>
+    <comment>String para alerta para cuando no se pudo validar la huella</comment>
+  </data>
+  <data name="Recuperacion" xml:space="preserve">
+    <value>Recovery</value>
+    <comment>String para titulo de page para recuperar clave</comment>
+  </data>
+  <data name="RecuperacionClaveExitosa" xml:space="preserve">
+    <value>Successful recovery, soon will arrive an email with your new data !.</value>
+    <comment>String para alerta para saber que se pudo recuperar la contraseña</comment>
+  </data>
+  <data name="UsarCorreo" xml:space="preserve">
+    <value>Use Email</value>
+    <comment>String para titulo de boton para recuperar con el email</comment>
+  </data>
+  <data name="UsarHuella" xml:space="preserve">
+    <value>Use Fingerprint</value>
+    <comment>String para titulo de boton para recuperar con la huella</comment>
+  </data>
+  <data name="ErrorModificarCuenta" xml:space="preserve">
+    <value>Failed to modify account!.</value>
+    <comment>String para alerta para deicr que no se pudo modificar la cuenta</comment>
+  </data>
+  <data name="ErrorRecuperarClave" xml:space="preserve">
+    <value>Recovering password failed!.</value>
+    <comment>String para alerta para decir que la recuperacion de clave no funciono</comment>
+  </data>
+  <data name="FaltanDatosCuenta" xml:space="preserve">
+    <value>Account details are missing!</value>
+    <comment>String para alerta para decir que no faltan datos de la cuenta</comment>
+  </data>
+  <data name="QuieresAsociarDispositivo" xml:space="preserve">
+    <value>Do you want to associate this device with your account?</value>
+    <comment>String para titulo de switch para sociar dispositivo a la cuenta</comment>
+  </data>
+  <data name="Alias" xml:space="preserve">
+    <value>Alias</value>
+    <comment>String para titulo de label para el alias del candidato</comment>
+  </data>
+  <data name="EscribeTuAlias" xml:space="preserve">
+    <value>Enter your alias here!.</value>
+    <comment>String para placeholder de entry para escribir el alias</comment>
+  </data>
+  <data name="Plan" xml:space="preserve">
+    <value>Plan</value>
+    <comment>String para titulo del label para indicar el plan</comment>
+  </data>
+  <data name="CerrarSesion" xml:space="preserve">
+    <value>Sign off</value>
+    <comment>String para titulo de boton para cerrar la sesion</comment>
+  </data>
+  <data name="ConfiguracionDeLaCuenta" xml:space="preserve">
+    <value>Account settings</value>
+    <comment>String para titulo de label para la region de configuracion de la cuenta</comment>
+  </data>
+  <data name="DatosDeLaCuenta" xml:space="preserve">
+    <value>Account data</value>
+    <comment>String para titulo de label para modificar los datos de la cuenta</comment>
+  </data>
+  <data name="DetalleDatosDeLaCuenta" xml:space="preserve">
+    <value>Modify your data or link / unlink services</value>
+    <comment>String para explicar el detalle del label para modificar los datos de la cuenta</comment>
+  </data>
+  <data name="DetalleHistorialPagos" xml:space="preserve">
+    <value>Detail on all your payments</value>
+    <comment>String para explicar el detalle del label para ver el historial de pagos</comment>
+  </data>
+  <data name="DetallePlanDeLaCuenta" xml:space="preserve">
+    <value>Modify or view your account plan</value>
+    <comment>String para explicar el detalle del label para ver el plan de la cuenta</comment>
+  </data>
+  <data name="DetalleTemasDeLaAplicacion" xml:space="preserve">
+    <value>Modify the application theme</value>
+    <comment>String para explicar el detalle del label para modificar el tema de la aplicacion</comment>
+  </data>
+  <data name="DetalleTerminosYCondiciones" xml:space="preserve">
+    <value>Open our terms and conditions</value>
+    <comment>String para explicar el detalle del label para ver los terminos de uso</comment>
+  </data>
+  <data name="HistorialPagos" xml:space="preserve">
+    <value>Payment history</value>
+    <comment>String para titulo de label para ver el historial de pagos</comment>
+  </data>
+  <data name="NoVence" xml:space="preserve">
+    <value>Does not expire</value>
+    <comment>String para label que indica que el plan no vence</comment>
+  </data>
+  <data name="Otros" xml:space="preserve">
+    <value>Others</value>
+    <comment>String para titulo de label para la region de otros</comment>
+  </data>
+  <data name="PlanDeLaCuenta" xml:space="preserve">
+    <value>Account Plan</value>
+    <comment>String para titulo de label para ver el plan de la cuenta</comment>
+  </data>
+  <data name="TermasDeLaAplicacion" xml:space="preserve">
+    <value>Application Themes</value>
+    <comment>String para el titulo del label para modificar el tema de la aplicacion</comment>
+  </data>
+  <data name="VencePlan" xml:space="preserve">
+    <value>Expiration date: </value>
+    <comment>String para label que indica cuando vence el plan</comment>
+  </data>
+  <data name="VersionApp" xml:space="preserve">
+    <value>Version of the app</value>
+    <comment>String para titulo de label para ver la version de la app</comment>
+  </data>
+  <data name="AgregadoPersonaDescripcion" xml:space="preserve">
+    <value>@_NombrePersona_@ has added you to his contacts</value>
+    <comment>String para descripcion de notificacion para un contacto agregado</comment>
+  </data>
+  <data name="AgregadoPersonaTitulo" xml:space="preserve">
+    <value>You have added by a new person!</value>
+    <comment>String para titulo de notificacion para un contacto agregado</comment>
+  </data>
+  <data name="EliminadoPersonaDescripcion" xml:space="preserve">
+    <value>@_NombrePersona_@ te ha eliminado de sus contactos</value>
+    <comment>String para descripcion de notificacion para un contacto agregado</comment>
+  </data>
+  <data name="EliminadoPersonaTitulo" xml:space="preserve">
+    <value>You have been deleted by one of your contacts!.</value>
+    <comment>String para titulo de notificacion para un contacto agregado</comment>
+  </data>
+  <data name="HayUnNuevoPlanDescripcion" xml:space="preserve">
+    <value>Check the plans available by the name "@_NombrePlan_@" and look at their new options and prices</value>
+    <comment>String para descripcion de notificacion para nuevo plan</comment>
+  </data>
+  <data name="HayUnNuevoPlanTitulo" xml:space="preserve">
+    <value>There is a new plan for your account type!.</value>
+    <comment>String para titulo de notificacion para nuevo plan</comment>
+  </data>
+  <data name="PlanEstaPorVencerseDescripcion" xml:space="preserve">
+    <value>Your plan "@_NombrePlan_@" is about to expire, expire on @_FechaVencimientoPlan_@!</value>
+    <comment>String para descripcion de notificacion que el plan esta por vencerse</comment>
+  </data>
+  <data name="PlanEstaPorVencerseTitulo" xml:space="preserve">
+    <value>Your plan is about to expire!.</value>
+    <comment>String para titulo de notificacion que el plan esta por vencerse</comment>
+  </data>
+  <data name="PlanSeHaVencidoDescripcion" xml:space="preserve">
+    <value>Your plan "@_NombrePlan_@" has expired on @_FechaVencimientoPlan_@!</value>
+    <comment>String para descripcion de notificacion que el plan se vencio</comment>
+  </data>
+  <data name="PlanSeHaVencidoTitulo" xml:space="preserve">
+    <value>Your plan has expired!.</value>
+    <comment>String para titulo de notificacion que el plan se vencio</comment>
+  </data>
+  <data name="ClaveFormatoInvalido" xml:space="preserve">
+    <value>The password must contain at least 8 characters, 1 capital letter, 1 number and no special characters!</value>
+    <comment>String para validacion del regex para el formato del clave</comment>
+  </data>
+  <data name="EmailFormatoInvalido" xml:space="preserve">
+    <value>Email of the user has an invalid format!.</value>
+    <comment>String para validacion del regex para el formato del email</comment>
+  </data>
+  <data name="NombreEmpresa" xml:space="preserve">
+    <value>Company name</value>
+    <comment>String para label para nombre de la empresa</comment>
+  </data>
+  <data name="UsuarioFormatoInvalido" xml:space="preserve">
+    <value>User with invalid format, no special characters are allowed!.</value>
+    <comment>String para validacion del regex para el formato del usuario</comment>
+  </data>
+  <data name="PlanFueAprobadoDescripcion" xml:space="preserve">
+    <value>The purchase of the "@_NombrePlan_@" plan was approved!.</value>
+    <comment>String para descripcion de notificacion que el plan fue aprobado</comment>
+  </data>
+  <data name="PlanFueAprobadoTitulo" xml:space="preserve">
+    <value>The purchase was approved!.</value>
+    <comment>String para titulo de notificacion que el plan fue aprobado</comment>
+  </data>
+  <data name="PlanFueRechazadoDescripcion" xml:space="preserve">
+    <value>Purchase of plan "@_NombrePlan_@" was rejected!.</value>
+    <comment>String para descripcion de notificacion que el plan fue rechazado</comment>
+  </data>
+  <data name="PlanFueRechazadoTitulo" xml:space="preserve">
+    <value>The purchase was rejected!.</value>
+    <comment>String para titulo de notificacion que el plan fue rechazado</comment>
+  </data>
+  <data name="FechasEventoInvalida" xml:space="preserve">
+    <value>The end date of the event can not be less than the start date</value>
+    <comment>String para error de fechas invalidas</comment>
+  </data>
+  <data name="EmailFormatoInvalidoResponsable" xml:space="preserve">
+    <value>Email of the person in charge has an invalid format!.</value>
+    <comment>String para validacion del regex para el formato del email del responsable</comment>
+  </data>
+  <data name="DesuscripcionEventoDescripcion" xml:space="preserve">
+    <value>@_NombrePersona_@  is no longer going to attend @_TituloEvento_@!.</value>
+    <comment>String para descripcion de notificacion </comment>
+  </data>
+  <data name="DesuscripcionEventoTitulo" xml:space="preserve">
+    <value>Someone is no longer going to attend one of your events!.</value>
+    <comment>String para titulo de notificacion </comment>
+  </data>
+  <data name="InscripcionEventoDescripcion" xml:space="preserve">
+    <value>@_NombrePersona_@  is going to attend @_TituloEvento_@!.</value>
+    <comment>String para descripcion de notificacion </comment>
+  </data>
+  <data name="InscripcionEventoTitulo" xml:space="preserve">
+    <value>Someone is going to attend one of your events!.</value>
+    <comment>String para titulo de notificacion </comment>
+  </data>
+  <data name="ConfirmaContraseña" xml:space="preserve">
+    <value>Confirm password</value>
+    <comment>String para label para verificar la contraseña</comment>
+  </data>
+  <data name="ContraseñasDiferentes" xml:space="preserve">
+    <value>Passwords are different!.</value>
+    <comment>String para alerta que dice que las claves son diferentes en primer registro</comment>
+  </data>
+  <data name="Obligatorio" xml:space="preserve">
+    <value>*  Required</value>
+    <comment>String para marca que dice que el campo es obligatorio</comment>
+  </data>
+  <data name="PlaceHolderContraseñaVerificacion" xml:space="preserve">
+    <value>Repeat your password</value>
+    <comment>String para el placeholder del entry de la verificacion de la  contraseña</comment>
+  </data>
+  <data name="Aprobado" xml:space="preserve">
+    <value>Approved</value>
+    <comment>String para label de estado de pago que indica que el pago fue aprobado</comment>
+  </data>
+  <data name="ErrorConsultarHistorialPagos" xml:space="preserve">
+    <value>Could not check your payment history!.</value>
+    <comment>String para alerta que indica que no se pudo consultar el historial de pagos</comment>
+  </data>
+  <data name="EsperaPago" xml:space="preserve">
+    <value>Hold Pay</value>
+    <comment>String para label de estado de pago que indica que esta esperando el pago del usuario</comment>
+  </data>
+  <data name="PendientePorAprobar" xml:space="preserve">
+    <value>Pending For Approve</value>
+    <comment>String para label de estado de pago que indica que esta esperando aprobacion del pago</comment>
+  </data>
+  <data name="Rechazado" xml:space="preserve">
+    <value>Rejected</value>
+    <comment>String para label de estado de pago que indica que el pago fue rechazado</comment>
+  </data>
+  <data name="FechaEstado" xml:space="preserve">
+    <value>Date of State:</value>
+    <comment>String para label que muestra la fecha del estado</comment>
+  </data>
+  <data name="Anual" xml:space="preserve">
+    <value>Annual</value>
+    <comment>String para el label para la periodicidad anual</comment>
+  </data>
+  <data name="Bimestral" xml:space="preserve">
+    <value>Bimonthly</value>
+    <comment>String para el label para la periodicidad bimensual</comment>
+  </data>
+  <data name="ErrorAlConsultarInfoPagos" xml:space="preserve">
+    <value>Failed to consult payment information!.</value>
+    <comment>String para alerta de error para indicar que no se pudo conseguir informacion de pago</comment>
+  </data>
+  <data name="EscribeCodigoPagoAqui" xml:space="preserve">
+    <value>Enter the payment code here!</value>
+    <comment>String para placeholder para escribir la referencia del pago</comment>
+  </data>
+  <data name="EscribeTusObservaciones" xml:space="preserve">
+    <value>Enter your payment remarks here</value>
+    <comment>String para el label para las observaciones del usuario</comment>
+  </data>
+  <data name="InformacionPago" xml:space="preserve">
+    <value>Payment Information</value>
+    <comment>String para el label del titulo de seccion de informacion de pago</comment>
+  </data>
+  <data name="InstruccionesParaElPago" xml:space="preserve">
+    <value>Instructions for payment:</value>
+    <comment>String para el label que muestra las instrucciones para el pago</comment>
+  </data>
+  <data name="Mensual" xml:space="preserve">
+    <value>Monthly</value>
+    <comment>String para el label para la periodicidad mensual</comment>
+  </data>
+  <data name="ObservacionesAdmin" xml:space="preserve">
+    <value>Feedback from the Administrator</value>
+    <comment>String para el label para las observaciones del administrador</comment>
+  </data>
+  <data name="ObservacionesPago" xml:space="preserve">
+    <value>Payment Notes</value>
+    <comment>String para el label del titulo de seccion de informacion de pago para reportarlo</comment>
+  </data>
+  <data name="Periodicidad" xml:space="preserve">
+    <value>Periodicity:</value>
+    <comment>String para el label que muestra la periodicidad del plan</comment>
+  </data>
+  <data name="Precio" xml:space="preserve">
+    <value>Price</value>
+    <comment>String para el label que muestra el precio del plan</comment>
+  </data>
+  <data name="ReferenciaPago" xml:space="preserve">
+    <value>Payment Reference</value>
+    <comment>String para el titulo de label para la referencia del pago</comment>
+  </data>
+  <data name="Semestral" xml:space="preserve">
+    <value>Biannual</value>
+    <comment>String para el label para la periodicidad semestral</comment>
+  </data>
+  <data name="ComprarPlan" xml:space="preserve">
+    <value>Buy Plan</value>
+    <comment>String para el label del boton para comprar el plan</comment>
+  </data>
+  <data name="PaisPago" xml:space="preserve">
+    <value>Country:</value>
+    <comment>String para label de titulo de pais para efectuar un pago</comment>
+  </data>
+  <data name="ReportarPago" xml:space="preserve">
+    <value>Report Payment</value>
+    <comment>String para el label del boton para reportar un pago</comment>
+  </data>
+  <data name="UbicacionEnElCampo" xml:space="preserve">
+    <value>Location on the playing field</value>
+    <comment>String para label del boton para seleccionar la ubicacion en el campo</comment>
+  </data>
+  <data name="Notificacion" xml:space="preserve">
+    <value>Notification</value>
+    <comment>String para titulo de alerta para una notificacion</comment>
+  </data>
+  <data name="ProcedeValidarCorreo" xml:space="preserve">
+    <value>Thanks for joining SportsGo. We have sent a confirmation message to your email.</value>
+    <comment>String para texto de que debe validar el correo</comment>
+  </data>
+  <data name="CuentaNoActiva" xml:space="preserve">
+    <value>The account you are trying to log in with is not active</value>
+    <comment>String para el titulo de alerta que no puedes ingresar si no esta activa</comment>
+  </data>
+  <data name="Planes" xml:space="preserve">
+    <value>Plans</value>
+    <comment>String para titulo de pagina para listar los planes</comment>
+  </data>
+  <data name="CambiarPlan" xml:space="preserve">
+    <value>Change Plan</value>
+    <comment>String para boton flotante para cambiar de plan</comment>
+  </data>
+  <data name="VerPlanes" xml:space="preserve">
+    <value>View Plans</value>
+    <comment>String para titulo de boton para ver planes</comment>
+  </data>
+  <data name="PlanNoSoportaOperacion" xml:space="preserve">
+    <value>This option is not available in your plan, check our subscription plans to access our options.</value>
+    <comment>String para label que dice que tu plan no puede hacer algo</comment>
+  </data>
+  <data name="PlanMaximoCategoria" xml:space="preserve">
+    <value>You have reached the maximum amount of sports allowed for your plan, look at our subscription plans in order to increase this limit.</value>
+    <comment>String para label que indica que no puedes agregar mas deportes</comment>
+  </data>
+  <data name="ConsultaDeportistas" xml:space="preserve">
+    <value>Athletes search</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="ConsultaEventos" xml:space="preserve">
+    <value>Events search</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="ConsultaGrupos" xml:space="preserve">
+    <value>Group search</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="CrearEventos" xml:space="preserve">
+    <value>Create Events</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="DetalleDeportistas" xml:space="preserve">
+    <value>Athletes detail</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="DetalleGrupos" xml:space="preserve">
+    <value>Group detail</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="NumeroDeportes" xml:space="preserve">
+    <value>Number of sports</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="VideosPerfil" xml:space="preserve">
+    <value>Profile videos</value>
+    <comment>String para label de permiso en detalle del plan</comment>
+  </data>
+  <data name="AnexarRecibo" xml:space="preserve">
+    <value>Attach Receipt</value>
+    <comment>String para label de boton para anexar el archivo</comment>
+  </data>
+  <data name="ArchivoNecesarioParaElPago" xml:space="preserve">
+    <value>Attach the receipt of payment to be able to continue with the process!.</value>
+    <comment>String para labe lde alerta para cuando no se tiene el archivo y se necesita</comment>
+  </data>
+  <data name="PagoNoSePudoRegistrar" xml:space="preserve">
+    <value>Failed to process the purchase of the plan!.</value>
+    <comment>String para label de alerta para cuando ocurre un error al tramitar la compra de un plan</comment>
+  </data>
+  <data name="PagoReferenciaPagoNecesaria" xml:space="preserve">
+    <value>Please write us the payment reference in order to continue the process!</value>
+    <comment>String para label de alerta para cuando se necesita la referencia del pago</comment>
+  </data>
+  <data name="PagoSeRegistroEsperandoAprobacion" xml:space="preserve">
+    <value>Thank you for purchasing our services, we will notify you when the payment has been confirmed!</value>
+    <comment>String para label de alerta para cuando espera la confirmacion del pago</comment>
+  </data>
+  <data name="PagoSeRegistroEsperandoPago" xml:space="preserve">
+    <value>Thank you for purchasing our services, we will be waiting for payment confirmation</value>
+    <comment>String para label para cuando se da adquirir un plan y se esta esperando el pago</comment>
+  </data>
+  <data name="PagoYaHayEnTramite" xml:space="preserve">
+    <value>There is already a payment pending, check the history of your purchases to continue with the process!</value>
+    <comment>String para label de alerta para cuando ya existe un pago en tramite</comment>
+  </data>
+  <data name="PesoMaximoVideoPermitido" xml:space="preserve">
+    <value>The maximum allowed size of the video is: 100MB</value>
+    <comment>String para label de maximo de peso del video para decirle al usuario</comment>
+  </data>
+  <data name="TiempoMaximoVideo" xml:space="preserve">
+    <value>Maximum time of the video</value>
+    <comment>String para el label del maximo tiempo del video</comment>
+  </data>
+  <data name="TiempoMaximoVideoPermitido" xml:space="preserve">
+    <value>Maximum allowed time for the video is:</value>
+    <comment>String para label del maximo de tiempo del video para decirle al usuario</comment>
+  </data>
+  <data name="AplicarFiltro" xml:space="preserve">
+    <value>Close Filter</value>
+    <comment>String para boton cuando se va a aplicar el filtro</comment>
+  </data>
+  <data name="Edad" xml:space="preserve">
+    <value>Age</value>
+    <comment>String para label de edad</comment>
+  </data>
+  <data name="Filtrar" xml:space="preserve">
+    <value>Filter</value>
+    <comment>String para boton para denotar que se va a filtrar</comment>
+  </data>
+</root>

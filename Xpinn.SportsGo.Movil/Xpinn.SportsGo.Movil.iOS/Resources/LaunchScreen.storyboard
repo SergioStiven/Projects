@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gAE-YM-kbH">
+            <objects>
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="45" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <variation key="heightClass=regular-widthClass=compact" image="Default.png"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint id="57" firstItem="45" firstAttribute="height" secondItem="yd7-JS-zBw" secondAttribute="height"/>
+                            <constraint id="64" firstItem="45" firstAttribute="width" secondItem="yd7-JS-zBw" secondAttribute="width"/>
+                            <constraint id="74" firstItem="yd7-JS-zBw" firstAttribute="trailing" secondItem="45" secondAttribute="trailing"/>
+                            <constraint id="75" firstItem="yd7-JS-zBw" firstAttribute="bottom" secondItem="45" secondAttribute="bottom"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="57"/>
+                                <exclude reference="64"/>
+                                <exclude reference="67"/>
+                                <exclude reference="68"/>
+                                <exclude reference="74"/>
+                                <exclude reference="75"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="57"/>
+                                <include reference="64"/>
+                                <include reference="67"/>
+                                <include reference="68"/>
+                                <include reference="74"/>
+                                <include reference="75"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="339"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon-60.png" width="60" height="60"/>
+        <image name="addphoto.png" width="1000" height="481"/>
+        <image name="BaseballCampo.png" width="480" height="854"/>
+        <image name="BasketballCampo.png" width="480" height="854"/>
+        <image name="BubbleThumb.png" width="1920" height="1080"/>
+        <image name="Candidato.png" width="480" height="284"/>
+        <image name="CandidatoPesoEstatura.png" width="252" height="592"/>
+        <image name="CarouselOne.png" width="480" height="854"/>
+        <image name="CarouselThree.png" width="480" height="854"/>
+        <image name="CarouselTwo.png" width="480" height="854"/>
+        <image name="CuadradoConMas.png" width="640" height="635"/>
+        <image name="Default-568h.png" width="320" height="568"/>
+        <image name="Default-Portrait.png" width="768" height="1004"/>
+        <image name="Default.png" width="320" height="480"/>
+        <image name="DefaultImagenBanner.png" width="1000" height="625"/>
+        <image name="DefaultImagenError.png" width="266" height="245"/>
+        <image name="DefaultImagenErrorBanner.png" width="475" height="300"/>
+        <image name="DefaultImagenNoPerfil.png" width="259" height="259"/>
+        <image name="DefaultImagenPerfil.png" width="1000" height="1000"/>
+        <image name="DefaultVideo.png" width="1000" height="600"/>
+        <image name="FacebookLogo.png" width="29" height="29"/>
+        <image name="FutbolCampo.png" width="480" height="854"/>
+        <image name="Grupo.png" width="480" height="284"/>
+        <image name="ic_add.png" width="24" height="24"/>
+        <image name="ic_add_shopping.png" width="24" height="24"/>
+        <image name="ic_add_shopping_cart_white.png" width="18" height="18"/>
+        <image name="ic_biografia.png" width="24" height="24"/>
+        <image name="ic_camera.png" width="18" height="18"/>
+        <image name="ic_cancel.png" width="24" height="24"/>
+        <image name="ic_check.png" width="24" height="24"/>
+        <image name="ic_clear.png" width="18" height="18"/>
+        <image name="ic_config.png" width="24" height="24"/>
+        <image name="ic_delete.png" width="36" height="36"/>
+        <image name="ic_deportes.png" width="18" height="18"/>
+        <image name="ic_downarrow.png" width="24" height="24"/>
+        <image name="ic_edit.png" width="24" height="24"/>
+        <image name="ic_eventos.png" width="24" height="24"/>
+        <image name="ic_gender.png" width="24" height="24"/>
+        <image name="ic_group_work.png" width="18" height="18"/>
+        <image name="ic_info_personal.png" width="18" height="18"/>
+        <image name="ic_pageview.png" width="24" height="24"/>
+        <image name="ic_payment.png" width="24" height="24"/>
+        <image name="ic_perfil.png" width="24" height="24"/>
+        <image name="ic_person_add.png" width="24" height="24"/>
+        <image name="ic_play_circle.png" width="48" height="48"/>
+        <image name="ic_region.png" width="24" height="24"/>
+        <image name="ic_save.png" width="36" height="36"/>
+        <image name="ic_send.png" width="24" height="24"/>
+        <image name="ic_skills.png" width="24" height="24"/>
+        <image name="ic_tab_buscar.png" width="24" height="24"/>
+        <image name="ic_tab_chat.png" width="24" height="24"/>
+        <image name="ic_tab_news.png" width="24" height="24"/>
+        <image name="ic_tab_notifications.png" width="24" height="24"/>
+        <image name="ic_tab_profile.png" width="24" height="24"/>
+        <image name="ic_toolbar_add.png" width="24" height="24"/>
+        <image name="ic_uparrow.png" width="24" height="24"/>
+        <image name="ic_video_library.png" width="18" height="18"/>
+        <image name="ic_volver.png" width="36" height="36"/>
+        <image name="Icon-76.png" width="76" height="76"/>
+        <image name="Icon-Small-40.png" width="40" height="40"/>
+        <image name="Icon-Small.png" width="29" height="29"/>
+        <image name="LogoSportsGo.png" width="696" height="392"/>
+        <image name="Representante.png" width="480" height="284"/>
+        <image name="RssIconFeed.png" width="2551" height="2551"/>
+        <image name="selected_circle.png" width="105" height="105"/>
+        <image name="slider-default-handle-disabled.png" width="23" height="23"/>
+        <image name="slider-default-handle-highlighted.png" width="23" height="23"/>
+        <image name="slider-default-handle.png" width="23" height="23"/>
+        <image name="slider-default-track.png" width="11" height="9"/>
+        <image name="slider-default-trackBackground.png" width="11" height="9"/>
+        <image name="slider-default-trackCrossedOver.png" width="11" height="9"/>
+        <image name="slider-default_trackBackground.png" width="11" height="9"/>
+        <image name="slider-default7-handle-disabled.png" width="43" height="43"/>
+        <image name="slider-default7-handle.png" width="43" height="43"/>
+        <image name="slider-default7-track.png" width="6" height="4"/>
+        <image name="slider-default7-trackBackground.png" width="6" height="4"/>
+        <image name="slider-default7-trackCrossedOver.png" width="6" height="4"/>
+        <image name="TwitterLogo.png" width="30" height="30"/>
+        <image name="VolleyballCampo.png" width="480" height="854"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

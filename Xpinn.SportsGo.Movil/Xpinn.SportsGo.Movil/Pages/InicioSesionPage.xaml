@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<renderers:NoSleepContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:messier16="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             x:Class="Xpinn.SportsGo.Movil.Pages.InicioSesionPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{Binding Titulo}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0,10,0,0"
+                     BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+            <Grid BackgroundColor="Transparent" VerticalOptions="FillAndExpand" IsVisible="{Binding NoEsPrimerRegistro, Converter={StaticResource negateConverter} }">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
+                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                            Source="{StaticResource RutaImagenLogoApp}" Aspect="AspectFill"/>
+                <xfx:XfxEntry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate Usuario}" PlaceholderColor="#000000"
+                          TextColor="#000000" VerticalOptions="CenterAndExpand" FontSize="Small"
+                          Text="{Binding Usuario, Mode=TwoWay}"/>
+                <xfx:XfxEntry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate Contraseña}" PlaceholderColor="#000000" 
+                          TextColor="#000000" IsPassword="True" VerticalOptions="CenterAndExpand" FontSize="Small"
+                          Text="{Binding Clave, Mode=TwoWay}" />
+                <xfx:XfxEntry Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate PlaceHolderContraseñaVerificacion}" PlaceholderColor="#000000" 
+                          TextColor="#000000" IsPassword="True" VerticalOptions="CenterAndExpand" FontSize="Small"
+                          Text="{Binding VerificacionClave, Mode=TwoWay}" />
+                <StackLayout Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
+                         VerticalOptions="Center" HorizontalOptions="Start" Orientation="Horizontal">
+                    <Switch IsToggled="{Binding Recuerdame, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False" />
+                    <Label Text="{markup:Translate Recuerdame}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False" >
+                        <Label.Effects>
+                            <effects:SizeFontToFitEffect />
+                        </Label.Effects>
+                    </Label>
+                </StackLayout>
+                <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"
+                        Text="{markup:Translate Ingresar}" TextColor="#FFFFFF" FontSize="Small"
+                        BorderRadius="3" BackgroundColor="{StaticResource PrimaryAppColor}"
+                        VerticalOptions="CenterAndExpand" Command="{Binding IngresarCuenta}" />
+                <StackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"
+                         HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding NoEsPrimerRegistro, Converter={StaticResource negateConverter} }">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <messier16:Checkbox Grid.Row="0" Grid.Column="0" Checked="{Binding AceptaTerminosCondiciones, Mode=TwoWay}" HeightRequest="25" WidthRequest="25">
+                            <messier16:Checkbox.HorizontalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions"
+                                        iOS="Center"
+                                        Android="Start"/>
+                            </messier16:Checkbox.HorizontalOptions>
+                            <messier16:Checkbox.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions"
+                                        iOS="Center"
+                                        Android="Start"/>
+                            </messier16:Checkbox.VerticalOptions>
+                        </messier16:Checkbox>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{markup:Translate AceptaTerminos}" FontSize="Small" TextColor="Black" Margin="0,3,0,0">
+                            <Label.HorizontalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions"
+                                        iOS="CenterAndExpand"
+                                        Android="CenterAndExpand"/>
+                            </Label.HorizontalOptions>
+                            <Label.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions"
+                                        iOS="CenterAndExpand"
+                                        Android="CenterAndExpand"/>
+                            </Label.VerticalOptions>
+                            <Label.Effects>
+                                <effects:UnderlineEffect />
+                                <effects:SizeFontToFitEffect />
+                            </Label.Effects>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding VerTerminos}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <Grid BackgroundColor="Transparent" VerticalOptions="FillAndExpand" IsVisible="{Binding NoEsPrimerRegistro}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Source="{StaticResource RutaImagenLogoApp}" Aspect="AspectFill"/>
+                <xfx:XfxEntry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate Usuario}" PlaceholderColor="#000000"
+                          TextColor="#000000" VerticalOptions="CenterAndExpand" FontSize="Small"
+                          Text="{Binding Usuario, Mode=TwoWay}"/>
+                <xfx:XfxEntry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate Contraseña}" PlaceholderColor="#000000" 
+                          TextColor="#000000" IsPassword="True" VerticalOptions="CenterAndExpand" FontSize="Small"
+                          Text="{Binding Clave, Mode=TwoWay}" />
+                <StackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                         VerticalOptions="Center" HorizontalOptions="Start" Orientation="Horizontal">
+                    <Switch IsToggled="{Binding Recuerdame, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Label Text="{markup:Translate Recuerdame}" VerticalOptions="Center" HorizontalOptions="Start" >
+                        <Label.Effects>
+                            <effects:SizeFontToFitEffect />
+                        </Label.Effects>
+                    </Label>
+                </StackLayout>
+                <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
+                    Text="{markup:Translate Ingresar}" TextColor="#FFFFFF" FontSize="Small"
+                    BorderRadius="3" BackgroundColor="{StaticResource PrimaryAppColor}"
+                    VerticalOptions="CenterAndExpand" Command="{Binding IngresarCuenta}" />
+                <Button Grid.Row="5" Grid.Column="1" IsVisible="False"
+                    BorderRadius="3" BackgroundColor="#3B5998"
+                    VerticalOptions="CenterAndExpand" Image="FacebookLogo" Command="{Binding IngresarFacebook}"/>
+                <Button Grid.Row="5" Grid.Column="3" IsVisible="False"
+                    BorderRadius="3" BackgroundColor="#1DA1F2"
+                    VerticalOptions="CenterAndExpand" Image="TwitterLogo" Command="{Binding IngresarTwitter}"/>
+                <StackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"
+                             HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                    <Label TextColor="Black" Text="{markup:Translate OlvidoContraseña}" FontSize="Small" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                        <Label.Effects>
+                            <effects:UnderlineEffect />
+                        </Label.Effects>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OlvidoContraseña}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     VerticalOptions="Start" BackgroundColor="Red" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label HorizontalOptions="Center" TextColor="White" Text="{markup:Translate ConexionPerdida}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</renderers:NoSleepContentPage>

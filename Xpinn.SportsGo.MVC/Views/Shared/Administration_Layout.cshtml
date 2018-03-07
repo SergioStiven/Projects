@@ -1,0 +1,249 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#333">
+    <title>Material Style</title>
+    <meta name="description" content="Sports Go">
+    <meta name="keywords" content="Sports">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/style.light-blue-500.min.css" />
+    <link rel="stylesheet" href="~/Content/administration.css" />
+    <link href="~/Content/select.min.css" rel="stylesheet" />
+    <link href="~/Content/ng-img-crop.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="app">
+
+    <div id="ms-preload" class="ms-preload">
+        <div id="status">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div ng-controller="MenuController" class="panel panel-dark panel-black col-xs-3 col-sm-3 col-md-3 col-lg-3" id="menu-left" style="padding:0; height:100vh;">
+
+            <!-- Modal image profile -->
+            <div class="modal modal-primary" id="modalImageProfile" tabindex="-1" role="dialog" aria-labelledby="modalImageProfileLabel">
+                <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                            <h3 class="modal-title" id="modalImageProfileLabel">Imágen de perfil</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form name="myForm">
+                                <div class="col-md-12 text-center">
+                                    <button ngf-select ng-model="picFile" accept="image/*" class="btn btn-primary">
+                                        Seleccione una imagen
+                                    </button>
+                                </div>
+                                <div class="col-md-6 text-center ">
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                                         class="cropArea">
+                                        <ui-cropper image="picFile  | ngfDataUrl" result-image-size="500"
+                                                    result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                        </ui-cropper>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <div>
+                                        <img ng-src="{{croppedDataUrl}}" style="width:100%" />
+                                    </div>
+                                </div>
+                                <span ng-show="result">Upload Successful</span>
+                                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button ng-click="menu.uploadImageProfile(croppedDataUrl, picFile.name)" class="btn  btn-success">
+                                <img ng-show="menu.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                                {{menu.isBusy ? 'Guardando...' : 'Guardar'}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Settings -->
+            <div class="modal modal-primary" id="modalSettings" tabindex="-1" role="dialog" aria-labelledby="modalSettingsLabel">
+                <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                            <h3 class="modal-title" id="modalSettingsLabel" translate="LBL_SETTINGS"></h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="inputUsername" class="col-md-2 control-label" translate="LBL_USERNAME"></label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" id="inputUsername" ng-model="User.userToUpdate.Usuario" autocomplete="off" style="color:black !important" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail" class="col-md-2 control-label" translate="LBL_EMAIL"></label>
+                                        <div class="col-md-10">
+                                            <input type="email" class="form-control" id="inputEmail" ng-model="User.userToUpdate.Email" style="color:black !important" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPass" class="col-md-2 control-label" translate="LBL_PASSWORD"></label>
+                                        <div class="col-md-10">
+                                            <input type="password" class="form-control" id="inputPass" ng-model="User.userToUpdate.Clave" autocomplete="off" style="color:black !important" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputReTypePass" class="col-md-2 control-label" translate="LBL_RE_TYPE_PASSWORD"></label>
+                                        <div class="col-md-10">
+                                            <input type="password" class="form-control" id="inputReTypePass" ng-model="User.userToUpdate.Password" autocomplete="off" style="color:black !important" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE">Cerrar</button>
+                            <button ng-click="User.update()" class="btn btn-success">
+                                <img ng-show="User.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                                {{User.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-heading noBorderRadius" style="height:20vh;">
+                <span style="float:right"><a href="~/Authenticate/Logoff" class="color-info" title="Salir"><i class="color-primary zmdi zmdi-sign-in"></i></a></span>
+
+                <a href="#" data-toggle="modal" data-target="#modalImageProfile">
+                    <img ng-src="{{menu.profile.UrlImagenPerfilAdmin === '' ? '../Content/assets/img/demo/avatar.png' : menu.profile.UrlImagenPerfilAdmin}}"
+                         style="width:70px;border-radius:50%;float:left;margin-top:25px;margin-right: 5px;" />
+                </a>
+
+                <h2 class="color-primary">
+                    <span>SportsGo</span><br />
+                    <span class="color-white lead lead-sm" ng-bind="menu.profile.PersonaDelUsuario.NombreYApellido + '  '"></span>
+                    <a data-toggle="modal" data-target="#modalSettings"><i style="font-size: 20px;margin-left: 15px;cursor: pointer;" class="fa fa-cogs"></i></a>
+                </h2>
+            </div>
+            <div class="panel-body" style="height:85vh;overflow-y: auto;float: left;width: 100%;">
+                <div class="list-group" style="border:0;">
+                    <p style="color:#898989" translate="LBL_DASHBOARD"></p>
+                    <hr style="margin:0" />
+                    <a href="~/Administration/Index" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-chart"></i>
+                        <span translate="LBL_GENERAL"></span>
+                    </a>
+                    <a href="~/Administration/Ads" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-collection-image-o"></i>
+                        <span translate="LBL_ADS"></span>
+                    </a>
+                    <a href="~/Administration/Events" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-calendar-note"></i>
+                        <span translate="LBL_EVENTS"></span>
+                    </a>
+                    <p style="color:#898989" translate="LBL_SETTINGS"></p>
+                    <hr style="margin:0" />
+                    <a href="~/Administration/Users" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-account"></i>
+                        <span translate="LBL_USERS"></span>
+                    </a>
+                    <a href="~/Administration/List" class="list-group-item withripple">
+                        <i class="color-primary zmdi zmdi-format-list-bulleted"></i>
+                        <span translate="LBL_LISTS"></span>
+                    </a>
+                    <a href="~/Administration/PaymentMethods" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-card"></i>
+                        <span translate="LBL_PAYMENT_METHODS"></span>
+                    </a>
+                    @*<a href="~/Administration/PaymentApproval" class="list-group-item">
+                            <i class="color-primary zmdi zmdi-case-check"></i>
+                            Aprobación de pago
+                        </a>*@
+                    <a href="~/Administration/PaymentPlans" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-money"></i>
+                        <span translate="LBL_MANAGE_PLANS"></span>
+                    </a>
+                    <a href="~/Administration/News" class="list-group-item">
+                        <i class="color-primary zmdi zmdi-collection-video"></i>
+                        <span translate="LBL_TIPS"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 backcolor-dark container-dark" style="overflow:auto;" id="containerDark" scroll>
+            <br />
+            <div class="backcolor-dark navResponsive">
+                <button id="nav-toggle"></button>
+            </div>
+            <nav class="navMenu">
+                <a style="height:55px" href="~/Administration/Index"><i class="zmdi zmdi-chart"></i></a>
+                <a style="height:55px" href="~/Administration/Ads"><i class="zmdi zmdi-collection-image-o"></i></a>
+                <a style="height:55px" href="~/Administration/Events"><i class="zmdi zmdi-calendar-note"></i></a>
+                <a style="height:55px" href="~/Administration/Users"><i class="zmdi zmdi-pin-account"></i></a>
+                <a style="height:55px" href="~/Administration/List"><i class="zmdi zmdi-format-list-bulleted"></i></a>
+                <a style="height:55px" href="~/Administration/PaymentMethods"><i class="zmdi zmdi-card"></i></a>
+                <a style="height:55px" href="~/Administration/PaymentPlans"><i class="zmdi zmdi-money"></i></a>
+                <a style="height:55px" href="~/Administration/News"><i class="zmdi zmdi-collection-video"></i></a>
+                <a style="height:55px" data-toggle="modal" data-target="#modalSettings"><i class="zmdi zmdi-settings"></i></a>
+                <a style="height:55px" href="~/Authenticate/Logoff/"><i class="zmdi zmdi-sign-in"></i></a>
+            </nav>
+            <div class="content-responsive">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- Plugins For Design -->
+    <script src="~/Content/assets/js/plugins.min.js"></script>
+    <script src="~/Content/assets/js/app.min.js"></script>
+    <!-- AngularJS Library -->
+    <script src="~/Scripts/app/lib/angular.min.js"></script>
+    <!-- Dropdownlist -->
+    <script src="~/Scripts/app/lib/select-tpls.min.js"></script>
+    <!-- SingalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!-- Translate -->
+    <script src="~/Scripts/app/lib/angular-translate.js"></script>
+    <script src="~/Scripts/app/Administration/translations.js"></script>
+    <!-- Module AngularJS -->
+    <script type="text/javascript">
+        var app = angular.module('app', ["pascalprecht.translate"]);
+    </script>
+    <!-- Upload image -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    <!-- Edit size image -->
+    <script src="~/Scripts/app/lib/ui-cropper.js"></script>
+    <!-- Master & Menú Controller AngularJS -->
+    <script src="~/Scripts/app/masterDark.js"></script>
+    <!-- Render Specific Controllers Of AngularJS For Each View -->
+    @RenderSection("ANGULARJS", required: false)
+    <!-- Factory AngularJS -->
+    <script src="~/Scripts/app/service.js"></script>
+    <!-- Function For Open Nav Responsive -->
+    <script>
+        $(function () {
+            $('#nav-toggle').on('click', function () {
+                $('body').toggleClass('nav-open');
+            });
+        });
+    </script>
+</body>
+</html>

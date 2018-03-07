@@ -1,0 +1,70 @@
+﻿
+<div class="col-md-12">
+    <!-- Nickname -->
+    <div class="col-md-4 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-face mr-1 color-warning"></i>
+            </span>
+            <label class="control-label" for="ms-form-personal-info-nickname" translate="LBL_NICKNAME"></label>
+            <input type="text" id="ms-form-personal-info-nickname" name="msFormPersoanalInfoNickname" class="form-control" placeholder="" ng-model="infoUser.user.CandidatoDeLaPersona.Alias" />
+        </div>
+    </div>
+    <!-- Gender -->
+    <div class="col-md-4 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group" style="width:100%;margin-top:5px;">
+            <label class="control-label" for="ms-form-city" translate="LBL_GENDER"></label>
+            <oi-select oi-options="item.Consecutivo as item.Descripcion for item in lists.genders track by item.Consecutivo"
+                       ng-model="infoUser.user.CandidatoDeLaPersona.CodigoGenero"
+                       required >
+            </oi-select>
+        </div>
+    </div>
+    <!-- Birthday -->
+    <div class="col-md-4 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-calendar mr-1 color-primary"></i>
+            </span>
+            <label class="control-label" for="ms-form-birthday" translate="LBL_BIRTHDAY"></label>
+            <input type="date" id="ms-form-birthday" class="form-control" placeholder="" ng-change="Tutor.validateDateForShowButton()" ng-model="infoUser.user.CandidatoDeLaPersona.FechaNacimiento" required />
+        </div>
+    </div>
+    <!-- Height -->
+    <div class="col-md-6">
+        <div class="col-md-12" style="padding-top:10px">
+            <p style="color:#9e9e9e!important;font-size: 12px;line-height: 1.07143;" translate="LBL_HEIGHT"></p>
+            <div class="col-md-3 col-xs-5" style="height:200px;">
+                <rzslider rz-slider-model="infoUser.user.CandidatoDeLaPersona.Estatura"
+                          rz-slider-options="infoUser.sliderHeight.options">
+                </rzslider>
+            </div>
+            <div class="col-md-6 cl-xs-7 text-center">
+                <span style="display:inline-block;height:200px;vertical-align:middle"></span>
+                <img src="~/Content/assets/img/CandidatoPesoEstatura.png"
+                     class="animated bounceIn animation-delay-10"
+                     width="{{infoUser.user.CandidatoDeLaPersona.Peso / 2}}"  height="{{infoUser.user.CandidatoDeLaPersona.Estatura / 2}}" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <rzslider rz-slider-model="infoUser.user.CandidatoDeLaPersona.Peso"
+                        rz-slider-options="infoUser.sliderWeight.options">
+            </rzslider>
+        </div>
+        <p class="text-center" style="color:#9e9e9e!important;font-size: 12px;line-height: 1.07143;" translate="LBL_WEIGHT"></p>
+    </div>
+    <!-- Biography -->
+    <div class="col-md-6 form-group label-floating is-focused" style="float:left;">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-email mr-1 color-success"></i>
+            </span>
+            <label class="control-label" for="ms-form-biografia" translate="LBL_BIOGRAPHY"></label>
+            <textarea rows="10" id="ms-form-biografia" class="form-control" placeholder="" ng-model="infoUser.user.CandidatoDeLaPersona.Biografia"></textarea>
+        </div>
+    </div>
+    <!-- Tutor -->
+    <div class="col-md-12">
+        <a ng-show="Tutor.showButton" data-toggle="modal" data-target="#modalInfoTutor" class="btn btn-raised btn-info"><i class="zmdi zmdi-account-box-mail"></i> <span translate="BTN_TUTOR"></span></a>
+    </div> 
+</div>

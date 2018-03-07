@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:util="clr-namespace:Xpinn.SportsGo.Util.Portable;assembly=Xpinn.SportsGo.Util.Portable"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             x:Class="Xpinn.SportsGo.Movil.Pages.PagosPage"
+             x:Name="ContentPagePagos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="55"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="LabelLocalTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Borrar}" Icon="ic_delete.png" Command="{Binding BorrarPago}" 
+                                      Parent="{x:Reference ContentPagePagos}" IsVisible="{Binding Pago.SePuedeBorrarPago}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                    Padding="0,0,0,20">
+            <StackLayout>
+                <StackLayout Style="{StaticResource stackLayoutTitleStyle}">
+                    <ffimageloading:CachedImage Source="ic_add_shopping.png" Style="{StaticResource iconTitleStyle}" />
+                    <Label Text="{markup:Translate InformacionPago}" Style="{StaticResource labelTitleStyle}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                    <ffimageloading:CachedImage Source="{Binding Pago.HistorialPago.Planes.UrlArchivo}" Style="{StaticResource RemoteImageStyle}"
+                                                HeightRequest="55" WidthRequest="55" DownsampleToViewSize="True" Aspect="Fill"  >
+                        <ffimageloading:CachedImage.Triggers>
+                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding Pago.HistorialPago.Planes.UrlArchivo}" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Source" Value="{StaticResource RutaDefaultImagen}" />
+                            </DataTrigger>
+                        </ffimageloading:CachedImage.Triggers>
+                    </ffimageloading:CachedImage>
+                    <StackLayout Margin="10,0,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Pago.HistorialPago.Planes.DescripcionIdiomaBuscado}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                               FontAttributes="Bold" TextColor="Black" FontSize="Medium" >
+                            <Label.Effects>
+                                <effects:SizeFontToFitEffect />
+                            </Label.Effects>
+                        </Label>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView Source="selected_circle.png" Foreground="{Binding Pago.ColorDeEstado}" 
+                                                        VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" 
+                                                        HeightRequest="20" WidthRequest="20" />
+                            <Label Text="{Binding Pago.NombreEstado}" TextColor="{Binding Pago.ColorDeEstado}" VerticalOptions="Center" FontSize="Small" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                    <Label Text="{markup:Translate Periodicidad}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" />
+                    <Label Text="{Binding Pago.PeriodicidadPlanNombre}" TextColor="Black" FontSize="Medium" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                    <Label Text="{markup:Translate PaisPago}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" />
+                    <Label Text="{Binding Pago.HistorialPago.Paises.DescripcionIdiomaBuscado}" TextColor="Black" FontSize="Medium" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{markup:Translate Precio}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" />
+                        <Label Text="{Binding Pago.AbreviaturaMoneda}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" />
+                    </StackLayout>
+                    <Label Text="{Binding Pago.HistorialPago.Precio}" TextColor="Black" FontSize="Medium" />
+                </StackLayout>
+                <StackLayout Padding="10,0,10,0" Margin="0,0,0,10">
+                    <Label Text="{markup:Translate InstruccionesParaElPago}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" />
+                    <Label Text="{Binding Pago.HistorialPago.TextoFacturaFormato}" TextColor="Black" FontSize="Medium" />
+                </StackLayout>
+                <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{Binding Pago.NombreParaElBoton}" Margin="10,0,10,0"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                        Command="{Binding InteractuarBoton}" FontSize="Small" IsVisible="{Binding Pago.PuedeCambiarEstado}" />
+                <ffimageloading:CachedImage Source="BotonPayU.png" Aspect="AspectFit" Margin="90,0,90,0"  
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" 
+                                            IsVisible="{Binding Pago.SeMuestraBotonPayU}"
+                                            fe:TappedGestureAttached.Command="{Binding InteractuarPayU}"/>
+                <StackLayout Style="{StaticResource stackLayoutTitleStyle}" IsVisible="{Binding Pago.DebeMostrarSeguimientoDelPago}">
+                    <ffimageloading:CachedImage Source="ic_payment.png" Style="{StaticResource iconTitleStyle}" />
+                    <Label Text="{markup:Translate ObservacionesPago}" Style="{StaticResource labelTitleStyle}" />
+                </StackLayout>
+                <StackLayout Style="{StaticResource StackLayoutStyle}" IsVisible="{Binding Pago.DebeMostrarSeguimientoDelPago}" Padding="10,0,10,0" Margin="0,0,0,10">
+                    <Label Text="{markup:Translate ReferenciaPago}" Style="{StaticResource LabelLocalTitleStyle}" />
+                    <Entry Text="{Binding Pago.HistorialPago.ReferenciaPago}" Placeholder="{markup:Translate EscribeCodigoPagoAqui}" Style="{StaticResource EntryStyle}" >
+                        <Entry.Effects>
+                            <effects:ClearEntryEffect/>
+                        </Entry.Effects>
+                    </Entry>
+                </StackLayout>
+                <StackLayout Margin="0,0,0,10" Padding="10,0,10,0" IsVisible="{Binding Pago.DebeMostrarSeguimientoDelPago}">
+                    <Label Text="{markup:Translate EscribeTusObservaciones}" Style="{StaticResource LabelLocalTitleStyle}" />
+                    <Editor Text="{Binding Pago.HistorialPago.ObservacionesCliente}" HeightRequest="150" HorizontalOptions="FillAndExpand" TextColor="Black"/>
+                </StackLayout>
+                <StackLayout Margin="0,0,0,10" IsVisible="{Binding Pago.DebeMostrarObservacionesAdmin}" Padding="10,0,10,0">
+                    <Label Text="{markup:Translate ObservacionesAdmin}" Style="{StaticResource LabelLocalTitleStyle}" />
+                    <Label Text="{Binding Pago.HistorialPago.ObservacionesAdministrador}" HorizontalOptions="FillAndExpand" TextColor="Black"/>
+                </StackLayout>
+                <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{Binding Pago.NombreParaElBotonAnexoArchivo}" Margin="10,0,10,0"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                        Command="{Binding CambiarArchivo}" FontSize="Small" IsVisible="{Binding Pago.PuedeInteractuarImagen}"/>
+                <ffimageloading:CachedImage HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" IsVisible="{Binding Pago.DebeMostrarImagen}"
+                                            BackgroundColor="Black" Source="{Binding Pago.UrlArchivo}" Aspect="AspectFit" Margin="10,0,10,0"
+                                            Style="{StaticResource RemoteImageStyle}" LoadingPlaceholder="{StaticResource RutaDefaultImagenBanner}" />
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .planTitle {
+        color:#03a9f4 !important;
+    }
+</style>
+<div class="card nav-tabs-ver-container" ng-controller="settingsController">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-tabs-ver" role="tablist">
+                <li role="presentation" class="active"><a href="#plans" aria-controls="plans" role="tab" data-toggle="tab"><i class="zmdi zmdi-card"></i> Planes</a></li>
+                <li role="presentation"><a href="#planHistory" aria-controls="planHistory" role="tab" data-toggle="tab"><i class="zmdi zmdi-time-restore-setting"></i> Historial de planes</a></li>
+                <li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab"><i class="zmdi zmdi-shield-security"></i> Contraseñas</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 nav-tabs-ver-container-content">
+            <div class="card-block">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="plans">
+                        <my-plan ng-show="Plans.isMyPlan"></my-plan>
+
+                        <div class="col-md-12" ng-hide="Plans.isMyPlan">
+                            <div ng-hide="Plans.manualPlan">
+                                <list-of-plans></list-of-plans>
+                            </div>
+                            <div ng-show="Plans.manualPlan">
+                                <pay-manual></pay-manual>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="planHistory">
+                        <history-of-my-plans></history-of-my-plans>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="password">
+                        <div class="col-md-7">
+                            <div class="card card-primary animated fadeInUp animation-delay-7">
+                                <div class="card-block">
+                                    <form class="form-horizontal" id="formPersonalInfo" name="formPersonalInfo" novalidate>
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label for="inputUsername" class="col-md-2 control-label" translate="LBL_USERNAME"></label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" id="inputUsername" name="inputUsername" ng-model="User.userToUpdate.Usuario" required/>
+                                                    <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.inputUsername.$error.required" ng-bind="'LBL_VALIDATION_NAME' | translate"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="col-md-2 control-label" translate="LBL_EMAIL"></label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" id="inputEmail" name="inputEmail" ng-model="User.userToUpdate.Email" required/>
+                                                    <span class="help-block color-danger" ng-show="(!formPersonalInfo.$pristine && formPersonalInfo.inputEmail.$error.required) || !User.validateEmail()" ng-bind="'LBL_VALIDATION_EMAIL' | translate"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPass" class="col-md-2 control-label" translate="LBL_PASSWORD"></label>
+                                                <div class="col-md-10">
+                                                    <input type="password" class="form-control" id="inputPass" name="inputPass" ng-model="User.userToUpdate.Clave" required/>
+                                                    <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.inputPass.$error.required" ng-bind="'LBL_VALIDATION_PASS' | translate"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputReTypePass" class="col-md-2 control-label" translate="LBL_RE_TYPE_PASSWORD"></label>
+                                                <div class="col-md-10">
+                                                    <input type="password" class="form-control" id="inputReTypePass" name="inputReTypePass" ng-model="User.userToUpdate.Password" required/>
+                                                    <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.inputReTypePass.$error.required" ng-bind="'LBL_VALIDATION_PASS' | translate"></span>
+                                                </div>
+                                            </div>
+                                            <button ng-click="User.update()" class="btn btn-raised btn-block btn-primary" translate="BTN_SAVE"></button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ANGULARJS{
+    <!-- Resources translations -->
+    <script src="~/Scripts/app/Settings/translations.js"></script>
+    <!-- Upload JS -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/app/Settings/settings.js"></script>
+}

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             x:Class="Xpinn.SportsGo.Movil.Pages.TerminosCondicionesPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+    <ScrollView>
+        <StackLayout>
+            <Label Text="{markup:Translate TerminosYCondiciones}" FontSize="Large" Margin="10" TextColor="Black"
+               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label.Effects>
+                    <effects:UnderlineEffect />
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+            <Label Margin="10,0,10,10" TextColor="Black" Text="{Binding TerminosCondiciones}" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

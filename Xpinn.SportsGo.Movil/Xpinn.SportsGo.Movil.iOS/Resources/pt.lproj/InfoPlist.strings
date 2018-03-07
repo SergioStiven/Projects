@@ -1,0 +1,3 @@
+﻿"NSCameraUsageDescription" = "Esta aplicação precisa acessar a câmera para tirar fotos!.";
+"NSPhotoLibraryUsageDescription" = "Esta aplicação requer acesso a fotos!.";
+"NSMicrophoneUsageDescription" = "Este aplicativo precisa de acesso ao microfone!.";

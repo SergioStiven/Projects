@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.NotificacionesViewCell">
+    
+    <StackLayout Spacing="0" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="InteractuarNotificacion_Tapped" />
+        </StackLayout.GestureRecognizers>
+        <StackLayout.Triggers>
+            <DataTrigger TargetType="StackLayout" Binding="{Binding EsNuevoMensaje, Mode=TwoWay}" Value="True">
+                <Setter Property="BackgroundColor" Value="#BDBDBD" />
+            </DataTrigger>
+        </StackLayout.Triggers>
+        <StackLayout HeightRequest="60" WidthRequest="60" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="0,0,10,0">
+            <ffimageloading:CachedImage x:Name="UrlArchivo" DownsampleToViewSize="True" WidthRequest="60" HeightRequest="60" 
+                                        Aspect="AspectFit" Style="{StaticResource RemoteImageStyle}" />
+        </StackLayout>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding Titulo}" TextColor="Black" FontSize="Small" FontAttributes="Bold" Margin="0,0,0,3"/>
+            <Label Text="{Binding Descripcion}" FontSize="Small" TextColor="Black" />
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

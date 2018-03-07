@@ -1,0 +1,52 @@
+﻿
+<!-- Modal confirm payment - Start -->
+<div class="modal modal-success" id="modalConfirmPayment" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalConfirmPayment">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalConfirmPayment"><i class="zmdi zmdi-money-box"></i> <span translate="LBL_PAYMENT_CONFIRMATION"></span></h3>
+            </div>
+            <div class="modal-body text-center">
+                <h1 class="color-success" ng-bind="'LBL_THANKS_PURCHASE' | translate"></h1>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="Plans.showMyPlan()" type="button" data-dismiss="modal" class="btn btn-info" translate="BTN_ACCEPT"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal confirm payment - End -->
+
+<!-- Back button - Start -->
+<div class="row">
+    <a href="javascript:void(0)" ng-click="Plans.showMyPlan()">
+        <span aria-hidden="true">«</span> <span translate="BTN_BACK"></span>
+    </a>
+</div>
+<!-- Back button - End -->
+
+<!-- Format selected plan - Start -->
+<div class="col-md-1"></div>
+<div class="col-md-10 col-sm-12" id="divManualPlan">
+    <div class="card card-info card-flat">
+        <div class="card-block">
+            <div style="text-align:center">
+                <img src="~/Content/assets/img/SportsGoTitle.png" style="width:60%"/>
+            </div>
+            <h4 class="right-line color-info">Datos de pago</h4>
+            <p><b ng-bind="'Fecha: '"></b>{{currentDate | date: 'dd/MM/yyyy'}}</p>
+            <p><b ng-bind="'Descripción: '"></b>{{Plans.planToPrint.DescripcionIdiomaBuscado}}</p>
+            <p><b ng-bind="'Valor: '"></b>{{Plans.planToPrint.Precio | currency:"$ " : 0}}</p>
+            <div class="border-box">
+                <h3 class="color-primary" ng-bind="Plans.invoiceFormat.Texto"></h3>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="javascript:void(0)" class="btn btn-info" id="btnPrint" ng-click="Plans.printPlan()">
+                <i class="zmdi zmdi-print"></i> <span translate="BTN_PRINT"></span>
+            </a>
+            <a ng-if="Plans.paymentHistory.Consecutivo > 0" href="javascript:void(0)" ng-click="Plans.redirectToPayU()"><img src="~/Content/assets/img/payUButton.jpeg" style="border-radius:20px;" /></a>
+        </div>
+    </div>
+</div>
+<!-- Format selected plan - Start -->

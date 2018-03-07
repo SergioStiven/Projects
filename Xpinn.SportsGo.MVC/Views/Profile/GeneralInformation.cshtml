@@ -1,0 +1,89 @@
+﻿<div class="col-md-12">    
+    <!-- Name -->
+    <div class="{{infoUser.isCandidate ? 'col-md-3' : 'col-md-4'}} col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-account mr-1 color-royal"></i>
+            </span>
+            <label class="control-label" for="ms-form-personal-info-username" ng-bind="'LBL_NAME' | translate"></label>
+            <input type="text" id="ms-form-personal-info-username" name="msFormPersoanalInfoUsername" class="form-control" placeholder="" ng-model="infoUser.user.Nombres" required />
+            <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.msFormPersoanalInfoUsername.$error.required" ng-bind="'LBL_VALIDATION_NAME' | translate"></span>
+        </div>
+    </div>
+    <!-- Surnames -->
+    <div ng-if="infoUser.isCandidate" class="col-md-3 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-account-circle mr-1 color-primary"></i>
+            </span>
+            <label class="control-label" for="ms-form-personal-info-surnames" translate="LBL_SURNAMES"></label>
+            <input type="text" id="ms-form-personal-info-surnames" name="msFormPersoanalInfoSurnames" class="form-control" placeholder="" ng-model="infoUser.user.Apellidos" required />
+            <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.msFormPersoanalInfoSurnames.$error.required" ng-bind="'LBL_VALIDATION_SURNAMES' | translate"></span>
+        </div>
+    </div>
+    <!-- Email -->
+    <div class="{{infoUser.isCandidate ? 'col-md-3' : 'col-md-4'}} col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-email mr-1 color-success"></i>
+            </span>
+            <label class="control-label" for="ms-form-Personal-Info-email" ng-bind="'LBL_EMAIL' | translate"></label>
+            <input type="email" id="ms-form-Personal-Info-email" name="msFormPersonalInfoEmail" class="form-control" placeholder="" ng-model="infoUser.user.Usuarios.Email" required />
+            <span class="help-block color-danger" ng-show="(!formPersonalInfo.$pristine && formPersonalInfo.msFormPersonalInfoEmail.$error.required) || !infoUser.validateEmail()" ng-bind="'LBL_VALIDATION_EMAIL' | translate"></span>
+        </div>
+    </div>
+    <!-- Skype -->
+    <div class="{{infoUser.isCandidate ? 'col-md-3' : 'col-md-4'}} col-xs-12 form-group label-floating is-focused" style="margin-bottom:15px;">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-skype mr-1 color-primary"></i>
+            </span>
+            <label class="control-label" for="ms-formGroup-skype" ng-bind="'LBL_SKYPE' | translate"></label>
+            <input type="text" id="ms-formGroup-skype" class="form-control" placeholder="" ng-model="infoUser.user.Skype" />
+        </div>
+    </div>
+    <!-- Phone -->
+    <div class="col-md-3 col-xs-12 form-group label-floating is-focused" style="margin-bottom:15px;">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-smartphone-android mr-1 color-black"></i>
+            </span>
+            <label class="control-label" for="ms-form-Personal-Info-phone" ng-bind="'LBL_PHONE' | translate"></label>
+            <input type="text" id="ms-form-Personal-Info-phone" name="msFormPersonalInfoPhone" class="form-control" placeholder="" ng-model="infoUser.user.Telefono" required />
+            <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.msFormPersonalInfoPhone.$error.required" ng-bind="'LBL_VALIDATION_PHONE' | translate"></span>
+        </div>
+    </div>
+    <!-- City -->
+    <div class="col-md-3 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-google-maps mr-1 color-danger"></i>
+            </span>
+            <label class="control-label" for="ms-form-personal-info-city" ng-bind="'LBL_CITY' | translate"></label>
+            <input type="text" id="ms-form-personal-info-city" name="msFormPersonalInfoCity" class="form-control" placeholder="" ng-model="infoUser.user.CiudadResidencia" required />
+            <span class="help-block" ng-show="!formPersonalInfo.$pristine && formPersonalInfo.msFormPersonalInfoCity.$error.required" ng-bind="'LBL_VALIDATION_CITY' | translate"></span>
+        </div>
+    </div>
+    <!-- Country -->
+    <div class="col-md-3 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group" style="width:100%;margin-top:5px;">
+            <label class="control-label" for="ms-form-city" ng-bind="'LBL_COUNTRY' | translate"></label>
+            <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                       ng-model="infoUser.user.Paises"
+                       placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}"
+                       required >
+            </oi-select>
+        </div>
+    </div>
+    <!-- Lenguage -->
+    <div class="col-md-3 col-xs-12 form-group label-floating is-focused">
+        <div class="input-group" style="width:100%;margin-top:5px;">
+            <label class="control-label" for="ms-form-city" ng-bind="'LBL_LANGUAGE' | translate"></label>
+            <oi-select oi-options="item.Descripcion for item in lists.lenguages track by item.Consecutivo"
+                       ng-model="infoUser.user.Lenguage"
+                       ng-change="changeLanguage()">
+            </oi-select>
+        </div>
+    </div>
+
+</div>

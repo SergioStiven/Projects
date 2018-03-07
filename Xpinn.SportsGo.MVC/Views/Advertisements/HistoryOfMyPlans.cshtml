@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/Advertiser_Layout.cshtml";
+}
+<style>
+    p, input, textarea {
+        color: white !important;
+    }
+    .form-group label{
+        color: white !important;
+    }
+</style>
+<div ng-controller="historyPlansController">
+    <history-of-my-plans></history-of-my-plans>
+</div>
+
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Advertiser/historyPlansController.js"></script>
+}

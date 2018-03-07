@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+<div ng-controller="metricaEventsController">
+
+    <!-- Variables for filters -->
+    <script>
+        var categories = [];
+        var countries = [];
+        var plans = [];
+        var lenguages = [];
+    </script>
+
+    <!-- Counters -->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="panel panel panel-primary panel-dark text-center">
+            <div class="panel-body" style="background-color:#028ac7">
+                <h2 class="" style="margin:0">{{metricas.registeredEvents}}</h2>
+                <i class="fa fa-4x fa-newspaper-o"></i>
+                <p class="mt-2 no-mb lead small-caps text-lowercase" translate="LBL_EVENTS"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="panel panel panel-primary panel-dark text-center">
+            <div class="panel-body" style="background-color:#028ac7">
+                <h2 class="counter" style="margin:0" ng-bind="metricas.registeredEventsLastMonth"></h2>
+                <i class="fa fa-4x fa-calendar-check-o"></i>
+                <p class="mt-2 no-mb lead small-caps text-lowercase" translate="LBL_EVENTS_LAST_MONTH"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="col-md-4 text-left">
+        <div class="form-group" style="margin:0">
+            <div class="col-md-12 text-right">
+                <a href="javascript:void(0)" ng-click="metricas.get()" class="btn-circle btn-circle-raised btn-circle-primary" title="Actualizar gráfica">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="select111" class="col-md-5 control-label" translate="LBL_SPORTS" style="margin-bottom:5px;"></label>
+            <div class="col-md-12">
+                <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                           ng-model="metricas.filtro.CategoriasParaBuscar"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="select111" class="col-md-5 control-label" translate="LBL_COUNTRIES" style="margin-bottom:5px;"></label>
+            <div class="col-md-12">
+                <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                           ng-model="metricas.filtro.PaisesParaBuscar"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="select111" class="col-md-5 control-label" translate="LBL_LANGUAGE" style="margin-bottom:5px;"></label>
+            <div class="col-md-12">
+                <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.lenguages track by item.Consecutivo"
+                           ng-model="metricas.filtro.IdiomasParaBuscar"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphic -->
+    <div class="col-md-5 col-sm-12 col-xm-12 text-center" style="margin-top:20px;">
+        <div class="circle" id="circles-1"></div>
+    </div>
+
+    <!-- Legend -->
+    <div class="col-md-2 col-sm-12 col-xm-12 text-right" style="margin-top:20px;padding:0;">
+        <h1 class="color-primary" translate="LBL_TOTAL_EVENTS"></h1>
+        <span class="ms-logo animated zoomInDown animation-delay-5">{{metricas.metrica.NumeroEventos}}</span>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/lib/Chart.js"></script>
+    <script src="~/Scripts/app/Administration/metricaEventsController.js"></script>
+}

@@ -1,0 +1,167 @@
+﻿<!-- Header -->
+<div>
+    <div class="row">
+        <a href="javascript:void(0)" ng-click="Plans.isMyPlan = true">
+            <span aria-hidden="true">«</span> <span translate="BTN_BACK"></span>
+        </a>
+    </div>
+    <h1 class="text-center planTitle" translate="LBL_TITLE_PLAN"></h1>
+
+    <p class="color-info lead text-center center-block mb-4 mw-800" translate="LBL_DESCRIPTION_PLAN"></p>
+
+</div>
+<!-- Pagination -->
+<nav aria-label="...">
+    <ul class="pager">
+        <li style="float:left">
+            <a ng-disabled="!Plans.btnBefore" ng-click="Plans.getBefore()" href="javascript:void(0)">
+                <span aria-hidden="true">«</span> <span ng-bind="'BTN_PREVIOUS' | translate"></span>
+            </a>
+        </li>
+        <li style="float:right">
+            <a ng-disabled="!Plans.btnNext" ng-click="Plans.getNext()" href="javascript:void(0)">
+                <span translate="BTN_NEXT"></span>
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- Table -->
+<div>
+    <div class="row pricing-table-container">
+        <!-- List of options -->
+        <div class="col-md-4 hidden-sm hidden-xs pricing-col">
+            <div class="pricing-table pricing-table-description">
+                <div class="pricing-table-head">
+                    <h2 translate="LBL_PLANS_AVAILABLE">
+                        <span translate="LBL_PERIODICITY"></span>
+                    </h2>
+                    <h3 class="price" translate="LBL_PRICES"></h3>
+                </div>
+                <ul class="pricing-table-content">
+                    <li>
+                        <i class="zmdi zmdi-bike"></i>{{'LBL_NUMBER_OF_SPORTS' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-collection-video"></i>{{'LBL_PROFILE_VIDEOS' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-time"></i>{{'LBL_DURATION_VIDEOS' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-email"></i>{{'LBL_CHAT' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-accounts-list"></i>{{'LBL_SPORTS_CONSULTATION' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-pin-account"></i>{{'LBL_DETAIL_SPORTSMEN' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-accounts"></i> {{'LBL_GROUP_CONSULTATION' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-group-work"></i>{{'LBL_GROUP_DETAIL' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-calendar"></i>{{'LBL_EVENT_CONSULTATION' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-collection-video"></i>{{'LBL_CREATE_ADS' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-eye"></i>{{'LBL_NUMBER_OCCURRENCES_PER_AD' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-plus-1"></i>{{'LBL_NUMBER_DAYS_PER_AD' | translate}}
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chart-donut"></i>{{'LBL_ADVERTISING_STATS' | translate}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- List of plans -->
+        <div class="{{Plans.list.length === 2 ? 'col-md-4' : ''}} {{Plans.list.length === 1 ? 'col-md-8' : ''}} {{Plans.list.length > 2 ? 'col-md-2' : ''}} pricing-col" 
+             ng-repeat="plan in Plans.list ">
+            <div class="pricing-table">
+                <!-- Header -->
+                <div class="pricing-table-head">
+                    <h2>
+                        {{plan.DescripcionIdiomaBuscado}}
+                        <span>{{plan.Periodicidades.Descripcion}}</span>
+                    </h2>
+                    <h3 class="price">
+
+                        <i style="font-size:20px">{{plan.Precio | currency:"$ " : 0}}</i>
+                        <span class="hidden-md hidden-lg">Per Month</span>
+                    </h3>
+                </div>
+                <!-- Options -->
+                <ul class="pricing-table-content">
+                    <li>
+                        {{plan.NumeroCategoriasPermisibles}}
+                        <span class="hidden-md hidden-lg">{{'LBL_NUMBER_OF_SPORTS' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.VideosPerfil === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_PROFILE_VIDEOS' | translate}}</span>
+                    </li>
+                    <li>
+                        {{plan.TiempoPermitidoVideo}}
+                        <span class="hidden-md hidden-lg">{{'LBL_DURATION_VIDEOS' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.ServiciosChat === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_CHAT' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.ConsultaCandidatos === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_SPORTS_CONSULTATION' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.DetalleCandidatos === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_DETAIL_SPORTSMEN' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.ConsultaGrupos === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_GROUP_CONSULTATION' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.DetalleGrupos === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_GROUP_DETAIL' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.ConsultaEventos === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_EVENT_CONSULTATION' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.CreacionAnuncios === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_CREATE_ADS' | translate}}</span>
+                    </li>
+                    <li>
+                        {{plan.NumeroAparicionesAnuncio}}
+                        <span class="hidden-md hidden-lg">{{'LBL_NUMBER_DAYS_PER_AD' | translate}}</span>
+                    </li>
+                    <li>
+                        {{plan.NumeroDiasVigenciaAnuncio}}
+                        <span class="hidden-md hidden-lg">{{'LBL_NUMBER_DAYS_PER_AD' | translate}}</span>
+                    </li>
+                    <li>
+                        <i class="{{plan.EstadisticasAnuncios === 1 ? 'fa fa-check' : 'fa fa-times'}}"></i>
+                        <span class="hidden-md hidden-lg">{{'LBL_ADVERTISING_STATS' | translate}}</span>
+                    </li>
+                </ul>
+                <!-- Button get -->
+                <div class="pricing-table-footer text-center">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-raised" ng-click="Plans.showManualPlan(plan, true)">
+                        <i class="zmdi zmdi-cloud-download"></i> <span translate="BTN_GET_NOW"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+</div>

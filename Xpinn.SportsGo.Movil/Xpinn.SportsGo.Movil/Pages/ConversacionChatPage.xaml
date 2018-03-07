@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<renderers:KeyboardResizingAwareContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             x:Class="Xpinn.SportsGo.Movil.Pages.ConversacionChatPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{Binding NombreDestino}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{markup:Translate Borrar}" Icon="ic_delete.png" Command="{Binding BorrarChat}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <StackLayout Spacing="0" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+            <controls:InfiniteListView x:Name="ListaChats" HasUnevenRows="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       SeparatorColor="Transparent" SeparatorVisibility="None" DismissKeyboardOnTouch="True"
+                                       ItemsSource="{Binding Mensajes}" LoadMoreCommand="{Binding LoadMoreMensajes}">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                <controls:InfiniteListView.ItemTemplate>
+                    <DataTemplate>
+                      <viewcells:ConversacionViewCell
+                          UrlMiImagenPerfil="{Binding Source={x:Reference ListaChats}, Path=BindingContext.UrlMiImagenPerfil}"
+                          UrlImagenPerfilDestino="{Binding Source={x:Reference ListaChats}, Path=BindingContext.UrlImagenPerfilDestino}"
+                          MiNombre="{Binding Source={x:Reference ListaChats}, Path=BindingContext.MiNombre}"
+                          NombreDestino="{Binding Source={x:Reference ListaChats}, Path=BindingContext.NombreDestino}"/>
+                    </DataTemplate>
+                </controls:InfiniteListView.ItemTemplate>
+            </controls:InfiniteListView>
+            <!--<Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="5" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                    <renderers:ExpandableEditor Text="{Binding TextoParaEnviar, Mode=TwoWay}" TextColor="Black"
+                                                Margin="0,0,5,0" HorizontalOptions="FillAndExpand" />
+                    <renderers:IconView Source="ic_send.png" Foreground="{StaticResource PrimaryAppColor}" 
+                                        HeightRequest="30" WidthRequest="35"
+                                        fe:TappedGestureAttached.Command="{Binding EnviarMensaje}"/>
+                </StackLayout>
+            </Grid>-->
+            <StackLayout Orientation="Horizontal" Margin="5" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                <Entry Text="{Binding TextoParaEnviar, Mode=TwoWay}" TextColor="Black"
+                       Margin="0,0,5,0" HorizontalOptions="FillAndExpand" Keyboard="Chat" />
+                <renderers:IconView Source="ic_send.png" Foreground="{StaticResource PrimaryAppColor}" 
+                                    HeightRequest="30" WidthRequest="35"
+                                    fe:TappedGestureAttached.Command="{Binding EnviarMensaje}"/>
+            </StackLayout>
+        </StackLayout>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</renderers:KeyboardResizingAwareContentPage>

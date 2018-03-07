@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.NoticiasViewCell"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+
+    <StackLayout BackgroundColor="{StaticResource PagePrimaryBackgroundColor}">
+        <StackLayout Orientation="Horizontal" Padding="15" HorizontalOptions="FillAndExpand">
+            <ContentView HeightRequest="55" WidthRequest="55" VerticalOptions="CenterAndExpand">
+                <ffimageloading:CachedImage x:Name="UrlImagenPerfil" HeightRequest="55" WidthRequest="55" LoadingPlaceholder="{StaticResource RutaDefaultImagenPerfil}"
+                                            DownsampleToViewSize="True" Style="{StaticResource RemoteImageStyle}" Aspect="AspectFit">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="IrPersona_Tapped" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+            </ContentView>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                    <Label Text="{Binding NombrePublicante}" TextColor="Black" FontSize="Small" FontAttributes="Bold" IsVisible="{Binding SeMuestraNombre}" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="IrPersona_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="{Binding TituloPublicacion}" TextColor="Black" FontSize="Small" FontAttributes="Bold" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{markup:Translate Eventos}" TextColor="#BDBDBD" FontSize="Micro" IsVisible="{Binding EsEvento}" />
+                        <Label Text="{markup:Translate Noticias}" TextColor="#BDBDBD" FontSize="Micro" IsVisible="{Binding EsNoticia}" />
+                        <Label Text="{Binding FechaPublicacion, StringFormat='{0:g}'}" TextColor="#BDBDBD" FontSize="Micro" IsVisible="{Binding EsPublicidad, Converter={StaticResource negateConverter}}"/>
+                        <Label Text="{markup:Translate Publicidad}" TextColor="#BDBDBD" FontSize="Micro" IsVisible="{Binding EsPublicidad}" />
+                    </StackLayout>
+                </StackLayout>
+                <ffimageloading:CachedImage Source="ic_pageview.png" HeightRequest="25" WidthRequest="25" LoadingPlaceholder="{StaticResource RutaDefaultImagenBanner}"
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="End" IsVisible="{Binding SeMuestraIconoInteraccion}">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="InteracturarIconoPublicacion_Tapped" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout HorizontalOptions="FillAndExpand" Padding="10,0,10,10">
+            <Label Text="{Binding DescripcionPublicacion}" TextColor="Black" FontSize="Small"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"/>
+        </StackLayout>
+        <StackLayout HeightRequest="250" IsVisible="{Binding TieneArchivo}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <AbsoluteLayout HeightRequest="300" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                            Margin="5,0,5,0" Style="{StaticResource RemoteImageStyle}" BackgroundColor="Black"
+                                            x:Name="UrlArchivoPublicacion" Aspect="AspectFit" LoadingPlaceholder="{StaticResource RutaDefaultImagenBanner}" >
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="InteracturarPublicacion_Tapped" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+                <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.3, 0.3" AbsoluteLayout.LayoutFlags="All" 
+                                                                Source="ic_play_circle.png" IsVisible="{Binding EsVideo}" 
+                                                                HeightRequest="50" WidthRequest="50">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="InteracturarPublicacion_Tapped" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+            </AbsoluteLayout>
+        </StackLayout>
+        <ContentView BackgroundColor="{StaticResource PageSecondaryBackgroundColor}" 
+                     HeightRequest="15" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+    </StackLayout>
+</ViewCell>

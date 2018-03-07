@@ -1,0 +1,181 @@
+﻿<style>
+    .card-block {
+        background-color: #424242;
+    }
+
+    input, textarea, .title > .text {
+        color: #fff !important;
+    }
+    oi-select .select-search-list-item_input input{
+        color: black !important;
+    }
+</style>
+<div class="row"></div>
+<div class="card card-primary" ng-repeat="post in New.list track by $index" ng-init="editPost = false">
+    <div class="card-header" style="min-height:60px;padding-top:5px;">
+        <h3 style="padding-top:15px;" class="col-md-10 col-xs-6 card-title" ng-bind="'Publicado el ' + (convertToDate(post.Creacion) | date : 'dd/MM/yyyy')"><i class="zmdi zmdi-graduation-cap"></i> </h3>
+        <div class="col-md-2 col-xs-6" style="float:right">
+            <a ng-click="ToDelete.assign(post,New.delete)" class="btn-circle btn-circle-raised btn-circle-danger" data-toggle="modal" data-target="#alertWarning" style="float:right;padding-left: 7px;">
+                <i class="color-white zmdi zmdi-delete"></i>
+            </a>
+            <button ng-click="editPost = !editPost" style="float:right;padding-left: 15px;margin-right:5%;"
+                    class="btn-circle btn-circle-raised btn-circle-warning">
+                <i class="zmdi zmdi-edit"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-block">
+
+        <div ng-show="editPost">
+            <!-- Title -->
+            <div class="col-md-6">
+                <div class="col-md-11 col-xs-9 form-group is-focused">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" ng-bind="('LBL_TITLE' | translate) + ' (*)'"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                               ng-model="post.NoticiasContenidos[0].Titulo" required />
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" translate="LBL_ENGLISH"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.NoticiasContenidos[1].Titulo" required />
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" translate="LBL_PORTUGUESE"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.NoticiasContenidos[2].Titulo" required />
+                    </div>
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="col-md-6">
+                <div class="col-md-11 col-xs-9 form-group is-focused" style="margin-top:7px;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" ng-bind="('LBL_DESCRIPTION' | translate) + ' (*)'"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}" ng-model="post.NoticiasContenidos[0].Descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" translate="LBL_ENGLISH"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" ng-model="post.NoticiasContenidos[1].Descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" translate="LBL_PORTUGUESE"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" ng-model="post.NoticiasContenidos[2].Descripcion"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- More fields -->
+            <div class="col-md-5">
+                <!-- Countries -->
+                <div class="col-md-12 form-group label-floating is-focused" style="margin-bottom:15px;padding:0;">
+                    <div class="input-group" style="width:100%">
+                        <label for="select222" class="col-md-5 control-label" ng-bind="('LBL_COUNTRIES' | translate) + ' (*)'"></label>
+                        <div class="col-md-12">
+                            <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                                       ng-model="post.NoticiasPaises"
+                                       multiple
+                                       placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                            </oi-select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories -->
+                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                    <label for="select111" class="col-md-5 control-label" ng-bind="('LBL_SPORTS' | translate) + ' (*)'"></label>
+                    <div class="col-md-12">
+                        <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                                   ng-model="post.CategoriasNoticias"
+                                   multiple
+                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+                <!-- Types News -->
+                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                    <label for="select111" class="col-md-5 control-label" ng-bind="('LBL_TYPE' | translate) + ' (*)'"></label>
+                    <div class="col-md-12">
+                        <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.typesNews track by item.Consecutivo"
+                                   ng-model="post.CodigoTipoNoticia"
+                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+                <!-- Url publicidad -->
+                <div class="col-md-12 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-url-publicity" style="top:-30px;font-size: 12px;" translate="LBL_ADVERTISING_URL"></label>
+                        <div class="col-md-3" style="padding:5px 0px 0px 0px;">
+                            <oi-select oi-options="item.value as item.name for item in lists.https track by $index"
+                                       ng-model="post.http">
+                            </oi-select>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="" ng-model="post.UrlPublicidad" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- File -->
+            <div class="col-md-7">
+                <div class="col-md-12 text-center">
+                    <div class="col-md-10">
+                        <img ng-if="post.CodigoTipoArchivo === 1" ng-hide="post.picFilePostForEdit" ng-src="{{post.UrlArchivo}}" style="max-width:80%;" />
+                        <video ng-if="post.CodigoTipoArchivo === 2" ng-hide="post.picFilePostForEdit" ng-src="{{post.UrlArchivo}}" controls style="max-height:250px;"></video>
+                        <img ngf-src="post.picFilePostForEdit" style="max-width:75%;">
+                        <video ng-show="post.picFilePostForEdit.type.includes('video')" ngf-src="post.picFilePostForEdit" style="max-height:250px;padding-bottom:15px;" controls></video>
+                    </div>
+                    <div class="col-md-2" style="margin-top:30px;">
+                        <button ngf-select ng-model="post.picFilePostForEdit" accept="image/*,video/*"
+                                ngf-change="New.changeFilePost(post.picFilePostForEdit)"
+                                class="btn-circle btn-circle-raised btn-circle-warning">
+                            <i class="fa fa-paperclip"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Button save -->
+            <div class="col-md-12" style="padding-left:30px;padding-right:50px;margin-bottom:20px;position:initial;">
+                <button ng-click="New.updateFile(post)" class="btn btn-block btn-raised btn-primary">
+                    <img ng-show="New.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                    {{New.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                </button>
+            </div>
+
+            <div class="row"></div>
+        </div>
+
+        <div class="row" ng-hide="editPost">
+            <div class="col-sm-6" ng-show="post.CodigoTipoArchivo == 1">
+                <div class="text-center">
+                    <img ng-src="{{post.UrlArchivo}}" style="width:100%;" />
+                </div>
+            </div>
+            <div class="col-sm-6" ng-show="post.CodigoTipoArchivo == 2">
+                <div class="videogular-container">
+                    <video ngf-src="post.UrlArchivo" controls style="width:100%;"></video>
+                </div>
+            </div>
+            <div class="col-sm-6" style="margin-top:0;">
+                <h1 class="text-center color-danger">{{post.TituloIdiomaBuscado}}</h1>
+                <div class="card-block text-left" style="padding-top:0;">
+                    <h2 class="color-white">{{post.DescripcionIdiomaBuscado}}</h2>
+                    <h4 class="color-info">Url de publicidad: <a style="font-size:15px;color:white;" href="{{post.UrlPublicidad}}" target="_blank" ng-bind="post.UrlPublicidad"></a></h4>
+                    <h4 ng-if="post.NoticiasPaises.length > 0" class="color-info">{{post.NoticiasPaises.length > 1 ? 'Paises':'Pais'}}: 
+                        <span style="font-size:15px;color:white;" ng-repeat="country in post.NoticiasPaises">{{country.DescripcionIdiomaBuscado + '. '}}</span>
+                    </h4>
+                    <h4 ng-if="post.CategoriasNoticias.length > 0" class="color-info">
+                        {{post.CategoriasNoticias.length > 1 ? 'Categorias':'Categoria'}}:
+                        <span style="font-size:15px;color:white;" ng-repeat="category in post.CategoriasNoticias">{{category.DescripcionIdiomaBuscado + '. '}}</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

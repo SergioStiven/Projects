@@ -1,0 +1,78 @@
+﻿<style>
+    table > tbody > tr > td {
+        word-break: break-word;
+    }
+</style>
+
+<div class="card-block">
+    <table class="table table-no-border table-striped">
+        <tbody>
+            <tr>
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-face mr-1 color-warning"></i> <span translate="LBL_FULLNAME"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Nombres + ' ' + infoUser.user.Apellidos"></td>
+            </tr>
+            <tr ng-if="infoUser.user.TipoPerfil === 1">
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-male-female mr-1 color-success"></i><span translate="LBL_GENDER"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Gender.Descripcion"></td>
+            </tr>
+            <tr>
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-email mr-1 color-danger"></i> <span translate="LBL_EMAIL"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Usuarios.Email"></td>
+            </tr>
+            <tr>
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-skype mr-1 color-primary"></i> <span translate="LBL_SKYPE"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Skype"></td>
+            </tr>
+            <tr>
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-smartphone-iphone mr-1 color-black"></i> <span translate="LBL_PHONE"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Telefono"></td>
+            </tr>
+            <tr>
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-flag mr-1 color-warning"></i> <span translate="LBL_COUNTRY"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.Paises.DescripcionIdiomaBuscado"></td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="zmdi zmdi-google-maps mr-1 color-danger"></i> <span translate="LBL_CITY"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.CiudadResidencia"></td>
+            </tr>
+            <tr ng-if="infoUser.user.TipoPerfil === 1">
+                <th>
+                    <i class="zmdi zmdi-calendar mr-1 color-info"></i> <span translate="LBL_BIRTHDAY"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.CandidatoDeLaPersona.FechaNacimiento | date: 'longDate'"></td>
+            </tr>
+            <tr ng-if="infoUser.user.TipoPerfil === 1">
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-male-alt mr-1 color-warning"></i> <span translate="LBL_HEIGHT"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.CandidatoDeLaPersona.Estatura + ' m'"></td>
+            </tr>
+            <tr ng-if="infoUser.user.TipoPerfil === 1">
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-male mr-1 color-black"></i> <span translate="LBL_WEIGHT"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.CandidatoDeLaPersona.Peso + ' Kg'"></td>
+            </tr>
+            <tr ng-if="infoUser.user.TipoPerfil === 1">
+                <th class="col-xs-5 col-md-4 col-lg-4">
+                    <i class="zmdi zmdi-email mr-1 color-success"></i> <span translate="LBL_BIOGRAPHY"></span>
+                </th>
+                <td class="col-xs-7 col-md-8 col-lg-8" ng-bind="infoUser.user.CandidatoDeLaPersona.Biografia"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             x:Class="Xpinn.SportsGo.Movil.App">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+            <Color x:Key="PagePrimaryBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="PageSecondaryBackgroundColor">#BDBDBD</Color>
+            <Color x:Key="PrimaryAppColor">#1976D2</Color>
+            <Color x:Key="BarTextAppColor">#FFFFFF</Color>
+            <x:String x:Key="RutaImagenAddFile">addphoto.png</x:String>
+            <x:String x:Key="RutaImagenLogoApp">LogoSportsGo.png</x:String>
+            <x:String x:Key="RutaDefaultVideo">DefaultVideo.png</x:String>
+            <x:String x:Key="RutaDefaultImagenBanner">DefaultImagenBanner.png</x:String>
+            <x:String x:Key="RutaDefaultImagenPerfil">DefaultImagenPerfil.png</x:String>
+            <x:String x:Key="RutaDefaultImagen">DefaultImagenNoPerfil.png</x:String>
+            <x:String x:Key="RutaDefaultImagenError">DefaultImagenError.png</x:String>
+            <x:String x:Key="RutaDefaultImagenBannerError">DefaultImagenErrorBanner.png</x:String>
+            <Style x:Key="RemoteImageStyle" TargetType="ffimageloading:CachedImage">
+                <Setter Property="RetryCount" Value="3" />
+                <Setter Property="RetryDelay" Value="1000" />
+                <Setter Property="CacheDuration" Value="0.6:00:00" />
+                <Setter Property="FadeAnimationEnabled" Value="True" />
+                <Setter Property="BitmapOptimizations" Value="True" />
+                <Setter Property="LoadingPlaceholder" Value="{StaticResource RutaDefaultImagen}" />
+                <Setter Property="ErrorPlaceholder" Value="{StaticResource RutaDefaultImagenError}" />
+                <Setter Property="TransparencyEnabled" Value="False" />
+            </Style>
+            <Style x:Key="NoConexionMessageContentViewStyle" TargetType="ContentView">
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="BackgroundColor" Value="Red" />
+            </Style>
+            <Style x:Key="NoConexionMessageLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Text" Value="{markup:Translate ConexionPerdida}" />
+            </Style>
+            <!--Barra de titulo de las pantallas de informacion de perfil, deportes y habilidades-->
+            <Style x:Key="stackLayoutTitleStyle" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="BackgroundColor" Value="#E0E0E0" />
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+            <Style x:Key="labelTitleStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="#424242" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="iconTitleStyle" TargetType="ffimageloading:CachedImage">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="WidthRequest" Value="25" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

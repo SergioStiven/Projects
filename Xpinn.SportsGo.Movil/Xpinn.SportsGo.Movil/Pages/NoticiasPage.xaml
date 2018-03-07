@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             x:Class="Xpinn.SportsGo.Movil.Pages.NoticiasPage"
+             BackgroundColor="{StaticResource PageSecondaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Noticias}">
+
+    <AbsoluteLayout>
+        <controls:InfiniteListView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                   x:Name="ListaTimeLine" HasUnevenRows="True" LoadMoreCommand="{Binding LoadMoreTimeLine}" IsRefreshing="{Binding IsRefreshing}"
+                                   ItemsSource="{Binding TimeLine}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}"
+                                   SeparatorColor="Transparent" SeparatorVisibility="None" BackgroundColor="{StaticResource PageSecondaryBackgroundColor}" >
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:InfiniteListView.ItemTemplate>
+                <DataTemplate>
+                    <viewcells:NoticiasViewCell
+                        InteracturarIconoPublicacion="{Binding Source={x:Reference ListaTimeLine}, Path=BindingContext.InteracturarIconoPublicacion}"
+                        InteracturarPublicacion="{Binding Source={x:Reference ListaTimeLine}, Path=BindingContext.InteracturarPublicacion}"
+                        IrPersona="{Binding Source={x:Reference ListaTimeLine}, Path=BindingContext.IrPersona}"/>
+                </DataTemplate>
+            </controls:InfiniteListView.ItemTemplate>
+        </controls:InfiniteListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

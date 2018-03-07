@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = ViewBag.Layout;
+}
+
+<div class="">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="card card-danger animated fadeInUp animation-delay-7">
+                <div class="card-block text-center">
+                    <span class="ms-icon ms-icon-circle ms-icon-xxlg gi-5x mb-4 color-danger"><i class="zmdi zmdi-block"></i></span>
+                    <h2 class="color-danger" translate="LBL_PAGE_UNAVAILABLE"></h2>
+                    <p>Esta opción no está disponible en tu plan, mira nuestros planes de suscripción y podrás acceder a nuestras opciones.</p>
+                    <a href="~/Settings/" class="btn btn-raised btn-primary"><i class="zmdi zmdi-shopping-cart"></i> VER PLANES</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Settings/translations.js"></script>
+}

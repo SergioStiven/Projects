@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/chat-theme.css" rel="stylesheet" />
+<div  style="overflow:hidden;" ng-controller="ChatController">
+    
+    <!-- Alert -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="Chat.delete()" type="button"  data-dismiss="modal" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="containerChat">
+            <div class="left">
+                <div class="top">
+                    <input type="text" ng-model="Chat.search"/>
+                    <a class="search btn-circle btn-circle-sm btn-circle-raised btn-circle-primary tooltip-dark" data-toggle="tooltip"
+                       ng-click="Chat.showListContacts(true)" title="{{'TITLE_NEW_MESSAGE' | translate}}" data-placement="bottom">
+                        <i class="zmdi zmdi-comment-edit"></i>
+                    </a>
+                </div>
+                <ul class="people" scroll-contacts>
+                    <li ng-show="Chat.viewContacts">
+                        <a href="javascript:void(0)" ng-click="Chat.showListContacts(false)" style="padding-left:20px;font-size: 20px;">
+                            <i class="zmdi zmdi-arrow-left"></i>
+                            <em class="color-dark" style="font-size:14px" ng-bind="'LBL_BACK_CONVERSATIONS' | translate"></em>
+                        </a>
+                        <h4 class="color-primary titleMyContacts" ng-bind="'LBL_MY_CONTACTS' | translate"></h4>
+                    </li>
+                        
+                    <li class="person" ng-repeat="contact in Chat.contacts | filter:Chat.search:strict" ng-click="Chat.openChatWindow(contact)">
+                        <img ng-src="{{ contact.PersonasContacto.UrlImagenPerfil === '' ? Chat.UrlImagePerfilDefault : contact.PersonasContacto.UrlImagenPerfil }}" alt="" />
+                        <span class="name" ng-bind="contact.PersonasContacto.NombreYApellido"></span>
+                        <span class="time" ng-bind="contact.UltimoMensaje.FechaMensaje == null ? '' : (ConverToDate(contact.UltimoMensaje.FechaMensaje) | date : 'hh:mm a')"></span>
+                        <span class="preview" ng-bind="contact.UltimoMensaje.Mensaje"></span>
+                    </li>
+                </ul>           
+            </div>
+            <div class="right">
+                <div class="top">
+                    <span ng-show="Chat.selectedChat">
+                        <img ng-src="{{ Chat.active.UrlImageProfile === '' ? Chat.UrlImagePerfilDefault : Chat.active.UrlImageProfile }}" id="imgChatActive" class="disconected" /> 
+                        <span class="name" ng-bind="Chat.active.name"></span>
+                        <a data-toggle="modal" data-target="#alertWarning" style="float: right;margin-right: 2%;font-size: 30px;padding: 5px;"><i class="color-danger zmdi zmdi-delete"></i></a>
+                    </span>
+                </div>
+                <div class="chat" ng-show="Chat.selectedChat" id="ChatContainer">
+                    <div class="text-center" ng-show="Chat.showButtonMoreMessages">
+                        <a ng-click="Chat.getMoreChatsFromContact()" class="btn btn-primary" translate="BTN_SEE_MORE"></a>
+                    </div>
+                    <div class="chat-msgs" id="chat-msgs">
+                        <!-- content messages -->
+                    </div>
+                    <!--
+                    <div class="conversation-start">
+                        <span>Today, 6:48 AM</span>
+                    </div>
+                    -->
+                </div>
+                <div class="write">
+                    <input type="text" ng-model="Chat.active.msg" ng-keyup="$event.keyCode == 13 ? Chat.send() : null" ng-disabled="!Chat.selectedChat" />
+                    <a href="javascript:;" class="write-link send" ng-click="Chat.send()"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Chat/translations.js"></script>
+    <script src="~/Scripts/app/Chat/chatController.js"></script>
+}

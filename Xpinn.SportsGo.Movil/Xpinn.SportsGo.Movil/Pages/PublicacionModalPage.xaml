@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:o="clr-namespace:Octane.Xam.VideoPlayer;assembly=Octane.Xam.VideoPlayer"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             x:Class="Xpinn.SportsGo.Movil.Pages.PublicacionModalPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="Black">
+
+    <AbsoluteLayout>
+        <!--<StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">-->
+        <controls:VideoPlayerExtender AutoPlay="True" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                           Source="{Binding Publicacion.UrlArchivo}" FillMode="ResizeAspect" >
+            <!--<o:VideoPlayer.Margin>
+                    <OnPlatform x:TypeArguments="Thickness"
+                                        iOS="0,70,10,0"
+                                        Android="0,130,0,70" />
+                </o:VideoPlayer.Margin>-->
+        </controls:VideoPlayerExtender>
+        <!--</StackLayout>-->
+        <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0.02, 0.02, 0.10, 0.10" AbsoluteLayout.LayoutFlags="All"
+                                    HeightRequest="40" WidthRequest="40" Source="ic_volver.png"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    fe:TappedGestureAttached.Command="{Binding CerrarModal}" >
+            <ffimageloading:CachedImage.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean"
+                                        iOS="False"
+                                        Android="True" />
+            </ffimageloading:CachedImage.IsVisible>
+        </ffimageloading:CachedImage>
+
+        <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0.02, 0.08, 0.10, 0.10" AbsoluteLayout.LayoutFlags="All"
+                                    HeightRequest="40" WidthRequest="40" Source="ic_volver.png"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    fe:TappedGestureAttached.Command="{Binding CerrarModal}" >
+            <ffimageloading:CachedImage.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean"
+                                        iOS="True"
+                                        Android="False" />
+            </ffimageloading:CachedImage.IsVisible>
+        </ffimageloading:CachedImage>
+    </AbsoluteLayout>
+
+</ContentPage>

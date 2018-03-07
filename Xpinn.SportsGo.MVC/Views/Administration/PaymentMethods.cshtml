@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+
+<div ng-controller="PaymentMethodsController">
+
+    <h2 class="color-info" translate="LBL_PAYMENT_METHODS"></h2>
+
+    <!-- Alert Delete -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-responsive ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th translate="LBL_NAME"></th>
+                    <th translate="LBL_COUNTRY"></th>
+                    <th class="text-right">
+                        <a href="javascript:void(0)" ng-click="InvoiceFormat.addNew = !InvoiceFormat.addNew" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                            <i class="{{ !InvoiceFormat.addNew ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- new plan -->
+                <tr ng-show="InvoiceFormat.addNew">
+                    <!-- Description -->
+                    <td class="col-md-7">
+                        <div class="form-group" style="margin-top:0px;">
+                            <input type="text" ng-model="InvoiceFormat.tempToSave[0].Texto" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}" style="color:white" />
+                        </div>
+                        <div class="form-group" style="margin-top:0px;">
+                            <input type="text" ng-model="InvoiceFormat.tempToSave[1].Texto" class="form-control" placeholder="{{'LBL_ENGLISH' | translate}}" style="color:white" />
+                        </div>
+                        <div class="form-group" style="margin-top:0px;">
+                            <input type="text" ng-model="InvoiceFormat.tempToSave[2].Texto" class="form-control" placeholder="{{'LBL_PORTUGUESE' | translate}}" style="color:white" />
+                        </div>
+                    </td>
+                    <!-- Country -->
+                    <td class="col-md-3">
+                        <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in Lists.countries track by item.Consecutivo"
+                                   ng-model="InvoiceFormat.countryToSave"
+                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </td>
+                    <!-- Button save -->
+                    <td class="col-md-2"><a ng-click="InvoiceFormat.save()" style="margin:0" class="btn btn-success" translate="BTN_SAVE"></a></td>
+                </tr>
+                <!-- List of plans -->
+                <tr ng-repeat="plan in InvoiceFormat.list">
+                    <!-- Description -->
+                    <td class="col-md-7" style="padding: 0px !important;">
+                        <div class="col-md-12 form-group label-floating">
+                            <div class="input-group" style="width:100%;">
+                                <label class="control-label" for="ms-form-username" style="top:-30px;font-size: 12px;" ng-bind="getLanguageById(plan.CodigoIdioma)"></label>
+                                <input type="text" id="ms-form-username" class="form-control color-white" ng-model="plan.Texto" />
+                            </div>
+                        </div>
+                    </td>
+                    <!-- Countries -->
+                    <td class="col-md-3" ng-bind="plan.Paises.DescripcionIdiomaBuscado"></td>
+                    <!-- Edit Or Delete -->
+                    <td class="col-md-2">
+                        <a ng-click="InvoiceFormat.update(plan)" style="margin:0" class="btn-circle">
+                            <i class="zmdi zmdi-refresh color-success"></i>
+                        </a>
+                        @*<a ng-click="ToDelete.assign(plan,InvoiceFormat.delete)" data-toggle="modal" data-target="#alertWarning" style="margin:0" class="btn-circle">
+                            <i class="zmdi zmdi-delete color-danger"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+@section ANGULARJS{
+    <script src="~/Scripts/app/Administration/paymentMethodsController.js"></script>
+}

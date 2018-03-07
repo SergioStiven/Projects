@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html ng-app="app" scroll>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SportsGo</title>
+    <meta name="description" content="Sports Go">
+    <meta name="keywords" content="Sports">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/style.light-blue-500.min.css" />
+    <link href="~/Scripts/app/lib/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
+    <link href="~/Scripts/app/lib/bower_components/angucomplete-alt/angucomplete-alt.css" rel="stylesheet" />
+    <link href="~/Content/home.css" rel="stylesheet" />
+    <link href="~/Content/dropDownList.css" rel="stylesheet" />
+    <link href="~/Content/select.min.css" rel="stylesheet" />
+    <style>
+        oi-select > .select-search {
+            border: none;
+            border-bottom: 2px solid #d2d2d2;
+        }
+        .dropdown > .dropdown-menu {
+            top: 0 !important;
+        }
+        .ms-slidebar .ms-slidebar-menu>li>a.collapsed:after{
+            content: none;
+        }
+    </style>
+</head>
+<body  >
+
+    <!-- HEADER -->
+    <header class="header-responsive ms-header ms-header-primary" ng-controller="MasterController" style="position:fixed;top:0;left:0;z-index:999;width:100%;height:23px;display:block !important;">
+        <div class="container-header-responsive container container-full">
+            <div class="ms-title">
+                <a href="~/Home/">
+                    <!-- <img src="assets/img/demo/logo-header.png" alt=""> -->
+                    <div class="logo-responsive-big">
+                        <span class="ms-logo animated zoomInDown animation-delay-5">S</span>
+                        <h1 class="animated fadeInRight animation-delay-6">
+                            <span>SportsGo</span>
+                        </h1>
+                    </div>
+                    <div class="logo-responsive-small">
+                        <span class="ms-logo ms-logo-sm animated zoomInDown animation-delay-5">S</span>
+                        <h1 class="animated fadeInRight animation-delay-6">
+                            <span>SportsGo</span>
+                        </h1>
+                    </div>
+                </a>
+            </div>
+            <div class="header-right">
+                <a data-toggle="tooltip" data-placement="bottom" title="{{'LBL_MIPERFIL' | translate}}" href="~/Profile/MyProfile" class="btn-circle btn-circle-primary tooltip-dark no-focus animated zoomInDown animation-delay-8">
+                    <i class="zmdi zmdi-account"></i>
+                </a>
+                <form ng-show="showButtonSearch" class="search-responsive search-form animated zoomInDown animation-delay-9" autocomplete="off">
+                    <input id="search-box" ng-model="toSearch" ng-keyup="$event.keyCode == 13 ? Search.searchInfo() : null" type="text" class="search-input" placeholder="Search..." name="toSearchHeader" />
+                    <label data-toggle="tooltip" data-placement="bottom" title="{{titleSearchButton}}" for="search-box" class="tooltip-dark">
+                        <i class="zmdi zmdi-search"></i>
+                    </label>
+                </form>
+                <div class="popover_parent">
+                    <a href="javascript:void(0);" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8">
+                        <i data-toggle="tooltip" data-placement="bottom" title="{{'LBL_MISNOTIFICACIONES' | translate}}" class="zmdi zmdi-notifications-active tooltip-dark"></i>
+                    </a>
+                    <div class="popover list-group" style="background-color:rgba(243, 241, 241, 0.95);border-radius:5px;overflow-y: auto;max-height: 60vh;">
+                        <a href="javascript:void(0);" class="list-group-item withripple" 
+                           ng-click="Notifications.redirectToUrl(notification)" ng-repeat="notification in Notifications.list" style="border-radius:5px;padding:10px 5px;">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img ng-src="{{ notification.UrlArchivo }}" style="width:30px;height:30px;border-radius:50%;" />
+                                </div>
+                                <div class="col-md-10">
+                                    <span style="font-size:12px;font-weight:bolder;" ng-bind="notification.Titulo"></span><br />
+                                    <span style="font-size:12px;" ng-bind="notification.Descripcion"></span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item withripple text-center" style="border-radius:5px;"
+                           ng-show="Notifications.showButtonSeeMore" ng-click="Notifications.get(true)"><span ng-bind="'LBL_VERMAS_NOTIFICACIONES' | translate"></span></a>
+                    </div>
+                </div>
+                
+
+                <a data-toggle="tooltip" data-placement="bottom" title="Menu" href="javascript:void(0)" class="btn-ms-menu btn-circle btn-circle-primary tooltip-dark sb-toggle-left animated zoomInDown animation-delay-10">
+                    <i class="zmdi zmdi-menu"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content-responsive" >
+        <div class="sb-site-container">
+            @RenderBody()
+        </div>
+    </div>
+    
+
+    <!-- LEFT MENU -->
+    <div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar" ng-controller="MenuController">
+        <div class="sb-slidebar-container">
+            <header class="ms-slidebar-header" id="divBannerLeftMenu" style="background-size: cover;">
+                <a>
+                    <img class="img-avatar-circle" style="width:90px;height:90px;transform:none;"
+                         ng-src="{{Profile.info.PersonaDelUsuario.UrlImagenPerfil === '' ? Profile.defaulImageProfile : Profile.info.PersonaDelUsuario.UrlImagenPerfil }}">
+                </a>
+                <div class="ms-slidebar-title">
+                    <div class="ms-slidebar-t text-center" style="float:none;margin:0;">
+                        <h3 style="word-spacing:0;" ng-bind="Profile.info.PersonaDelUsuario.NombreYApellido"></h3>
+                    </div>
+                </div>
+            </header>
+            <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
+                <li class="panel">
+                    <a class="collapsed" href="~/Home/">
+                        <i class="zmdi zmdi-home"></i> <span ng-bind="'LBL_INICIO_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+                <li class="panel" role="tab">
+                    <a class="collapsed" href="~/Search/">
+                        <i class="zmdi zmdi-search-in-page"></i> <span ng-bind="'LBL_BUSCAR_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+                <li class="panel" role="tab">
+                    <a class="collapsed" href="~/Chat/">
+                        <i class="zmdi zmdi-email"></i> <span ng-bind="'LBL_CHAT_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+                <li class="panel" role="tab">
+                    <a class="collapsed" href="~/Events/">
+                        <i class="zmdi zmdi-calendar-note"></i> <span ng-bind="'LBL_EVENTOS_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+                <li class="panel" role="tab">
+                    <a class="collapsed" href="~/Settings/">
+                        <i class="zmdi zmdi-settings"></i> <span ng-bind="'LBL_CONFIGURARMICUENTA_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+                <li class="panel" role="tab">
+                    <a class="collapsed" href="~/Authenticate/Logoff/">
+                        <i class="zmdi zmdi-sign-in"></i> <span ng-bind="'LBL_CERRARSESION_MENULATERAL' | translate"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    @*<script src="~/Scripts/app/lib/jquery-3.1.1.min.js"></script>*@
+    <!-- Theme JS -->
+    <script src="~/Content/assets/js/plugins.min.js"></script>
+    <script src="~/Scripts/app/lib/moment.js"></script>
+    <!-- AunglarJS -->
+    <script src="~/Content/assets/js/app.min.js"></script>
+    <script src="~/Scripts/app/lib/angular.min.js"></script>
+    <!-- SingalR -->
+    @*<script src="~/Scripts/jquery.signalR-2.2.2.js"></script>*@
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!-- Translate -->
+    <script src="~/Scripts/app/lib/angular-translate.js"></script>
+    <!-- Select & Select multiple -->
+    <script src="~/Scripts/app/lib/select-tpls.min.js"></script>
+    
+    <script type="text/javascript">
+        var app = angular.module('app', ["pascalprecht.translate"]);
+    </script>
+
+    <script src="~/Scripts/app/master.js"></script>
+
+    @RenderSection("ANGULARJS", required: true)
+
+    <script src="~/Scripts/app/service.js"></script>
+
+    <script>
+        $('.popover_parent a').on('click', function () {
+            $('.popover_parent > a').not(this).parent().removeClass('active');
+            $(this).parent().toggleClass('active');
+        });
+
+        //Hide the dropdown when clicked off
+        $(document).on('click touchstart', function (event) {
+            if (!$(event.target).closest('.popover_parent').length) {
+                // Hide the menus.
+                $('.popover_parent.active').removeClass('active');
+            }
+        });
+    </script>
+
+</body>
+</html>

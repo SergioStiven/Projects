@@ -1,0 +1,163 @@
+﻿<!-- Alert -->
+<div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+            </div>
+            <div class="modal-body">
+                <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal plan in process -->
+<div class="modal modal-primary" id="modalUpdatePlanInProcess" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePlanInProcessLabel">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="modalUpdatePlanInProcessLabel">Actualizar Plan</h3>
+            </div>
+            <div class="modal-body dark">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating is-focused is-empty" style="width:100%">
+                            <label class="control-label" for="focusedInput1">Referencia de pago</label>
+                            <input class="form-control" id="focusedInput1" type="text" ng-model="Plans.planInProcess.ReferenciaPago">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea rows="3" style="width:100%" class="form-control" placeholder="Escriba aqui sus observaciones..." ng-model="Plans.planInProcess.ObservacionesCliente"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group is-empty is-fileinput">
+                            <input type="file" id="inputFile4" ngf-select ng-model="file" accept="image/*">
+                            <div class="input-group">
+                                <input type="text" readonly="" class="form-control" placeholder="Subir comprobante">
+                                <span class="input-group-btn input-group-sm">
+                                    <button type="button" class="btn btn-fab btn-fab-mini">
+                                        <i class="material-icons">attach_file</i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <a class="btn btn-raised btn-block btn-primary" ng-click="Plans.uploadFile()" data-dismiss="modal" translate="BTN_SAVE"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-1"></div>
+<div class="col-md-5 price-table price-table-info animated zoomInDown animation-delay-7">
+    <header class="price-table-header">
+        <span class="price-table-category" translate="LBL_DETAILS"></span>
+        <h3>
+            <sup>$</sup>{{Plans.myPlan.Planes.Precio | currency:" " : 0}}
+            <sub>/{{Plans.getPeriodicityById(Plans.myPlan.Planes.CodigoPeriodicidad)}}.</sub>
+        </h3>
+    </header>
+    <div class="price-table-body">
+        <ul class="price-table-list">
+            <li ng-show="Plans.myPlan.Planes.NumeroCategoriasPermisibles > 0">
+                <i class="zmdi zmdi-bike"></i>Número de categorias ({{Plans.myPlan.Planes.NumeroCategoriasPermisibles}})
+            </li>
+            <li ng-show="Plans.myPlan.Planes.VideosPerfil > 0">
+                <i class="zmdi zmdi-collection-video"></i>Videos del perfil
+            </li>
+            <li ng-show="Plans.myPlan.Planes.VideosPerfil > 0">
+                <i class="zmdi zmdi-time"></i>{{('LBL_DURATION_VIDEOS' | translate) + ' (' + Plans.myPlan.Planes.TiempoPermitidoVideo + ')'}}
+            </li>
+            <li ng-show="Plans.myPlan.Planes.ServiciosChat > 0">
+                <i class="zmdi zmdi-email"></i>Chat
+            </li>
+            <li ng-show="Plans.myPlan.Planes.ConsultaCandidatos > 0">
+                <i class="zmdi zmdi-accounts-list"></i>Consulta de candidatos
+            </li>
+            <li ng-show="Plans.myPlan.Planes.DetalleCandidatos > 0">
+                <i class="zmdi zmdi-pin-account"></i>Detalle de candidato
+            </li>
+            <li ng-show="Plans.myPlan.Planes.ConsultaGrupos > 0">
+                <i class="zmdi zmdi-accounts"></i> Consulta de grupos
+            </li>
+            <li ng-show="Plans.myPlan.Planes.DetalleGrupos > 0">
+                <i class="zmdi zmdi-group-work"></i>Detalle de grupo
+            </li>
+            <li ng-show="Plans.myPlan.Planes.ConsultaEventos > 0">
+                <i class="zmdi zmdi-calendar"></i>Consulta de eventos
+            </li>
+            <li ng-show="Plans.myPlan.Planes.CreacionAnuncios > 0">
+                <i class="zmdi zmdi-collection-video"></i>Crear anuncios
+            </li>
+            <li ng-show="Plans.myPlan.Planes.EstadisticasAnuncios > 0">
+                <i class="zmdi zmdi-chart-donut"></i>Estadisticas de anuncios
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-5 col-sm-6">
+    <div class="col-md-12 animated zoomInDown animation-delay-7">
+        <div class="card card-info">
+            <div class="card-block" style="padding-bottom:0;">
+                <div class="text-center"><i class="fa fa-cogs color-info font-big"></i></div>
+                <h4 class="right-line color-info" translate="LBL_SETUP_PLAN"></h4>
+                <p><b ng-bind="('LBL_NAME' | translate) + ': '"></b>{{Plans.myPlan.Planes.DescripcionIdiomaBuscado}}</p>
+                <p><b ng-bind="('LBL_PERIODICITY' | translate) + ': '"></b>{{Plans.getPeriodicityById(Plans.myPlan.Planes.CodigoPeriodicidad)}}</p>
+                <p><b ng-bind="('LBL_LAST_PAYMENT' | translate) + ': '"></b>{{ConverToDate(Plans.myPlan.Adquisicion) | date : 'dd/MM/yyyy'}}</p>
+                <p ng-hide="Plans.myPlan.Planes.PlanDefault != 0"><b ng-bind="('LBL_DUE_DATE' | translate) + ': '"></b>{{ConverToDate(Plans.myPlan.Vencimiento) | date : 'dd/MM/yyyy'}}</p>
+                <div class="text-center">
+                    <a ng-if="!Plans.isPlanInProcess || Plans.myPlan.Planes.PlanDefault === 0" 
+                       ng-click="Plans.showManualPlan(Plans.myPlan.Planes,false)"
+                       class="btn btn-success">
+                        <i class="zmdi zmdi-print"></i> <span translate="BTN_PRINT"></span>
+                    </a>
+                    <a ng-if="!Plans.isPlanInProcess" href="#" class="btn btn-info" ng-click="Plans.isMyPlan = false">
+                        <i class="zmdi zmdi-collection-plus"></i> <span translate="BTN_SEE_MORE"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="Plans.isPlanInProcess" class="col-md-12 animated zoomInDown animation-delay-7">
+        <div class="card card-info">
+            <div class="card-block">
+                <div class="text-center"><i class="fa fa-spinner color-info font-big"></i></div>
+                <h4 class="right-line color-info">Plan en proceso</h4>
+                <p><b ng-bind="('LBL_NAME' | translate) + ': '"></b>{{Plans.planInProcess.Planes.DescripcionIdiomaBuscado}}</p>
+                <p><b ng-bind="'Estado del pago: '"></b>{{Plans.getStatusById(Plans.planInProcess.EstadoDelPago)}}</p>
+                <div class="row text-center">
+                    <a href="#" class="btn-circle btn-success" data-toggle="modal" data-target="#modalUpdatePlanInProcess">
+                        <i class="zmdi zmdi-refresh color-success"></i>
+                    </a>
+                    <a href="#" ng-if="Plans.planInProcess.EstadoDelPago !== 3" ng-click="Plans.showManualPlan(Plans.planInProcess.Planes, false)"
+                       class="btn-circle btn-info">
+                        <i class="zmdi zmdi-print color-info"></i>
+                    </a>
+                    <a href="#" ng-if="Plans.planInProcess.EstadoDelPago === 1" ng-click="ToDelete.assign(Plans.planInProcess,Plans.deletePlanInProcess)"
+                       data-toggle="modal" data-target="#alertWarning" class="btn-circle btn-danger">
+                        <i class="zmdi zmdi-delete color-danger"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

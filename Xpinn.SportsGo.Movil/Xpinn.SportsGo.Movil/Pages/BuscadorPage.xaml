@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             x:Class="Xpinn.SportsGo.Movil.Pages.BuscadorPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Busqueda}">
+
+    <AbsoluteLayout>
+        <ListView x:Name="ListaCategorias" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                  ItemsSource="{Binding Categorias}" RowHeight="90">
+            <ListView.Header>
+                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="80" Padding="10,15,10,0">
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                           Text="{markup:Translate Deportes}" FontAttributes="Bold" FontSize="Large" TextColor="Black"/>
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Start" FontSize="Medium" TextColor="Black" Text="{markup:Translate BuscaPorLosDeportesDeTuInteres}" />
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0"
+                                     fe:TappedGestureAttached.Command="{Binding Source={x:Reference ListaCategorias}, Path=BindingContext.IrBuscarPerfiles}"
+                                     fe:TappedGestureAttached.CommandParameter="{Binding .}">
+                            <ffimageloading:CachedImage HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                                                        Source="{Binding UrlArchivo}" Aspect="Fill" Style="{StaticResource RemoteImageStyle}"
+                                                        HeightRequest="60" WidthRequest="60" Margin="0,0,10,0" DownsampleToViewSize="True">
+                                <ffimageloading:CachedImage.Triggers>
+                                    <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding UrlArchivo, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Source" Value="{StaticResource RutaDefaultImagen}" />
+                                    </DataTrigger>
+                                </ffimageloading:CachedImage.Triggers>
+                            </ffimageloading:CachedImage>
+                            <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                                   Text="{Binding DescripcionCategoria}" TextColor="Black" FontSize="Medium" FontAttributes="Bold" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+            Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

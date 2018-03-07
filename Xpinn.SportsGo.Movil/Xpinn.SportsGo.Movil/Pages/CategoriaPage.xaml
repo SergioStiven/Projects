@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:entities="clr-namespace:Xpinn.SportsGo.Entities;assembly=Xpinn.SportsGo.Entities"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Xpinn.SportsGo.Movil.Pages.CategoriaPage"
+             x:Name="ContentPageCategorias"
+             Title="{Binding TituloPage}"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding GuardarCategoria}" 
+                                      Parent="{x:Reference ContentPageCategorias}" IsVisible="{Binding EsMiPersonaORegistro}" />
+        <controls:BindableToolbarItem Text="{markup:Translate Borrar}" Icon="ic_delete.png" Command="{Binding BorrarCategoria}" 
+                                      Parent="{x:Reference ContentPageCategorias}" IsVisible="{Binding SePuedeBorrarLaCategoria}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="0,0,0,10">
+            <StackLayout>
+                <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" >
+                    <ffimageloading:CachedImage Source="ic_deportes.png" Style="{StaticResource iconTitleStyle}" />
+                    <Label Text="{markup:Translate EligeTuDeporteInteres}" Style="{StaticResource labelTitleStyle}" />
+                </StackLayout>
+                <StackLayout>
+                    <controls:HorizontalScrollView x:Name="ListaCategorias" ItemsSource="{Binding Categorias}" 
+                                                   Padding="10,10,7,10" HeightRequest="85" HorizontalOptions="StartAndExpand">
+                        <controls:HorizontalScrollView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView Padding="2">
+                                    <ffimageloading:CachedImage HeightRequest="70" WidthRequest="70" Source="{Binding UrlArchivo, Mode=OneWay}" Aspect="Fill" Style="{StaticResource RemoteImageStyle}"
+                                                                fe:TappedGestureAttached.Command="{Binding Source={x:Reference ListaCategorias}, Path=BindingContext.ToogleSeleccion}"
+                                                                fe:TappedGestureAttached.CommandParameter="{Binding .}">
+                                        <ffimageloading:CachedImage.Triggers>
+                                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding UrlArchivo, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Source" Value="{StaticResource RutaDefaultImagen}" />
+                                            </DataTrigger>
+                                        </ffimageloading:CachedImage.Triggers>
+                                    </ffimageloading:CachedImage>
+                                    <ContentView.Triggers>
+                                        <DataTrigger TargetType="ContentView" Binding="{Binding EstaSeleccionado, Mode=TwoWay}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryAppColor}" />
+                                        </DataTrigger>
+                                    </ContentView.Triggers>
+                                </ContentView>
+                            </DataTemplate>
+                        </controls:HorizontalScrollView.ItemTemplate>
+                    </controls:HorizontalScrollView>
+                    <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{markup:Translate UbicacionEnElCampo}" 
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                            FontSize="Small" Margin="10,0,10,0" IsVisible="{Binding PuedeSeleccionarUbicacionEnElCampo}"
+                            Command="{Binding IrPosicion}" />
+                </StackLayout>
+                <ContentView IsVisible="{Binding EsCandidato}" VerticalOptions="Start">
+                    <StackLayout>
+                        <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35">
+                            <ffimageloading:CachedImage Source="ic_skills.png" Style="{StaticResource iconTitleStyle}" />
+                            <Label Text="{markup:Translate Habilidades}" Style="{StaticResource labelTitleStyle}" />
+                        </StackLayout>
+                        <fe:SegmentedButtonGroup OnColor="{StaticResource PrimaryAppColor}" OffColor="{StaticResource PagePrimaryBackgroundColor}" 
+                                                 HorizontalOptions="CenterAndExpand" SelectedIndex="{Binding SelectIndexSegmentBar, Mode=TwoWay}" Margin="5"
+                                                 CornerRadius="5" HeightRequest="35">
+                            <fe:SegmentedButtonGroup.LabelStyle>
+                                <Style TargetType="Label">
+                                    <Setter Property="FontSize" Value="12" />
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                    <Setter Property="Margin" Value="5,0" />
+                                </Style>
+                            </fe:SegmentedButtonGroup.LabelStyle>
+                            <fe:SegmentedButtonGroup.SegmentedButtons>
+                                <fe:SegmentedButton Title="{markup:Translate Tecnicas}" />
+                                <fe:SegmentedButton Title="{markup:Translate Tacticas}"/>
+                                <fe:SegmentedButton Title="{markup:Translate Fisicas}"/>
+                            </fe:SegmentedButtonGroup.SegmentedButtons>
+                        </fe:SegmentedButtonGroup>
+                        <Frame CornerRadius="10" HasShadow="False" Margin="3" Padding="0" VerticalOptions="Start" BackgroundColor="Transparent" OutlineColor="Transparent">
+                            <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                                <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35">
+                                    <Label Text="{markup:Translate HabilidadesActuales}" Style="{StaticResource labelTitleStyle}" />
+                                    <ffimageloading:CachedImage Source="ic_add.png" Style="{StaticResource iconTitleStyle}" Margin="0,0,5,0"
+                                                                VerticalOptions="CenterAndExpand" HorizontalOptions="Center" IsVisible="{Binding EsMiPersonaORegistro}"
+                                                                fe:TappedGestureAttached.Command="{Binding AgregarHabilidades}" />
+                                </StackLayout>
+                                <xlabs:RepeaterView x:Name="ListaHabilidades" Spacing="10" ItemsSource="{Binding HabilidadesCandidato, Mode=OneWay}" x:TypeArguments="entities:HabilidadesCandidatosDTO">
+                                    <xlabs:RepeaterView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Horizontal" Spacing="0" WidthRequest="45" VerticalOptions="CenterAndExpand">
+                                                <Label Text="{Binding Habilidades.DescripcionIdiomaBuscado}" TextColor="#000000" LineBreakMode="TailTruncation"
+                                                       HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="3,0,0,0" FontSize="Small"/>
+                                                <rating:SfRating Precision="Standard" ItemSize="22" HeightRequest="25" ReadOnly="{Binding Source={x:Reference ListaHabilidades}, Path=BindingContext.EsMiPersonaORegistro, Converter={StaticResource negateConverter} }" 
+                                                                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding NumeroEstrellas}">
+                                                    <rating:SfRating.RatingSettings>
+                                                        <rating:SfRatingSettings RatedFill="{StaticResource PrimaryAppColor}" UnRatedFill="{StaticResource Key=PagePrimaryBackgroundColor}" />
+                                                    </rating:SfRating.RatingSettings>
+                                                </rating:SfRating>
+                                                <ffimageloading:CachedImage VerticalOptions="CenterAndExpand" Margin="3,0,3,0" IsVisible="{Binding Source={x:Reference ListaHabilidades}, Path=BindingContext.EsMiPersonaORegistro}"
+                                                                            fe:TappedGestureAttached.Command="{Binding Source={x:Reference ListaHabilidades}, Path=BindingContext.BorrarHabilidad}" 
+                                                                            fe:TappedGestureAttached.CommandParameter="{Binding .}" Source="ic_cancel.png" HeightRequest="25"/>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </xlabs:RepeaterView.ItemTemplate>
+                                </xlabs:RepeaterView>
+                                <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35">
+                                    <Label Text="{markup:Translate MostrarTodo}" Style="{StaticResource labelTitleStyle}" 
+                                           TextColor="{StaticResource PrimaryAppColor}" >
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding MostrandoTodo, Mode=TwoWay}" Value="True">
+                                                <Setter Property="Text" Value="{markup:Translate MostrarMenos}" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <ffimageloading:CachedImage Source="ic_downarrow.png" Style="{StaticResource iconTitleStyle}" Margin="3,0,3,0"
+                                                                fe:TappedGestureAttached.Command="{Binding ToogleMostrar}" 
+                                                                HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                                        <ffimageloading:CachedImage.Triggers>
+                                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding MostrandoTodo, Mode=TwoWay}" Value="True">
+                                                <Setter Property="Source" Value="ic_uparrow.png" />
+                                            </DataTrigger>
+                                        </ffimageloading:CachedImage.Triggers>
+                                    </ffimageloading:CachedImage>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.Pages.DetallePlanPage"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:util="clr-namespace:Xpinn.SportsGo.Util.Portable;assembly=Xpinn.SportsGo.Util.Portable"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Plan}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="renderers:IconView">
+                <Setter Property="HeightRequest" Value="25"/>
+                <Setter Property="WidthRequest" Value="25"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="20,20,20,10">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <ffimageloading:CachedImage Source="{Binding Plan.UrlArchivo}" HeightRequest="55" WidthRequest="55" 
+                                                DownsampleToViewSize="True" Aspect="Fill" Style="{StaticResource RemoteImageStyle}" >
+                        <ffimageloading:CachedImage.Triggers>
+                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding Plan.UrlArchivo}" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Source" Value="{StaticResource RutaDefaultImagen}" />
+                            </DataTrigger>
+                        </ffimageloading:CachedImage.Triggers>
+                    </ffimageloading:CachedImage>
+                    <StackLayout Margin="10,0,0,0">
+                        <Label Text="{Binding Plan.DescripcionIdiomaBuscado}" FontAttributes="Bold" TextColor="Black" FontSize="Medium" >
+                            <Label.Effects>
+                                <effects:SizeFontToFitEffect />
+                            </Label.Effects>
+                        </Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{markup:Translate Precio}" TextColor="Black" VerticalOptions="Center" FontSize="Small" />
+                            <Label Text="{Binding AbreviaturaMonedaDeLaPersona}" TextColor="Black" VerticalOptions="Center" FontSize="Small"/>
+                            <Label Text="{Binding Plan.Precio}" TextColor="Black" VerticalOptions="Center" FontSize="Small" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Margin="0,10,0,0" Spacing="10">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_deportes.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate NumeroDeportes}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Plan.NumeroCategoriasPermisibles}" Margin="6,0,0,0"
+                               TextColor="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" FontSize="Small" />
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding PlanEsParaCandidatos}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_video_library.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center"  />
+                            <Label Text="{markup:Translate VideosPerfil}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.VideosPerfil}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding PlanNoEsParaRepresentantes}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_video_library.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center"  />
+                            <Label Text="{markup:Translate TiempoMaximoVideo}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding TiempoMaximoDeVideo}" Margin="6,0,0,0"
+                               TextColor="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" FontSize="Small" />
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_tab_chat.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate Mensajeria}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.ServiciosChat}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_info_personal.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate ConsultaDeportistas}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.ConsultaCandidatos}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_biografia.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate DetalleDeportistas}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.DetalleCandidatos}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_tab_profile.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate ConsultaGrupos}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.ConsultaGrupo}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_group_work.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate DetalleGrupos}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.DetalleGrupos}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.8*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <renderers:IconView Source="ic_tab_news.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" />
+                            <Label Text="{markup:Translate ConsultaEventos}" TextColor="Black" VerticalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                        </StackLayout>
+                        <renderers:IconView Grid.Column="1" Grid.Row="0" Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                            <renderers:IconView.Triggers>
+                                <DataTrigger TargetType="renderers:IconView" Binding="{Binding Plan.ConsultaEventos}" Value="0">
+                                    <Setter Property="Source" Value="ic_clear.png" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </renderers:IconView.Triggers>
+                        </renderers:IconView>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 1.0, 1.0, 0.12" AbsoluteLayout.LayoutFlags="All" 
+                     BackgroundColor="{StaticResource PrimaryAppColor}" 
+                     fe:TappedGestureAttached.Command="{Binding InteractuarPlan}">
+            <Label Text="{markup:Translate CambiarPlan}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="{StaticResource BarTextAppColor}">
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding EsParaComprarPlan, Mode=TwoWay}" Value="True">
+                        <Setter Property="Text" Value="{markup:Translate ComprarPlan}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </ContentView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+</ContentPage>

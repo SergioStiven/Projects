@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<renderers:NoSleepContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             x:Class="Xpinn.SportsGo.Movil.Pages.LottieLoadPage">
+    
+    <lottie:AnimationView x:Name="AnimationView"
+                         Animation="trail_loading.json"
+                         Loop="True"
+                         AutoPlay="True"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand" />
+</renderers:NoSleepContentPage>

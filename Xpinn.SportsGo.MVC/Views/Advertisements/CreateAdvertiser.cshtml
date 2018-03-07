@@ -1,0 +1,176 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Advertiser_Layout.cshtml";
+}
+<style>
+    .card-block {
+        background-color: #424242;
+    }
+
+    input, textarea, .title > .text {
+        color: #fff !important;
+    }
+
+    oi-select .select-search-list-item_input input{
+        color: black !important;
+    }
+</style>
+<!-- Form post -->
+<div ng-controller="CreateAdvertiserController">
+    
+    <div class="card-block">
+        <h3 class="color-primary right-line" style="width:98%; padding:20px;">Crea una publicación</h3>        
+        <!-- Title -->
+        <div class="col-md-6">
+            <div class="col-md-11 col-xs-9 form-group is-focused">
+                <div class="input-group" style="width:100%">
+                    <label class="control-label" for="ms-form-username" translate="LBL_TITLE"></label>
+                    <input type="text" id="ms-form-username" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                           ng-focus="addTitleAndDescription = true" 
+                           ng-init="addTitleAndDescription = false"
+                           ng-model="Advertiser.post.AnunciosContenidos[0].Titulo" required />
+                </div>
+            </div>
+            <div class="col-md-11 col-xs-9 form-group label-floating" ng-show="addTitleAndDescription">
+                <div class="input-group" style="width:100%">
+                    <label class="control-label" for="ms-form-username" translate="LBL_ENGLISH"></label>
+                    <input type="text" id="ms-form-username" class="form-control" placeholder="" 
+                           ng-blur="Advertiser.showTitle()"
+                           ng-model="Advertiser.post.AnunciosContenidos[1].Titulo" required />
+                </div>
+            </div>
+            <div class="col-md-11 col-xs-9 form-group label-floating" ng-show="addTitleAndDescription">
+                <div class="input-group" style="width:100%">
+                    <label class="control-label" for="ms-form-username" translate="LBL_PORTUGUESE"></label>
+                    <input type="text" id="ms-form-username" class="form-control" placeholder="" 
+                           ng-model="Advertiser.post.AnunciosContenidos[2].Titulo" ng-blur="Advertiser.showTitle()" required />
+                </div>
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="col-md-6">
+            <div class="col-md-11 col-xs-9 form-group is-focused" style="margin-top:7px;">
+                <div class="input-group" style="width:100%;">
+                    <label class="control-label" for="ms-form-biografia" translate="LBL_DESCRIPTION"></label>
+                    <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                              ng-model="Advertiser.post.AnunciosContenidos[0].Descripcion" ng-focus="addTitleAndDescription = true" ></textarea>
+                </div>
+            </div>
+            <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;" ng-show="addTitleAndDescription">
+                <div class="input-group" style="width:100%;">
+                    <label class="control-label" for="ms-form-biografia" translate="LBL_ENGLISH"></label>
+                    <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" 
+                              ng-model="Advertiser.post.AnunciosContenidos[1].Descripcion" ng-blur="Advertiser.showTitle()"></textarea>
+                </div>
+            </div>
+            <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;" ng-show="addTitleAndDescription">
+                <div class="input-group" style="width:100%;">
+                    <label class="control-label" for="ms-form-biografia" translate="LBL_PORTUGUESE"></label>
+                    <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" 
+                              ng-model="Advertiser.post.AnunciosContenidos[2].Descripcion" ng-blur="Advertiser.showTitle()"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- More fields -->
+        <div class="col-md-5">
+            <!-- Countries -->
+            <div class="col-md-12 form-group label-floating is-focused" style="margin-bottom:15px;padding:0;">
+                <div class="input-group" style="width:100%">
+                    <label for="select222" class="col-md-5 control-label" translate="LBL_COUNTRY"></label>
+                    <div class="col-md-12">
+                        <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                                    ng-model="Advertiser.post.Countries"
+                                    multiple
+                                    placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+            </div>
+            <!-- Categories -->
+            <div class="col-md-12 form-group label-floating" style="padding:0;">
+                <label for="select111" class="col-md-5 control-label" translate="LBL_SPORTS"></label>
+                <div class="col-md-12">
+                    <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                                ng-model="Advertiser.post.Categories"
+                                multiple
+                                placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                    </oi-select>
+                </div>
+            </div>
+            <!-- Type ad -->
+            <div class="col-md-12 form-group label-floating" style="padding:0;">
+                <label for="selectType" class="col-md-5 control-label" translate="LBL_TYPE"></label>
+                <div class="col-md-12">
+                    <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.typesAds track by item.Consecutivo"
+                               ng-model="Advertiser.post.CodigoTipoAnuncio"
+                               placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                    </oi-select>
+                </div>
+            </div>
+            <!-- Url publicidad -->
+            <div class="col-md-12 form-group label-floating">
+                <div class="input-group" style="width:100%">
+                    <label class="control-label" for="ms-form-url-publicity" style="top:-30px;font-size: 12px;" translate="LBL_ADVERTISING_URL"></label>
+                    <div class="col-md-3" style="padding:5px 0px 0px 0px;">
+                        <oi-select oi-options="item.value as item.name for item in lists.https track by $index"
+                                   ng-model="Advertiser.post.http">
+                        </oi-select>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="" ng-model="Advertiser.post.UrlPublicidad" />
+                    </div>
+                </div>
+            </div>
+            <!-- Fecha de inicio -->
+            <div class="col-md-6 form-group label-floating is-focused">
+                <div class="input-group" style="width:100%">
+                    <label class="control-label" for="ms-form-username" style="top:-30px;font-size: 12px;" translate="LBL_DATE_START"></label>
+                    <input type="date" id="ms-form-username" class="form-control" placeholder="" ng-change="Advertiser.addDays()" ng-model="Advertiser.post.FechaInicio" />
+                </div>
+            </div>
+            <!-- Numero apariciones -->
+            <div class="col-md-6 form-group label-floating">
+                <div class="input-group" style="width:100%;">
+                    <label class="control-label" for="ms-form-username" style="top:-30px;font-size: 12px;" translate="LBL_NO_APPEARANCES"></label>
+                    <input type="number" id="ms-form-username" class="form-control" readonly ng-model="Advertiser.post.NumeroApariciones" />
+                </div>
+            </div>
+            <!-- Vencimiento -->
+            <div class="col-md-12">
+                <p class="color-white" ng-bind="('LBL_DUE_DATE' | translate) + ' ' + (Advertiser.post.Vencimiento | date : 'MM/dd/yyyy')"></p>
+            </div>
+
+        </div>
+        <!-- File -->
+        <div class="col-md-7">
+            <div class="col-md-12 text-center">
+                <div class="col-md-10">
+                    <img ng-hide="picFilePost" src="~/Content/assets/img/rider.png" style="max-width:80%;" />
+                    <img ngf-src="picFilePost" style="max-width:75%;">
+                    <div ng-show="picFilePost.type.includes('video')">
+                        <video ngf-src="picFilePost" style="width:75%;padding-bottom:15px;"></video>
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top:30px;">
+                    <button ngf-select ng-model="picFilePost" accept="image/*,audio/*,video/*"
+                            class="btn-circle btn-circle-raised btn-circle-warning">
+                        <i class="fa fa-paperclip"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Button save -->
+        <div class="col-md-12" style="padding-left:30px;padding-right:50px;margin-bottom:20px;position:initial;">
+            <button ng-click="Advertiser.uploadFile()" class="btn btn-block btn-raised btn-primary">
+                <img ng-show="Advertiser.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                {{Advertiser.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+            </button>
+        </div>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Advertiser/createAdvertiser.js"></script>
+    <script src="~/Scripts/app/lib/select-custom.js"></script>
+}

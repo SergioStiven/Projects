@@ -1,0 +1,96 @@
+﻿<!-- Modal Event detail -->
+<div class="modal modal-primary" id="modalEventDetail" tabindex="-1" role="dialog" aria-labelledby="modalEventDetail">
+    <div class="modal-dialog modal-lg animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="modalEventDetail"><i class="zmdi zmdi-alert-triangle"></i> <span>Evento</span></h3>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card card-flat bg-transparent">
+                            <div class="card-block color-white">
+                                <header class="text-center mb-2">
+                                    <img ng-if="Event.eventDetail.TipoArchivo === 1" ng-src="{{Event.eventDetail.UrlArchivo}}" class="img-responsive" />
+                                    <video ng-if="Event.eventDetail.TipoArchivo === 2" style="width:450px;" ng-src="{{Event.eventDetail.UrlArchivo}}" controls />
+                                    <h2 class="no-m ms-site-title color-primary center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5"
+                                        ng-bind="Event.eventDetail.NumeroEventosAsistentes + ' ' + ('LBL_GOING' | translate)"></h2>
+                                    <a ng-show="!Event.IWillAttend" ng-click="Event.saveAssistantEvent(Event.eventDetail)"
+                                       href="javascript:void(0)"
+                                       class="btn btn-success btn-raised">
+                                        <i class="zmdi zmdi-plus-1"></i> <span ng-bind="'BTN_GOING' | translate"></span><div class="ripple-container"></div>
+                                    </a>
+                                    <a ng-show="Event.IWillAttend" ng-click="Event.deleteAssistantEvent(Event.eventDetail)"
+                                       href="javascript:void(0)" class="btn btn-danger btn-raised">
+                                        <i class="zmdi zmdi-neg-1"></i> <span ng-bind="'BTN_NOT_GOING' | translate"></span><div class="ripple-container"></div>
+                                    </a>
+                                </header>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card index-1 animated zoomInRight animation-delay-7">
+                            <div class="card-block-big">
+                                <h1 class="color-primary" ng-bind="Event.eventDetail.Titulo"></h1>
+                                <p class="lead" ng-bind="Event.eventDetail.Descripcion"></p>
+                                <div id="ms-countdown"></div>
+                                <h4 class="color-info"><span ng-bind="'LBL_LOCATION' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="Event.eventDetail.Ubicacion"></span></h4>
+                                <h4 class="color-info"><span ng-bind="'LBL_DATE_START' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="ConverToDate(Event.eventDetail.FechaInicio) | date : 'dd/MM/yyyy'"></span></h4>
+                                <h4 class="color-info"><span ng-bind="'LBL_DATE_END' | translate"></span>: <span style="font-size:15px;color:black;" ng-bind="ConverToDate(Event.eventDetail.FechaTerminacion) | date : 'dd/MM/yyyy'"></span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-primary" ng-repeat="new in New.list track by $index">
+    <div class="card-header" style="height:60px;padding:5px;" ng-click="New.redirectToUrl(new)">
+        <div class="col-md-1 col-xs-2 col-sm-2">
+            <img ng-src="{{new.UrlImagenPerfil === '' ? New.UrlImagePerfilDefault : new.UrlImagenPerfil}}" style="width:50px;height:50px;border-radius:50%;" />
+        </div>
+        <div class="col-md-9 col-xs-7" style="padding-top:5px;">
+            <h3 class="card-title" ng-bind="new.NombrePublicante == null ? 'Administrador': new.NombrePublicante" style="font-weight:600"><i class="zmdi zmdi-graduation-cap"></i> </h3>
+            <p style="font-size:12px" ng-bind="(!new.EsPublicidad ? (ConverToDate(new.FechaPublicacion) | date : 'longDate') : '') + (new.EsPublicidad ? ' Anunciante' : '')"></p>
+        </div>
+        <div class="col-md-2 col-xs-3 text-right" style="cursor:pointer;">
+            <img ng-if="(new.EsNoticia || new.EsPublicidad) && (new.UrlRedireccionar !== '' && new.UrlRedireccionar !== null)" 
+                 src="~/Content/assets/img/goToPage.png" style="width:50px"/>
+            <i ng-if="!new.EsNoticia && !new.EsPublicidad" class="zmdi zmdi-account" style="font-size: 50px;"></i>
+        </div>
+    </div>
+    <h2 class="text-center color-info" ng-click="New.redirectToUrl(new)">{{new.TituloPublicacion}}</h2>
+    <h3 style="padding:5px" class="color-black" ng-click="New.redirectToUrl(new)">{{new.DescripcionPublicacion}}</h3>
+    <div ng-show="new.EsVideo" class="videogular-container">
+        <videogular vg-theme="(videogularTheme)">
+            <vg-media vg-src="(new.UrlArchivoPublicacion)">
+            </vg-media>
+            <vg-controls>
+                <vg-play-pause-button></vg-play-pause-button>
+                <vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                </vg-scrub-bar>
+                <vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
+                <vg-volume>
+                    <vg-mute-button></vg-mute-button>
+                    <vg-volume-bar></vg-volume-bar>
+                </vg-volume>
+                <vg-fullscreen-button></vg-fullscreen-button>
+            </vg-controls>
+            <vg-overlay-play></vg-overlay-play>
+        </videogular>
+    </div>
+    <div ng-show="new.EsImagen" class="withripple zoom-img" ng-click="New.redirectToUrl(new)">
+        <a href="javascript:void(0);">
+            <img ng-src="{{new.UrlArchivoPublicacion}}" alt="" class="img-responsive" style="width:100%">
+        </a>
+        <div class="ripple-container"></div>
+    </div>
+</div>

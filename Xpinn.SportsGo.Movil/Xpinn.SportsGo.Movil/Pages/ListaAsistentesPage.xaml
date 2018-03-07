@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.Pages.ListaAsistentesPage"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Personas}">
+
+    <AbsoluteLayout>
+        <controls:InfiniteListView x:Name="ListaBuscador" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                   ItemsSource="{Binding Personas}" LoadMoreCommand="{Binding LoadMoreBusqueda}" RowHeight="100">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:InfiniteListView.Header>  
+                <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <SearchBar Text="{Binding TextoBuscador, Mode=TwoWay}" Placeholder="{markup:Translate BuscaAqui}" PlaceholderColor="Gray"
+                               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                               CancelButtonColor="Red" SearchCommand="{Binding LoadMoreBusqueda}"/>
+                </ContentView>
+            </controls:InfiniteListView.Header>
+            <controls:InfiniteListView.ItemTemplate>
+                <DataTemplate>
+                    <viewcells:ListaAsistentesViewCell 
+                        RegistroSeleccionado="{Binding Source={x:Reference ListaBuscador}, Path=BindingContext.RegistroSeleccionado}"/>
+                </DataTemplate>
+            </controls:InfiniteListView.ItemTemplate>
+        </controls:InfiniteListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

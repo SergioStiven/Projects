@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xpinn.SportsGo.Movil.ViewCells.HabilidadesViewCell"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    
+    <StackLayout Orientation="Horizontal" Spacing="0" HeightRequest="45">
+        <Label Text="{Binding Habilidad.DescripcionIdiomaBuscado, Mode=OneWay}" TextColor="#000000" LineBreakMode="TailTruncation"
+               HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" FontSize="Small" >
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding EstaAgregada, Mode=TwoWay}" Value="True">
+                    <Setter Property="FontAttributes" Value="Bold" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+        <rating:SfRating Precision="Standard" ItemSize="22" HeightRequest="25" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding NumeroEstrellas, Mode=TwoWay}">
+            <rating:SfRating.RatingSettings>
+                <rating:SfRatingSettings RatedFill="{StaticResource PrimaryAppColor}" UnRatedFill="{StaticResource PagePrimaryBackgroundColor}" />
+            </rating:SfRating.RatingSettings>
+        </rating:SfRating>
+        <ffimageloading:CachedImage VerticalOptions="CenterAndExpand" Margin="5,0,5,0" 
+                                    Source="ic_add.png" HeightRequest="25">
+            <ffimageloading:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ToogleAgregarEntidad_OnTapped"/>
+            </ffimageloading:CachedImage.GestureRecognizers>
+            <ffimageloading:CachedImage.Triggers>
+                <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding EstaAgregada, Mode=TwoWay}" Value="True">
+                    <Setter Property="Source" Value="ic_cancel.png" />
+                </DataTrigger>
+            </ffimageloading:CachedImage.Triggers>
+        </ffimageloading:CachedImage>
+    </StackLayout>
+
+</ViewCell>

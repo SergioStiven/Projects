@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<renderers:NoSleepContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:o="clr-namespace:Octane.Xam.VideoPlayer;assembly=Octane.Xam.VideoPlayer"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             xmlns:helpers="clr-namespace:Xpinn.SportsGo.Movil.Helpers"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:app="clr-namespace:Xpinn.SportsGo.Movil"
+             xmlns:util="clr-namespace:Xpinn.SportsGo.Util.Portable;assembly=Xpinn.SportsGo.Util.Portable"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Name="ContentPagePublicacion"
+             x:Class="Xpinn.SportsGo.Movil.Pages.PublicacionPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             Title="{Binding TituloPage}"
+             NavigationPage.BackButtonTitle="">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="LabelDataStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="LabelTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding AsignarPublicacion}" 
+                                      Parent="{x:Reference ContentPagePublicacion}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" />
+        <controls:BindableToolbarItem Text="{markup:Translate Borrar}" Icon="ic_delete.png" Command="{Binding BorrarPublicacion}" 
+                                      Parent="{x:Reference ContentPagePublicacion}" IsVisible="{Binding EsMiPersonaYNoRegistro}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="10">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="FillAndExpand">
+                    <ContentView HeightRequest="50" WidthRequest="50">
+                        <ffimageloading:CachedImage Source="{Binding UrlImagenPerfil, Mode=TwoWay}" Aspect="Fill"
+                                                    Style="{StaticResource RemoteImageStyle}">
+                            <ffimageloading:CachedImage.Triggers>
+                                <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding UrlImagenPerfil, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Source" Value="{StaticResource RutaDefaultImagenPerfil}" />
+                                </DataTrigger>
+                            </ffimageloading:CachedImage.Triggers>
+                        </ffimageloading:CachedImage>
+                    </ContentView>
+                    <Label Text="{Binding PublicacionSeleccionada.PersonaDeLaPublicacion.NombreYApellido}" VerticalOptions="CenterAndExpand" 
+                           Style="{StaticResource LabelTitleStyle}" />
+                </StackLayout>
+                <StackLayout Margin="0,0,0,10">
+                    <Label Text="{markup:Translate Titulo}" Style="{StaticResource LabelTitleStyle}" />
+                    <Entry Text="{Binding PublicacionSeleccionada.Titulo}" HorizontalOptions="FillAndExpand" 
+                           IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" TextColor="Black"/>
+                    <Label Text="{Binding PublicacionSeleccionada.Titulo}" HorizontalOptions="FillAndExpand" TextColor="Black"
+                           IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }"/>
+                </StackLayout>
+                <StackLayout Margin="0,0,0,10">
+                    <Label Text="{markup:Translate Descripcion}" Style="{StaticResource LabelTitleStyle}" />
+                    <Editor Text="{Binding PublicacionSeleccionada.Descripcion}" HeightRequest="150" HorizontalOptions="FillAndExpand" 
+                            IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" TextColor="Black"/>
+                    <Label Text="{Binding PublicacionSeleccionada.Descripcion}" HorizontalOptions="FillAndExpand" TextColor="Black"
+                           IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding EsGrupo}" HorizontalOptions="FillAndExpand">
+                    <StackLayout IsVisible="{Binding NoEsRegistroYEsEvento}" Orientation="Horizontal">
+                        <StackLayout>
+                            <Label Text="{markup:Translate Asistiran}" Style="{StaticResource LabelStyle}" FontAttributes="Bold"/>
+                            <Label Text="{Binding NumeroAsistentes}" Style="{StaticResource LabelDataStyle}"/>
+                        </StackLayout>
+                        <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{markup:Translate VerAsistentes}" 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                                Command="{Binding IrVerAsistentes}" FontSize="Small" Margin="30,0" />
+                    </StackLayout>
+                    <Grid HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand">
+                            <Label Text="{markup:Translate Pais}" Style="{StaticResource LabelStyle}" FontAttributes="Bold" />
+                            <StackLayout Orientation="Horizontal">
+                                <ffimageloading:CachedImage Source="{Binding PublicacionSeleccionada.PaisDelEvento.UrlArchivo}" Aspect="Fill" 
+                                                            Style="{StaticResource RemoteImageStyle}" HeightRequest="20" WidthRequest="30"
+                                                            DownsampleToViewSize="True" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                                <Picker ItemsSource="{Binding Paises}" ItemDisplayBinding="{Binding DescripcionIdiomaBuscado}" SelectedItem="{Binding PaisSeleccionado}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                        IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" />
+                                <Label Text="{Binding PublicacionSeleccionada.PaisDelEvento.DescripcionIdiomaBuscado}" Style="{StaticResource LabelDataStyle}"
+                                       IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" >
+                            <Label Text="{markup:Translate Idioma}" Style="{StaticResource LabelStyle}" FontAttributes="Bold"/>
+                            <Picker ItemsSource="{Static app:App.ListaIdioma}" ItemDisplayBinding="{Binding NombreIdioma}" SelectedItem="{Binding IdiomaSeleccionado, Mode=TwoWay}"
+                                    VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                    IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" />
+                            <Label Text="{Binding PublicacionSeleccionada.IdiomaDelEvento.NombreIdioma, Mode=TwoWay}" Style="{StaticResource LabelDataStyle}"
+                                   IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" >
+                            <Label Text="{markup:Translate Deportes}" Style="{StaticResource LabelStyle}" FontAttributes="Bold"/>
+                            <Picker ItemsSource="{Binding Categorias}" ItemDisplayBinding="{Binding DescripcionIdiomaBuscado}" SelectedItem="{Binding CategoriaSeleccionada}"
+                                    VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                    IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" />
+                            <Label Text="{Binding PublicacionSeleccionada.CategoriaDelEvento.Categorias.DescripcionIdiomaBuscado}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" 
+                                   Style="{StaticResource LabelDataStyle}"/>
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{markup:Translate FechaInicio}" Style="{StaticResource LabelStyle}" FontAttributes="Bold" />
+                                <DatePicker MinimumDate="{Binding FechaMinimaPermitida}" MaximumDate="{Static util:AppConstants.MaximumDate}" 
+                                            Date="{Binding PublicacionSeleccionada.FechaInicio}" Format="{Static util:AppConstants.DateFormat}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}"
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding PublicacionSeleccionada.FechaInicioString}" Style="{StaticResource LabelDataStyle}"
+                                       IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{markup:Translate FechaFinal}" Style="{StaticResource LabelStyle}" FontAttributes="Bold"/>
+                                <DatePicker MinimumDate="{Binding FechaMinimaPermitida}" MaximumDate="{Static util:AppConstants.MaximumDate}" 
+                                            Date="{Binding PublicacionSeleccionada.FechaTerminacion}" Format="{Static util:AppConstants.DateFormat}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}"
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding PublicacionSeleccionada.FechaTerminacionString}" Style="{StaticResource LabelDataStyle}"
+                                       IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{markup:Translate HoraInicial}" Style="{StaticResource LabelStyle}" FontAttributes="Bold" />
+                                <TimePicker TextColor="Black" Format="hh:mm tt" Time="{Binding HoraInicio}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}" 
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding HoraInicioString}" Style="{StaticResource LabelDataStyle}"
+                                       IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{markup:Translate HoraFinal}" Style="{StaticResource LabelStyle}" FontAttributes="Bold"/>
+                                <TimePicker TextColor="Black" Format="hh:mm tt" Time="{Binding HoraFinal}" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}"
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding HoraFinalString}" Style="{StaticResource LabelDataStyle}"
+                                       IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                            <Label Text="{markup:Translate Ubicacion}" Style="{StaticResource LabelTitleStyle}" />
+                            <Entry Text="{Binding PublicacionSeleccionada.Ubicacion}" HorizontalOptions="FillAndExpand" 
+                                   IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}"/>
+                            <Label Text="{Binding PublicacionSeleccionada.Ubicacion}" Style="{StaticResource LabelDataStyle}"
+                                   IsVisible="{Binding PublicacionSeleccionada.EsMiPersona, Converter={StaticResource negateConverter} }" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Margin="0,5,0,5" WidthRequest="150" HeightRequest="40" IsVisible="{Binding SeVeEspacioBoton}">
+                    <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{markup:Translate CambiarArchivo}" 
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                            FontSize="Small" IsVisible="{Binding PuedeCambiarArchivo}"
+                            Command="{Binding InteractuarPublicacion}" CommandParameter="{Static helpers:BooleanHelper.True}" />
+                    <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{markup:Translate Asistiras}" 
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                            Command="{Binding ToogleAsistirPublicacion}" FontSize="Small" IsVisible="{Binding NoEsMiPersonaYNoRegistroYEsEvento}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding PersonaAsiste, Mode=TwoWay}" Value="True">
+                                <Setter Property="Text" Value="{markup:Translate NoAsistiras}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackLayout>
+                <StackLayout Margin="0,5,0,5" IsVisible="{Binding PublicacionSeleccionada.EsMiPersona}">
+                    <Label Text="{Binding MensajeMaximoVideo}" TextColor="Red" FontSize="Micro" />
+                    <Label Text="{markup:Translate PesoMaximoVideoPermitido}" TextColor="Red" FontSize="Micro" />
+                </StackLayout>
+                <AbsoluteLayout HeightRequest="300" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding EsRegistroPublicacionOPublicacionConArchivo, Mode=TwoWay}">
+                    <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                Source="{Binding UrlArchivo, Mode=TwoWay}" Aspect="AspectFit"
+                                                Style="{StaticResource RemoteImageStyle}" HeightRequest="300" DownsampleToViewSize="True" BackgroundColor="Black"
+                                                fe:TappedGestureAttached.Command="{Binding InteractuarPublicacion}" 
+                                                LoadingPlaceholder="{StaticResource RutaDefaultImagenBanner}">
+                        <ffimageloading:CachedImage.Triggers>
+                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding UrlArchivo, Mode=TwoWay}" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Source" Value="{StaticResource RutaImagenAddFile}" />
+                                <Setter Property="Aspect" Value="Fill" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="ffimageloading:CachedImage" Binding="{Binding PublicacionSeleccionada.EsVideo}" Value="True">
+                                <Setter Property="Source" Value="{StaticResource RutaDefaultVideo}" />
+                                <Setter Property="Aspect" Value="Fill" />
+                            </DataTrigger>
+                        </ffimageloading:CachedImage.Triggers>
+                    </ffimageloading:CachedImage>
+                    <ffimageloading:CachedImage AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.3, 0.3" AbsoluteLayout.LayoutFlags="All" 
+                                                Source="ic_play_circle.png" IsVisible="{Binding PublicacionSeleccionada.EsVideo}" 
+                                                HeightRequest="50" WidthRequest="50" 
+                                                fe:TappedGestureAttached.Command="{Binding InteractuarPublicacion}" />
+                </AbsoluteLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+
+</renderers:NoSleepContentPage>

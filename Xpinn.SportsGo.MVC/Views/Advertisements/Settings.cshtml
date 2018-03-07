@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Advertiser_Layout.cshtml";
+}
+<style>
+    .card-block {
+        background-color: #424242;
+    }
+
+    input, textarea, .title > .text {
+        color: #fff !important;
+    }
+
+    oi-select .select-search-list-item_input input {
+        color: black !important;
+    }
+</style>
+<div ng-controller="SettingsController">
+
+    <div class="col-md-6">
+        <div class="card card-info">
+            <div class="withripple backcolor-dark text-center" style="padding-top: 15px;">
+                <h2 class="color-primary" style="margin-bottom:0;" translate="LBL_ACCOUNT_INFO"></h2>
+            </div>
+            <div class="card-block text-center backcolor-dark" style="padding-top: 0;">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="inputUsername" class="col-md-2 control-label" translate="LBL_USERNAME"></label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="inputUsername" ng-model="User.userToUpdate.Usuario" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-md-2 control-label" translate="LBL_EMAIL"></label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="inputEmail" ng-model="User.userToUpdate.Email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPass" class="col-md-2 control-label" translate="LBL_PASSWORD"></label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" id="inputPass" ng-model="User.userToUpdate.Clave" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputReTypePass" class="col-md-2 control-label" translate="LBL_RE_TYPE_PASSWORD"></label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" id="inputReTypePass" ng-model="User.userToUpdate.Password" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <a href="javascript:void(0)" ng-click="User.update()" class="btn btn-info btn-raised">
+                    <i class="zmdi zmdi-star"></i> <span translate="BTN_SAVE"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-info">
+            <div class="withripple backcolor-dark text-center" style="padding-top: 15px;">
+                <h2 class="color-primary" style="margin-bottom:0;" translate="LBL_CHANGE_LANGUAGE"></h2>
+            </div>
+            <div class="card-block text-center backcolor-dark" style="padding-top: 0;">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-md-12 text-left">
+                                <div class="radio radio-primary">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-click="Language.updateLanguage('1')" ng-checked="Language.selectedLanguage === '1'">
+                                        <span class="circle"></span><span class="check"></span> {{'LBL_SPANISH' | translate}}
+                                    </label>
+                                </div>
+                                <div class="radio radio-primary">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-click="Language.updateLanguage('2')" ng-checked="Language.selectedLanguage === '2'">
+                                        <span class="circle"></span><span class="check"></span> {{'LBL_ENGLISH' | translate}}
+                                    </label>
+                                </div>
+                                <div class="radio radio-primary">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-click="Language.updateLanguage('3')" ng-checked="Language.selectedLanguage === '3'">
+                                        <span class="circle"></span><span class="check"></span> {{'LBL_PORTUGUESE' | translate}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <a href="javascript:void(0)" ng-click="Language.update()" class="btn btn-info btn-raised">
+                    <i class="zmdi zmdi-star"></i> <span translate="BTN_SAVE"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ANGULARJS{
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Advertiser/settings.js"></script>
+}

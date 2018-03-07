@@ -1,0 +1,227 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+<style>                                                                                                                                                                                                                                                                                                                                                                                         
+    input, textarea, .title > .noselect > .text{
+        color:#fff !important;
+    }
+</style>            
+   <!-- Variables for filters -->
+<script>
+        var categories = [];
+        var countries = [];
+        var plans = [];
+        var lenguages = [];
+</script>
+
+<!-- Form post -->
+<div ng-controller="NewsController as newsCtrl">
+
+    <!-- Alert Delete -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> Atención</h3>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea eliminar esta publicación?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-primary">
+        <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-2" role="tablist">
+            <li role="presentation" class="active"><a class="withoutripple" href="#newTip" aria-controls="newTip" role="tab" data-toggle="tab"><i class="zmdi zmdi-wallpaper"></i> <span class="hidden-xs" ng-bind="'LBL_NEW_TIP' | translate"></span></a></li>
+            <li role="presentation"><a class="withoutripple" href="#rss" aria-controls="rss" role="tab" data-toggle="tab"><i class="zmdi zmdi-rss"></i> <span class="hidden-xs">RSS</span></a></li>
+        </ul>
+
+        <div class="card-block">
+            <div class="tab-content">
+                <!-- Create a new post -->
+                <div role="tabpanel" class="tab-pane fade active in" id="newTip" ng-init="newsCtrl.createTip = false">
+                    <div ng-hide="newsCtrl.createTip" class="text-center">
+                        <a href="#" ng-click="newsCtrl.createTip = true" class="btn btn-primary"><i class="fa fa-plus"></i> <span translate="LBL_CREATE_NEW_TIP"></span></a>
+                    </div>
+                    <div ng-show="newsCtrl.createTip">
+                        <!-- Title & Description -->
+                        <div class="row">
+                            <!-- Title -->
+                            <div class="col-md-6">
+                                <div class="col-md-11 col-xs-9 form-group is-focused">
+                                    <div class="input-group" style="width:100%">
+                                        <label class="control-label" for="ms-form-username" ng-bind="('LBL_TITLE' | translate) + ' (*)'"></label>
+                                        <input type="text" id="ms-form-username" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                                               ng-focus="addTitleAndDescription = true"
+                                               ng-init="addTitleAndDescription = false"
+                                               ng-model="New.post.NoticiasContenidos[0].Titulo" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-11 col-xs-9 form-group label-floating" ng-show="addTitleAndDescription">
+                                    <div class="input-group" style="width:100%">
+                                        <label class="control-label" for="ms-form-username" translate="LBL_ENGLISH"></label>
+                                        <input type="text" id="ms-form-username" class="form-control" placeholder=""
+                                               ng-blur="New.showTitle()"
+                                               ng-model="New.post.NoticiasContenidos[1].Titulo" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-11 col-xs-9 form-group label-floating" ng-show="addTitleAndDescription">
+                                    <div class="input-group" style="width:100%">
+                                        <label class="control-label" for="ms-form-username" translate="LBL_PORTUGUESE"></label>
+                                        <input type="text" id="ms-form-username" class="form-control" placeholder=""
+                                               ng-blur="New.showTitle()"
+                                               ng-model="New.post.NoticiasContenidos[2].Titulo" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Description -->
+                            <div class="col-md-6">
+                                <div class="col-md-11 col-xs-9 form-group is-focused" style="margin-top:7px;">
+                                    <div class="input-group" style="width:100%;">
+                                        <label class="control-label" for="ms-form-biografia" ng-bind="('LBL_DESCRIPTION' | translate) + ' (*)'"></label>
+                                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                                                  ng-focus="addTitleAndDescription = true"
+                                                  ng-model="New.post.NoticiasContenidos[0].Descripcion" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;" ng-show="addTitleAndDescription">
+                                    <div class="input-group" style="width:100%;">
+                                        <label class="control-label" for="ms-form-biografia" translate="LBL_ENGLISH"></label>
+                                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder=""
+                                                  ng-blur="New.showTitle()"
+                                                  ng-model="New.post.NoticiasContenidos[1].Descripcion" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;" ng-show="addTitleAndDescription">
+                                    <div class="input-group" style="width:100%;">
+                                        <label class="control-label" for="ms-form-biografia" translate="LBL_PORTUGUESE"></label>
+                                        <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder=""
+                                                  ng-blur="New.showTitle()"
+                                                  ng-model="New.post.NoticiasContenidos[2].Descripcion" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- More fields -->
+                        <div class="row">
+                            <div class="col-md-5">
+                                <!-- Countries -->
+                                <div class="col-md-12 form-group label-floating is-focused" style="margin-bottom:15px;padding:0;">
+                                    <div class="input-group" style="width:100%">
+                                        <label for="select222" class="col-md-5 control-label" ng-bind="('LBL_COUNTRIES' | translate) + ' (*)'"></label>
+                                        <div class="col-md-12">
+                                            <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                                                       ng-model="New.post.NoticiasPaises"
+                                                       multiple
+                                                       placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                                            </oi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Categories -->
+                                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                                    <label for="select111" class="col-md-5 control-label" ng-bind="('LBL_SPORTS' | translate) + ' (*)'"></label>
+                                    <div class="col-md-12">
+                                        <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                                                   ng-model="New.post.CategoriasNoticias"
+                                                   multiple
+                                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                                        </oi-select>
+                                    </div>
+                                </div>
+                                <!-- Types News -->
+                                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                                    <label for="select111" class="col-md-5 control-label" ng-bind="('LBL_TYPE' | translate) + ' (*)'"></label>
+                                    <div class="col-md-12">
+                                        <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.typesNews track by item.Consecutivo"
+                                                   ng-model="New.post.CodigoTipoNoticia"
+                                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                                        </oi-select>
+                                    </div>
+                                </div>
+                                <!-- Url publicidad -->
+                                <div class="col-md-12 form-group label-floating">
+                                    <div class="input-group" style="width:100%">
+                                        <label class="control-label" for="ms-form-url-publicity" style="top:-30px;font-size: 12px;" translate="LBL_ADVERTISING_URL"></label>
+                                        <div class="col-md-3" style="padding:5px 0px 0px 0px;">
+                                            <oi-select oi-options="item.value as item.name for item in lists.https track by $index"
+                                                       ng-model="New.post.http">
+                                            </oi-select>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" placeholder="" ng-model="New.post.UrlPublicidad" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- File -->
+                            <div class="col-md-7">
+                                <div class="col-md-12 text-center">
+                                    <div class="col-md-10">
+                                        <img ng-hide="picFilePost" src="~/Content/assets/img/rider.png" style="max-width:80%;" />
+                                        <img ngf-src="picFilePost" style="max-width:75%;">
+                                        <div ng-show="picFilePost.type.includes('video')">
+                                            <video ngf-src="picFilePost" style="width:75%;padding-bottom:15px;"></video>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="margin-top:30px;">
+                                        <button ngf-select ng-model="picFilePost" accept="image/*,audio/*,video/*"
+                                                class="btn-circle btn-circle-raised btn-circle-warning">
+                                            <i class="fa fa-paperclip"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button save -->
+                        <div class="col-md-12" style="padding-left:30px;padding-right:50px;">
+                            <div class="btn-group btn-group-justified btn-group-raised">
+                                <a href="#" class="btn btn-success" ng-click="New.uploadFile()">
+                                    <img ng-show="New.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                                    {{New.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                                </a>
+                                <a href="#" class="btn btn-danger" ng-click="newsCtrl.createTip = false" translate="BTN_CANCEL"></a>
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                    </div>
+                </div>
+                <!-- RSS -->
+                <div role="tabpanel" class="tab-pane fade" id="rss">
+                    <!-- Buttons to show or hide RSS list and RSS Form -->
+                    <div class="row">
+                        <div ng-hide="Rss.viewFormRss" class="col-md-12 text-center">
+                            <a href="#" ng-click="Rss.viewFormRss = true" class="btn btn-primary"><i class="fa fa-plus"></i> <span translate="BTN_CREATE_NEW_LINK_RSS"></span></a>
+                        </div>
+                    </div>
+                    <!-- RSS Form-->
+                    <div ng-show="Rss.viewFormRss">
+                        <rss-form></rss-form>
+                    </div>
+                    <div class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr class="color double">
+    </div>
+    
+    <!-- List of news -->
+    <news-list></news-list>
+    <div class="row text-center">
+        <img src="~/Content/assets/img/balls_loading.gif" ng-hide="!New.isBusy || New.endList" width="100" height="100" />
+    </div>
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Administration/tipsController.js"></script>
+}

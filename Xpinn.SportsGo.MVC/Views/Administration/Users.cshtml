@@ -1,0 +1,216 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+
+<style>
+    .table tr:hover{
+        background-color:rgba(157, 161, 169, 0.30);
+    }
+    .table {
+        color: white;
+        min-height: 300px;
+    }
+    .table th{
+        font-size:12px;
+    }
+    .table tbody tr{
+        color:#cfd2da;
+    }
+        .table tbody tr td {
+            vertical-align: middle;
+        }
+    .sortorder:after {
+        content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+    }
+    .sortorder.reverse:after {
+        content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+    }
+</style>
+
+<div class="col-md-12 text-left" ng-controller="userSettingsController">
+    
+    <!-- Alert -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p ng-bind="messageModal"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User details -->
+    <div class="modal modal-info" id="alertUserDetails" tabindex="-1" role="dialog" aria-labelledby="alertUserDetails">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertUserDetails"><i class="zmdi zmdi-user"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="formUserDetail" name="formUserDetail" novalidate>
+                            <!-- Username -->
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" for="txt-user" translate="LBL_USERNAME" style="top:-30px;left:0;font-size:12px;line-height: 1.07143;"></label>
+                                    <input class="form-control" id="txt-user" name="txtUser" type="text" ng-model="userSettings.userDetails.Usuario" required>
+                                    <span class="help-block" ng-show="!formUserDetail.$pristine && formUserDetail.txtUser.$error.required" ng-bind="'LBL_VALIDATION_NAME' | translate"></span>
+                                </div>
+                            </div>
+                            <!-- Plan -->
+                            <div class="col-md-6">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label" for="cb-plan" style="top:-30px;left: 0;font-size: 12px;line-height: 1.07143;">{{'LBL_PLANS' | translate}}  </label>
+                                    <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.planes track by item.Consecutivo"
+                                               ng-model="userSettings.userDetails.PlanesUsuarios.CodigoPlanDeseado"
+                                               placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}"
+                                               required
+                                               id="cb-plan">
+                                    </oi-select>
+                                </div>
+                            </div>
+                            <!-- Email -->
+                            <div class="col-md-12">
+                                <div class="form-group label-floating is-focused">
+                                    <label class="control-label" for="txt-user" translate="LBL_EMAIL" style="top:-30px;left:0;font-size:12px;line-height: 1.07143;"></label>
+                                    <input class="form-control" id="txt-email" name="txtEmail" type="text" ng-model="userSettings.userDetails.Email" required>
+                                    <span class="help-block color-danger" ng-show="(!formUserDetail.$pristine && formUserDetail.txtEmail.$error.required) || !userSettings.validateEmail(userSettings.userDetails.Email)" ng-bind="'LBL_VALIDATION_EMAIL' | translate"></span>
+                                </div>
+                            </div>
+                            <!-- Password -->
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" for="txt-user" translate="LBL_PASSWORD"></label>
+                                    <input class="form-control" id="txt-user" type="text" ng-model="userSettings.userDetails.Clave">
+                                    <p class="help-block">{{'NOTI_INVALID_PASSWORD' | translate}}</p>
+                                </div>
+                            </div>
+                            <!-- Re-Type Password -->
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" for="txt-user" translate="LBL_PASSWORD"></label>
+                                    <input class="form-control" id="txt-user" type="text" ng-model="userSettings.userDetails.ClaveConfirmacion">
+                                    <p class="help-block">{{'NOTI_INVALID_PASSWORD' | translate}}</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="userSettings.validateIfEmailExist()" ng-disabled="formUserDetail.$invalid"
+                            type="button" class="btn btn-raised btn-success" translate="BTN_UPDATE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="color-primary" translate="LBL_USERS"></h2>
+
+    <!-- Filters -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group label-floating is-empty">
+                <label class="control-label" for="txt-search" translate="LBL_USERNAME"></label>
+                <input class="form-control color-white" id="txt-search" type="text" ng-keyup="userSettings.searchUser()" ng-model="userSettings.filter.UsuarioParaBuscar">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group label-floating is-empty">
+                <label class="control-label" for="txt-search" translate="LBL_NAME"></label>
+                <input class="form-control color-white" id="txt-search" type="text" ng-keyup="userSettings.searchUser()" ng-model="userSettings.filter.NombrePersonaParaBuscar">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group label-floating is-empty"> 
+                <label class="control-label" for="txt-search" translate="LBL_EMAIL"></label>
+                <input class="form-control color-white" id="txt-search" type="text" ng-keyup="userSettings.searchUser()" ng-model="userSettings.filter.EmailParaBuscar">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message no data found -->
+    <div class="text-center" ng-show="userSettings.noDataFound">
+        <hr class="color-white" />
+        <h3 class="color-white" translate="LBL_NO_DATA_FOUND"></h3>
+        <hr class="color-white" />
+    </div>
+    
+    <!-- Table -->
+    <div class="table-responsive" ng-hide="userSettings.noDataFound">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0);" ng-click="userSettings.sortBy('Usuarios.Usuario')" translate="LBL_USERNAME"></a>
+                        <span class="sortorder" ng-show="propertyName === 'Usuarios.Usuario'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0);" ng-click="userSettings.sortBy('Nombres')" translate="LBL_NAME"></a>
+                        <span class="sortorder" ng-show="propertyName === 'Nombres'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0);" ng-click="userSettings.sortBy('Usuarios.Email')" translate="LBL_EMAIL"></a>
+                        <span class="sortorder" ng-show="propertyName === 'Usuarios.Email'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0);" ng-click="userSettings.sortBy('Paises.DescripcionIdiomaBuscado')" translate="LBL_COUNTRY"></a>
+                        <span class="sortorder" ng-show="propertyName === 'Paises.DescripcionIdiomaBuscado'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0);" ng-click="userSettings.sortBy('Usuarios.Creacion')" translate="LBL_REGISTRATION_DATE"></a>
+                        <span class="sortorder" ng-show="propertyName === 'Usuarios.Creacion'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th ng-bind="'LBL_OPTIONS' | translate">
+                        
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in userSettings.list | orderBy:propertyName:reverse">
+                    <td>{{user.Usuarios.Usuario}}</td>
+                    <td>{{user.Nombres}}</td>
+                    <td>{{user.Usuarios.Email}}</td>
+                    <td>{{user.Paises.DescripcionIdiomaBuscado}}</td>
+                    <td style="font-size:13px;">{{ convertToDate(user.Usuarios.Creacion) | date:'dd/MM/yyyy HH:mm:ss a'}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn {{user.Usuarios.CuentaActiva === 1 ? 'btn-success' : 'btn-danger' }} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{user.Usuarios.CuentaActiva === 1 ? 'Desbloqueado' : 'Bloqueado'}} <i class="zmdi zmdi-chevron-down right"></i>
+                            </button>
+                            <ul class="dropdown-menu {{user.Usuarios.CuentaActiva === 1 ? 'dropdown-menu-success' : 'dropdown-menu-danger' }}">
+                                <li><a href="javascript:void()" ng-click="userSettings.openModalToBlock(user,false)">{{user.Usuarios.CuentaActiva === 1 ? 'Bloquear' : 'Desbloquear'}}</a></li>
+                                <li><a href="javascript:void()" ng-click="userSettings.showUserDetail(user)" translate="BTN_UPDATE"></a></li>
+                                <li><a href="javascript:void()" ng-click="userSettings.openModalToBlock(user,true)" translate="BTN_DELETE"></a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pagination -->
+    <nav aria-label="...">
+        <ul class="pager pager-flat pager-info">
+            <li><a href="javascript:void(0)" ng-click="userSettings.first()"><span aria-hidden="true">«</span> <span translate="BTN_FIRST"></span></a></li>
+            <li><a href="javascript:void(0)" ng-click="userSettings.before()"><span aria-hidden="true">«</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="userSettings.next()"><span aria-hidden="true">»</span></a></li>
+            <li><a href="javascript:void(0)" ng-click="userSettings.last()"><span translate="BTN_LAST"></span> <span aria-hidden="true">»</span></a></li>
+        </ul>
+    </nav>
+</div>
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/Administration/userSettingsController.js"></script>
+}

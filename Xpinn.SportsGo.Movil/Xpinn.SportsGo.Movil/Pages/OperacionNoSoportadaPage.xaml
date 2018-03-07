@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             x:Class="Xpinn.SportsGo.Movil.Pages.OperacionNoSoportadaPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <ffimageloading:CachedImage Source="BubbleThumb.png" Aspect="AspectFit" 
+                                    HorizontalOptions="CenterAndExpand"
+                                    BackgroundColor="Transparent" WidthRequest="200" HeightRequest="100" />
+        <Label Text="{Binding TextoNoSoportaOperacion}" HorizontalTextAlignment="Center"
+               HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="Small" Margin="30,0,30,0" />
+        <Button BackgroundColor="{StaticResource PrimaryAppColor}" Text="{markup:Translate VerPlanes}" Image="ic_add_shopping_cart_white.png"
+                HorizontalOptions="CenterAndExpand" TextColor="{StaticResource PagePrimaryBackgroundColor}"
+                Command="{Binding VerPlanes}" FontSize="Small" IsVisible="{Binding OperacionControl.EsPrimerRegistro, Converter={StaticResource negateConverter} }" />
+    </StackLayout>
+    
+</ContentPage>

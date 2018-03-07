@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Xpinn.SportsGo.Movil"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Xpinn.SportsGo.Movil.Pages.MainPage"
+             NavigationPage.HasNavigationBar="false"
+             NavigationPage.BackButtonTitle="">
+
+    <AbsoluteLayout>
+        <controls:CustomCarouselView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                                     Position="{Binding Position, Mode=TwoWay}" ItemsSource="{Binding ImagenesCarousel, Mode=OneWay}">
+            <controls:CustomCarouselView.ItemTemplate>
+                <DataTemplate>
+                    <ffimageloading:CachedImage Aspect="Fill" Source="{Binding ImageUrl, Mode=OneWay}" />
+                </DataTemplate>
+            </controls:CustomCarouselView.ItemTemplate>
+        </controls:CustomCarouselView>
+        <Grid AbsoluteLayout.LayoutBounds="1.0, 1.0, 1.0, 0.25" AbsoluteLayout.LayoutFlags="All" 
+              BackgroundColor="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <controls:CarouselIndicators Grid.Row="0" Grid.Column="2" 
+                                         IndicatorHeight="16" IndicatorWidth="16" SelectedIndicator="selected_circle.png" 
+                                         Position="{Binding Position, Mode=TwoWay}" ItemsSource="{Binding ImagenesCarousel, Mode=OneWay}" />
+            <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                    BackgroundColor="{StaticResource PrimaryAppColor}" FontSize="Medium" TextColor="White" VerticalOptions="CenterAndExpand"
+                    Command="{Binding CrearCuenta}" Text="{markup:Translate CrearCuenta}"/>
+            <StackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                         Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label TextColor="Black" Text="{markup:Translate YaTienesUnaCuenta}" FontSize="Small" 
+                       HorizontalOptions="Center" VerticalOptions="StartAndExpand"/>
+                <Label TextColor="Black" Text="{markup:Translate EntraAqui}" FontSize="Small" 
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+                    <Label.Effects>
+                        <effects:UnderlineEffect />
+                    </Label.Effects>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IniciarSesion}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </AbsoluteLayout>
+    
+</ContentPage>

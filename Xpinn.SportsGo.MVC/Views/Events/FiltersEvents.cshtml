@@ -1,0 +1,41 @@
+﻿<div class="card card-danger">
+    <ul class="nav nav-tabs nav-tabs-transparent indicator-danger nav-tabs-full nav-tabs-3" role="tablist">
+        <li role="presentation" class="active"><a class="withoutripple" href="#countries" aria-controls="countries" role="tab" data-toggle="tab"><i class="zmdi zmdi-flag"></i> <span class="hidden-xs" ng-bind="'LBL_COUNTRIES' | translate"></span></a></li>
+        <li role="presentation"><a class="withoutripple" href="#name" aria-controls="name" role="tab" data-toggle="tab"><i class="zmdi zmdi-border-color"></i> <span class="hidden-xs" ng-bind="'LBL_NAME' | translate"></span></a></li>
+        <li role="presentation"><a class="withoutripple" href="#categories" aria-controls="categories" role="tab" data-toggle="tab"><i class="zmdi zmdi-bike"></i> <span class="hidden-xs" ng-bind="'LBL_SPORTS' | translate"></span></a></li>
+    </ul>
+
+    <div class="card-block">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="countries">
+                <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                           ng-model="countryForSearch"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+                <div class="text-right" >
+                    <a href="#" class="btn btn-raised btn-success" ng-click="onFilter()" ng-bind="'PLACEHOLDER_DROPDOWNLIST' | translate"></a>
+                    <a href="#" class="btn btn-raised btn-danger" ng-click="onClearFilter()" ng-bind="'BTN_CANCEL' | translate">Cancelar</a>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="name">
+                <input type="text" id="ms-form-face" class="form-control" ng-model="nameForSearch" placeholder="" />
+                <div class="text-right">
+                    <a href="#" class="btn btn-raised btn-success" ng-click="onFilter()" ng-bind="'BTN_SEARCH' | translate">Buscar</a>
+                    <a href="#" class="btn btn-raised btn-danger" ng-click="onClearFilter()" ng-bind="'BTN_CANCEL' | translate">Cancelar</a>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="categories">
+                <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                           ng-model="categoryForSearch"
+                           multiple
+                           placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                </oi-select>
+                <div class="text-right">
+                    <a href="#" class="btn btn-raised btn-success" ng-click="onFilter()" ng-bind="'BTN_SEARCH' | translate">Buscar</a>
+                    <a href="#" class="btn btn-raised btn-danger" ng-click="onClearFilter()" ng-bind="'BTN_CANCEL' | translate">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

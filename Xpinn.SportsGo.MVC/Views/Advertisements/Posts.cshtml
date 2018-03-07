@@ -1,0 +1,219 @@
+﻿
+<style>
+    .card-block {
+        background-color: #424242;
+    }
+
+    input, textarea, .title > .text {
+        color: #fff !important;
+    }
+
+    oi-select .select-search-list-item_input input{
+        color: black !important;
+    }
+</style>
+<link href="~/Content/videogular.css" rel="stylesheet" />
+<!-- Alert -->
+<div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+            </div>
+            <div class="modal-body">
+                <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-primary" ng-repeat="post in Posts.list track by $index" ng-init="editPost = false">
+    <div class="card-header" style="min-height:60px;padding-top:5px;">
+        <h3 style="padding-top:15px;" class="col-md-10 col-xs-6 card-title" ng-bind="'Publicado en ' + (ConverToDate(post.Creacion) | date : 'longDate')"><i class="zmdi zmdi-graduation-cap"></i> </h3>
+        <div class="col-md-2 col-xs-6" style="float:right">
+            <a ng-click="ToDelete.assign(post,Posts.delete)" class="btn-circle btn-circle-raised btn-circle-danger" data-toggle="modal" data-target="#alertWarning" style="float:right;padding-left: 7px;">
+                <i class="color-white zmdi zmdi-delete"></i>
+            </a>
+            <button ng-click="editPost = !editPost" style="float:right;padding-left: 15px;margin-right:5%;"
+                    class="btn-circle btn-circle-raised btn-circle-warning">
+                <i class="zmdi zmdi-edit"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-block">
+        <!-- Form for edit -->
+        <div ng-show="editPost">
+            <!-- Title -->
+            <div class="col-md-6">
+                <div class="col-md-11 col-xs-9 form-group is-focused">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" translate="LBL_TITLE"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}"
+                               ng-model="post.AnunciosContenidos[0].Titulo" required />
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" translate="LBL_ENGLISH"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="" 
+                               ng-model="post.AnunciosContenidos[1].Titulo" required />
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-username" translate="LBL_PORTUGUESE"></label>
+                        <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="post.AnunciosContenidos[2].Titulo" required />
+                    </div>
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="col-md-6">
+                <div class="col-md-11 col-xs-9 form-group is-focused" style="margin-top:7px;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" translate="LBL_DESCRIPTION"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" required placeholder="{{'LBL_SPANISH' | translate}}" ng-model="post.AnunciosContenidos[0].Descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" translate="LBL_ENGLISH"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" required placeholder="" ng-model="post.AnunciosContenidos[1].Descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-11 col-xs-9 form-group label-floating" style="margin-top:0;">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-biografia" translate="LBL_PORTUGUESE"></label>
+                        <textarea rows="2" id="ms-form-biografia" class="form-control" required placeholder="" ng-model="post.AnunciosContenidos[2].Descripcion"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- More fields -->
+            <div class="col-md-5">
+                <!-- Countries -->
+                <div class="col-md-12 form-group label-floating is-focused" style="margin-bottom:15px;padding:0;">
+                    <div class="input-group" style="width:100%">
+                        <label for="select222" class="col-md-5 control-label" translate="LBL_COUNTRY"></label>
+                        <div class="col-md-12">
+                            <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.countries track by item.Consecutivo"
+                                       ng-model="post.AnunciosPaises"
+                                       multiple
+                                       placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                            </oi-select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories -->
+                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                    <label for="select111" class="col-md-5 control-label" translate="LBL_SPORTS"></label>
+                    <div class="col-md-12">
+                        <oi-select oi-options="item.DescripcionIdiomaBuscado for item in lists.categories track by item.Consecutivo"
+                                   ng-model="post.CategoriasAnuncios"
+                                   multiple
+                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+                <!-- Type Ad -->
+                <div class="col-md-12 form-group label-floating" style="padding:0;">
+                    <label for="selectType" class="col-md-5 control-label" translate="LBL_TYPE"></label>
+                    <div class="col-md-12">
+                        <oi-select oi-options="item.Consecutivo as item.DescripcionIdiomaBuscado for item in lists.typesAds track by item.Consecutivo"
+                                   ng-model="post.CodigoTipoAnuncio"
+                                   placeholder="{{'PLACEHOLDER_DROPDOWNLIST' | translate}}">
+                        </oi-select>
+                    </div>
+                </div>
+                <!-- Url publicidad -->
+                <div class="col-md-12 form-group label-floating">
+                    <div class="input-group" style="width:100%">
+                        <label class="control-label" for="ms-form-url-publicity" style="top:-30px;font-size: 12px;" translate="LBL_ADVERTISING_URL"></label>
+                        <div class="col-md-3" style="padding:5px 0px 0px 0px;">
+                            <oi-select oi-options="item.value as item.name for item in lists.https track by $index"
+                                       ng-model="post.http">
+                            </oi-select>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="" ng-model="post.UrlPublicidad" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Fecha de inicio -->
+                <div class="col-md-6 form-group label-floating">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-username" style="top:-30px;font-size: 12px;" translate="LBL_DATE_START"></label>
+                        <input type="date" id="ms-form-username" class="form-control" ng-model="post.FechaInicio"/>
+                    </div>
+                </div>
+                <!-- Numero apariciones -->
+                <div class="col-md-6 form-group label-floating">
+                    <div class="input-group" style="width:100%;">
+                        <label class="control-label" for="ms-form-username" style="top:-30px;font-size: 12px;" translate="LBL_NO_APPEARANCES"></label>
+                        <input type="number" id="ms-form-username" class="form-control" readonly ng-model="post.NumeroApariciones" />
+                    </div>
+                </div>
+                <!-- Vencimiento -->
+                <div class="col-md-12">
+                    <p class="color-white" ng-bind="('LBL_DUE_DATE' | translate) + ' ' + (post.Vencimiento | date : 'MM/dd/yyyy')"></p>
+                </div>
+            </div>
+            <!-- File -->
+            <div class="col-md-7">
+                <div class="col-md-12 text-center">
+                    <div class="col-md-10">
+                        <img ng-if="post.TipoArchivo === 1" ng-hide="picFilePost" ng-src="{{post.UrlArchivoAnuncio}}" style="max-width:80%;" />
+                        <video ng-if="post.TipoArchivo === 2" ng-hide="picFilePost" ng-src="{{post.UrlArchivoAnuncio}}" controls style="max-height:250px;"></video>
+                        <img ngf-src="picFilePost" style="max-width:75%;">
+                        <video ng-show="picFilePost.type.includes('video')" ngf-src="picFilePost" style="max-height:250px;padding-bottom:15px;" controls></video>
+                    </div>
+                    <div class="col-md-2" style="margin-top:30px;">
+                        <button ngf-select ng-model="picFilePost" accept="image/*,audio/*,video/*"
+                                class="btn-circle btn-circle-raised btn-circle-warning">
+                            <i class="fa fa-paperclip"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Button save -->
+            <div class="col-md-12" style="padding-left:30px;padding-right:50px;margin-bottom:20px;position:initial;">
+                <button ng-click="Posts.updateFile(post, picFilePost)" class="btn btn-block btn-raised btn-primary"
+                        ng-disabled="Countries.selectedName == 'SELECCIONE'">
+                    <img ng-show="Posts.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                    {{Posts.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                </button>
+            </div>
+
+            <div class="row"></div>
+        </div>
+        <!-- Only read information about Ads -->
+        <div class="row" ng-hide="editPost">
+            <div class="col-sm-6" ng-show="post.TipoArchivo == 1">
+                <div class="col-md-12">
+                    <img ng-src="{{post.UrlArchivoAnuncio}}" style="width:100%" />
+                </div>
+            </div>
+            <div class="col-sm-6" ng-show="post.TipoArchivo == 2">
+                <div class="videogular-container">
+                    <video ngf-src="post.UrlArchivoAnuncio" controls style="max-height:250px;"></video>
+                </div>
+            </div>
+            <div class="{{post.UrlArchivoAnuncio === '' ? 'col-sm-12' : 'col-sm-6'}}">
+                @*<div ng-class="'col-sm-6': post.UrlArchivo, 'col-sm-12':  post.UrlArchivo.length > 0" style="margin-top:1%;">*@
+                <h1 class="text-center color-danger">{{post.TituloIdiomaBuscado}}</h1>
+                <div class="card-block text-left" style="padding-top:0">
+                    <h2 class="color-white">{{post.DescripcionIdiomaBuscado}}</h2>
+                    <h4 class="color-info"><span translate="LBL_NUMBER_APPEARANCES"></span>: <span style="font-size:15px;color:white;" ng-bind="post.NumeroApariciones"></span></h4>
+                    <h4 class="color-info"><span translate="LBL_DUE_DATE"></span>: <span style="font-size:15px;color:white;" ng-bind="post.Vencimiento | date : 'longDate'"></span></h4>
+                    <h4 class="color-info"><span translate="LBL_CLICKS"></span>: <span style="font-size:15px;color:white;" ng-bind="post.NumeroVecesClickeados === null ? 0 : post.NumeroVecesClickeados"></span></h4>
+                    <h4 class="color-info"><span translate="LBL_SEEN"></span>: <span style="font-size:15px;color:white;" ng-bind="post.NumeroVecesVistos === null ? 0 : post.NumeroVecesVistos"></span></h4>
+                    <h4 ng-if="post.AnunciosPaises.length > 0" class="color-info"><span translate="LBL_COUNTRIES"></span>: <span class="color-white" ng-repeat="country in post.AnunciosPaises">{{ country.DescripcionIdiomaBuscado + '. ' }}</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

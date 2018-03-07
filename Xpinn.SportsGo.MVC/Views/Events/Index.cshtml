@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/events.css" rel="stylesheet" />
+<link href="~/Content/datetimepicker.css" rel="stylesheet" />
+<link href="~/Content/filtersEvents.css" rel="stylesheet" />
+<div ng-controller="eventsController">
+
+    <div class="card nav-tabs-ver-container">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav nav-tabs-ver nav-tabs-ver-default" role="tablist">
+                    <li class="card card-primary card-header"><h1 class="color-primary" ng-bind="'LBL_EVENTS' | translate">Eventos</h1></li>
+                    <li role="presentation" class="active"><a ng-click="Event.loadTab(1)" href="#all" aria-controls="all" role="tab" data-toggle="tab"><i class="zmdi zmdi-check-all"></i> <span ng-bind="'LBL_ALL_EVENTS' | translate"></span></a></li>
+                    <li ng-if="Event.isGroup" role="presentation"><a ng-click="Event.loadTab(2)" href="#myEvents" aria-controls="myEvents" role="tab" data-toggle="tab"><i class="zmdi zmdi-account-circle"></i> <span ng-bind="'LBL_MY_EVENTS' | translate"></span></a></li>
+                    <li role="presentation"><a ng-click="Event.loadTab(3)" href="#assistantEvents" aria-controls="assistantEvents" role="tab" data-toggle="tab"><i class="zmdi zmdi-check-circle-u"></i> <span ng-bind="'LBL_EVENTS_I_WILL_GO_TO' | translate"></span></a></li>
+                    <li ng-if="Event.isGroup" role="presentation"><a ng-click="Event.loadTab(4)" href="#createEvent" aria-controls="createEvent" role="tab" data-toggle="tab"><i class="zmdi zmdi-puzzle-piece"></i> <span ng-bind="'LBL_CREATE_EVENTS' | translate"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-md-9 nav-tabs-ver-container-content">
+                <div class="card-block">
+                    <div class="tab-content">
+                        <div ng-if="Event.tabAllEvents" role="tabpanel" class="tab-pane active" id="all">
+                            <list-of-all-events></list-of-all-events>
+                        </div>
+                        <div ng-if="Event.isGroup && Event.tabMyEvents" role="tabpanel" class="tab-pane" id="myEvents">
+                            <list-of-my-events></list-of-my-events>
+                        </div>
+                        <div ng-if="Event.tabAssistantEvents" role="tabpanel" class="tab-pane" id="assistantEvents">
+                            <assistant-events></assistant-events>
+                        </div>
+                        <div ng-if="Event.isGroup  && Event.tabCreateEvent" role="tabpanel" class="tab-pane" id="createEvent">
+                            <create-events></create-events> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section ANGULARJS{
+    <!-- Resources Translate -->
+    <script src="~/Scripts/app/Events/translations.js"></script>
+
+    <!-- Date time picker-->
+    <script src="~/Scripts/app/lib/datetimepicker.js"></script>
+    <script src="~/Scripts/app/lib/datetimepicker.templates.js"></script>
+
+    <!-- Upload JS -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    
+    <!-- Counter -->
+    <script src="~/Content/assets/js/coming.js"></script>
+
+    <!-- Video JS -->
+    <script src="~/Scripts/app/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular/videogular.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-poster/vg-poster.js"></script>
+
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Events/eventsController.js"></script>
+}

@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="notificationController">
+    <div class="panel panel-primary">
+        <div class="card card-primary">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <form class="search-form animated zoomInDown animation-delay-9">
+                    <input id="search-box111" type="search" class="form-control" placeholder="Search..." ng-model="searchNotifications">
+                </form>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="list-group">
+                    <div class="panel-body" style="padding:0px;">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="result in notifications | filter:searchNotifications:strict">
+                                <img ng-src="{{ result.picture }}" class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="width:125px;height:100px;" />
+                                <div class="col-md-10 col-lg-10">
+                                    <a href="~/Profile/"><h2 class="color-info">{{result.name}}</h2></a>
+                                    <em class="lead">{{result.description}}</em>
+                                </div>
+                                <a ng-click="deleteNotification($index)" class="btn-circle btn-circle-danger no-focus animated zoomInDown animation-delay-8">
+                                    <i class="zmdi zmdi-close"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div ng-controller="notificationController">
+    <div class="panel panel-primary">
+        <div class="card card-primary">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <form class="search-form animated zoomInDown animation-delay-9">
+                    <input id="search-box111" type="search" class="form-control" placeholder="Search..." name="qqqq">
+                </form>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="list-group">
+                    <div class="panel-body" style="padding:0px;">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="result in notifications | filter:search:strict">
+                                <img ng-src="{{ result.picture }}" style="float:left;width:100px; height:100px;" />
+                                <div style="float:left; margin-left:10px;">
+                                    <a href="/Profile/"><h2 class="color-info">{{result.name}}</h2></a>
+                                    <em class="lead">{{result.description}}</em>
+                                </div>
+                                <a ng-click="deleteNotification($index)" class="btn-circle btn-circle-danger no-focus animated zoomInDown animation-delay-8" style="float:right">
+                                    <i class="zmdi zmdi-close"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@section ANGULARJS{
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/app/Notifications/notificationController.js"></script>
+    <script src="~/Scripts/app/Notifications/searchService.js"></script>
+}
+

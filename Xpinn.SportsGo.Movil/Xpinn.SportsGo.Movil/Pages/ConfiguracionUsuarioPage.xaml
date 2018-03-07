@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Xpinn.SportsGo.Movil.Pages.ConfiguracionUsuarioPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{Binding Cuenta}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+            <Style x:Key="GridLayoutStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding GuardarUsuario}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35">
+                <ffimageloading:CachedImage Source="ic_info_personal.png" Style="{StaticResource iconTitleStyle}" />
+                <Label Text="{markup:Translate InformacionCuenta}" Style="{StaticResource labelTitleStyle}" />
+            </StackLayout>
+            <StackLayout Padding="5" Spacing="3">
+                <Grid Style="{StaticResource GridLayoutStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Usuario}" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Usuario}" Placeholder="{markup:Translate EscribeTuUsuario}" 
+                           Style="{StaticResource EntryStyle}">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </Grid>
+                <Grid Style="{StaticResource GridLayoutStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Contraseña}" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Clave}" IsPassword="True" Placeholder="{markup:Translate EscribeTuClave}" 
+                           Style="{StaticResource EntryStyle}">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </Grid>
+                <Grid Style="{StaticResource GridLayoutStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate ConfirmaContraseña}" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding VerificacionClave}" IsPassword="True" Placeholder="{markup:Translate PlaceHolderContraseñaVerificacion}" 
+                           Style="{StaticResource EntryStyle}">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </Grid>
+                <Grid Style="{StaticResource GridLayoutStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Email" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Email}" Placeholder="{markup:Translate EscribeTuEmail}" 
+                           Style="{StaticResource EntryStyle}" Keyboard="Email">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </Grid>
+                <Grid Style="{StaticResource GridLayoutStyle}" IsVisible="{Binding AsociaDeviceId}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" IsToggled="{Binding AgregarDeviceId, Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{markup:Translate QuieresAsociarDispositivo}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" >
+                        <Label.Effects>
+                            <effects:SizeFontToFitEffect />
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

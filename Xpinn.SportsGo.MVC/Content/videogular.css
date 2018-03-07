@@ -1,0 +1,30 @@
+﻿@media screen and (min-width: 320px) {
+        .videogular-container {
+        height: 100%;
+    }
+
+    .videogular-container.audio {
+        height: 30px;
+    }
+}   
+@media (min-width: 768px) {
+    .videogular-container {
+        height: 250px;
+    }
+
+    .videogular-container.audio {
+        height: 50px;
+    }
+
+}
+
+@media (min-width: 992px) {
+    .videogular-container {
+        height: 250px;
+    }
+
+    .videogular-container.audio {
+        height: 50px;
+    }
+
+}

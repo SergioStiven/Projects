@@ -1,0 +1,22 @@
+﻿
+.file-upload {
+  background-color: #ffffff;
+  width: 70%;
+  margin: 0 auto;
+}
+
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #03a9f4;
+  position: relative;
+  height:200px;
+  text-align:center;
+  padding-top:10%
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: rgba(3, 169, 244, 0.61);
+  border: 4px dashed #ffffff;
+}

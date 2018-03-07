@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:viewcells="clr-namespace:Xpinn.SportsGo.Movil.ViewCells"
+             x:Class="Xpinn.SportsGo.Movil.Pages.ChatPage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Mensajeria}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{markup:Translate NuevoChat}" Icon="ic_toolbar_add.png" Command="{Binding NuevoChat}" />
+    </ContentPage.ToolbarItems>
+    
+    <AbsoluteLayout>
+        <controls:InfiniteListView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All"
+                                   SeparatorColor="Transparent" SeparatorVisibility="None"
+                                   x:Name="ListaChats" RowHeight="90" LoadMoreCommand="{Binding LoadMoreChats}" IsRefreshing="{Binding IsRefreshing}"
+                                   ItemsSource="{Binding Chats}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" >
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:InfiniteListView.ItemTemplate>
+                <DataTemplate>
+                    <viewcells:ChatViewCell 
+                        IrConversacion="{Binding Source={x:Reference ListaChats}, Path=BindingContext.IrConversacion}"
+                        BorrarChat="{Binding Source={x:Reference ListaChats}, Path=BindingContext.BorrarChat}"/>
+                </DataTemplate>
+            </controls:InfiniteListView.ItemTemplate>
+        </controls:InfiniteListView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+    
+</ContentPage>

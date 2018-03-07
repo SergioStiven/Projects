@@ -1,0 +1,80 @@
+﻿<!-- Modal plan in process -->
+<div class="modal modal-primary" id="modalPlanObservations" tabindex="-1" role="dialog" aria-labelledby="modalPlanObservationsLabel">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="modalPlanObservationsLabel">Observaciones</h3>
+            </div>
+            <div class="modal-body dark">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating is-focused is-empty" style="width:100%">
+                            <label class="control-label" for="focusedInput1">Referencia de pago</label>
+                            <input class="form-control" id="focusedInput1" type="text" ng-model="Plans.currentHistoryPlan.ReferenciaPago" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="lead-sm">Mis observaciones</p>
+                        <textarea rows="3" style="width:100%" class="form-control" ng-model="Plans.currentHistoryPlan.ObservacionesCliente" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="row" ng-if="Plans.currentHistoryPlan.UrlImagen !== ''">
+                    <div class="col-md-12">
+                        <img ng-src="{{Plans.currentHistoryPlan.UrlImagen}}" style="width:100%" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="lead-sm">Observaciones del administrador</p>
+                        <textarea rows="3" style="width:100%" class="form-control" ng-model="Plans.currentHistoryPlan.ObservacionesAdministrador" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre del plan</th>
+                <th>Precio</th>
+                <th>Periodicidad</th>
+                <th>Pais</th>
+                <th>Instrucciones</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="history in Plans.historyPlansList">
+                <td><img width="50" height="50" ng-src="{{history.Planes.UrlArchivo}}" /></td>
+                <td ng-bind="history.Planes.DescripcionIdiomaBuscado"></td>
+                <td ng-bind="history.Precio"></td>
+                <td ng-bind="Plans.getPeriodicityById(history.Planes.CodigoPeriodicidad)"></td>
+                <td ng-bind="history.Paises.DescripcionIdiomaBuscado"></td>
+                <td ng-bind="history.TextoFacturaFormato"></td>
+                <td ng-bind="convertToDate(history.FechaPago) | date : 'dd/MM/yyyy'"></td>
+                <td ng-bind="Plans.getStatusById(history.EstadoDelPago)"></td>
+                <td class="text-center">
+                    <a ng-if="history.EstadoDelPago === 2 || history.EstadoDelPago === 4" ng-click="Plans.currentHistoryPlan = history" data-toggle="modal" data-target="#modalPlanObservations" class="btn-circle">
+                        <i class="zmdi zmdi-eye color-info"></i>
+                    </a>
+                    <a ng-if="history.EstadoDelPago !== 2 && history.EstadoDelPago !== 4" class="btn-circle">
+                        <i class="zmdi zmdi-eye-off color-black"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

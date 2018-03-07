@@ -1,0 +1,60 @@
+﻿<style>
+.sportsFields {
+    position: relative;
+}
+
+.sportsFields > img {
+    vertical-align: top;
+    width: 100%;
+    max-height: 100%;
+}
+
+.sportsFields > a {
+    width: 8.5%;
+    height: 15%;
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sportsFields > a:hover {
+    background: rgba(0,0,0,0.5);
+}
+
+.sportsFields > .selected {
+    background: rgba(255,255,0,0.7);
+}
+
+.sportsFields > a.pivot {
+    top: 58%;
+    left: 3%;
+}
+
+.sportsFields > a.alero {
+    top: 17%;
+    left: 12%;
+}
+
+.sportsFields > a.alaPivot {
+    top: 31%;
+    left: 16.5%;
+}
+
+.sportsFields > a.escolta {
+    top: 67%;
+    left: 19.3%;
+}
+
+.sportsFields > a.base {
+    top: 42%;
+    left: 29.5%;
+}
+</style>
+<div class="sportsFields">
+    <img src="~/Content/assets/img/BasketballCourt.png" />
+    <a class="pivot" ng-class="{'selected' : Categories.category.PosicionCampo === 1}" ng-click="Categories.category.PosicionCampo = 1"></a> <!-- Pivot -->
+    <a class="alero" ng-class="{'selected' : Categories.category.PosicionCampo === 2}" ng-click="Categories.category.PosicionCampo = 2"></a> <!-- Alero -->
+    <a class="alaPivot" ng-class="{'selected' : Categories.category.PosicionCampo === 3}" ng-click="Categories.category.PosicionCampo = 3"></a> <!-- Ala-Pivot -->
+    <a class="escolta" ng-class="{'selected' : Categories.category.PosicionCampo === 4}" ng-click="Categories.category.PosicionCampo = 4"></a> <!-- Escolta -->
+    <a class="base" ng-class="{'selected' : Categories.category.PosicionCampo === 5}" ng-click="Categories.category.PosicionCampo = 5"></a> <!-- Base -->
+</div>

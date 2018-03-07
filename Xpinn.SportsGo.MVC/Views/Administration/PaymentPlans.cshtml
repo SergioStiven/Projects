@@ -1,0 +1,511 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Administration_Layout.cshtml";
+}
+
+<style>
+    .form-group{
+        margin:0 !important;
+    }
+    select option{
+        background-color:#424242;
+    }
+</style>
+
+<h1 class="color-primary" translate="LBL_MANAGE_PLANS"></h1>
+
+<div ng-controller="PaymentPlansController">
+
+    <!-- Alert Delete -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image history plans -->
+    <div class="modal modal-primary" id="modalImageHistory" tabindex="-1" role="dialog" aria-labelledby="imageHistory">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="imageHistory"><i class="zmdi zmdi-search-in-file"></i> <span translate="LBL_IMAGE"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <img ng-src="{{PaymentHistory.currentImage}}" style="width:100%" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image plan -->
+    <div class="modal modal-primary" id="modalImagePlan" tabindex="-1" role="dialog" aria-labelledby="modalImagePlanLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalImagePlanLabel" ng-bind="'LBL_UPDATE_IMAGE' | translate"></h3>
+                </div>
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFileCategory" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center ">
+                            <div ngf-drop ng-model="picFileCategory" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFileCategory  | ngfDataUrl" result-image-size="500"
+                                            result-image="croppedDataUrlCategory" ng-init="croppedDataUrlCategory=''">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div>
+                                <img ng-src="{{croppedDataUrlCategory}}" style="width:100%" id="imagePlan" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="PaymentPlans.updateImage(croppedDataUrlCategory, picFileCategory.name)" class="btn  btn-success" translate="BTN_SAVE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal New Image plan -->
+    <div class="modal modal-primary" id="modalNewImagePlan" tabindex="-1" role="dialog" aria-labelledby="modalNewImagePlanLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalNewImagePlanLabel" translate="LBL_UPDATE_IMAGE"></h3>
+                </div>
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFilePlan" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center ">
+                            <div ngf-drop ng-model="picFilePlan" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFilePlan  | ngfDataUrl" result-image-size="500"
+                                            result-image="croppedDataUrlPlan" ng-init="croppedDataUrlPlan=''">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div>
+                                <img ng-src="{{croppedDataUrlPlan}}" style="width:100%" id="imageNewPlan" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="PaymentPlans.saveImageTemp(croppedDataUrlPlan, picFilePlan.name)" class="btn btn-success" translate="BTN_SAVE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal options -->
+    <div class="modal modal-primary" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="modalCategorieLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalCategorieLabel" translate="LBL_OPTIONS"></h3>
+                </div>
+                <div class="modal-body dark">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td translate="LBL_PROFILE_VIDEOS"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.VideosPerfil" type="checkbox"></label></div></td>
+                                </tr>
+                                <tr ng-show="PaymentPlans.options.VideosPerfil">
+                                    <td translate="LBL_VIDEO_DURATION"></td>
+                                    <td>
+                                        <input type="number" class="form-control color-white" 
+                                               ng-keyup="PaymentPlans.updateVideoDuration($event.keyCode)" 
+                                               ng-blur="PaymentPlans.updateVideoDuration(null)" 
+                                               ng-model="PaymentPlans.options.TiempoPermitidoVideo" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_CHAT"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.ServiciosChat" type="checkbox"></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_SPORTS_CONSULTATION"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.ConsultaCandidatos" type="checkbox" ></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_DETAIL_SPORTSMEN"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.DetalleCandidatos" type="checkbox" ></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_GROUP_CONSULTATION"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.ConsultaGrupos" type="checkbox" ></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_GROUP_DETAIL"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.DetalleGrupos" type="checkbox" ></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_EVENT_CONSULTATION"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.ConsultaEventos" type="checkbox" checked=""></label></div></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_CREATE_ADS"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.CreacionAnuncios" type="checkbox" checked=""></label></div></td>
+                                </tr>
+                                <tr ng-show="PaymentPlans.options.CreacionAnuncios">
+                                    <td translate="LBL_NUMBER_DAYS_PER_AD"></td>
+                                    <td><input type="text" class="form-control color-white" ng-model="PaymentPlans.options.NumeroDiasVigenciaAnuncio" /></td>
+                                </tr>
+                                <tr ng-show="PaymentPlans.options.CreacionAnuncios">
+                                    <td translate="LBL_NUMBER_OCCURRENCES_PER_AD"></td>
+                                    <td><input type="text" class="form-control color-white" ng-model="PaymentPlans.options.NumeroAparicionesAnuncio" /></td>
+                                </tr>
+                                <tr>
+                                    <td translate="LBL_ADVERTISING_STATS"></td>
+                                    <td><div class="togglebutton"><label><input ng-model="PaymentPlans.options.EstadisticasAnuncios" type="checkbox" checked=""></label></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer dark">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="PaymentPlans.updateOptions()" class="btn btn-raised btn-success" translate="BTN_SAVE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal plan history -->
+    <div class="modal modal-primary" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="modalHistoryLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalHistoryLabel">Actualizar estado</h3>
+                </div>
+                <div class="modal-body dark">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectObservationAdmin">Nuevo Estado</label>
+                                <select class="form-control form-color-dark" id="selectObservationAdmin" 
+                                        ng-model="PaymentHistory.historyToUpdate.status"
+                                        ng-options="option.Descripcion for option in PaymentHistory.status track by option.Consecutivo">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="PaymentHistory.historyToUpdate.status.Consecutivo === 3">
+                        <div class="col-md-12">
+                            <textarea rows="3" style="width:100%" placeholder="Escriba aqui sus observaciones..." ng-model="PaymentHistory.historyToUpdate.ObservacionesAdministrador"></textarea>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <a class="btn btn-raised btn-block btn-primary" ng-click="PaymentHistory.update()" translate="BTN_SAVE"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tables -->
+    <div class="panel-group ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <!-- Plans available -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingAvailable">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseAvailable" aria-expanded="false" aria-controls="collapseAvailable">
+                        <i class="zmdi zmdi-card-membership"></i> <span translate="LBL_PLANS_AVAILABLE"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseAvailable" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAvailable">
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <div class="table-responsive ">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th translate="LBL_NAME"></th>
+                                        <th translate="LBL_PERIODICITY"></th>
+                                        <th ng-bind="('LBL_PRICES' | translate) + ' (COP)'"></th>
+                                        <th translate="LBL_OPTIONS"></th>
+                                        <th translate="LBL_SPORTS"></th>
+                                        <th class="text-center" translate="LBL_IMAGE"></th>
+                                        <th translate="LBL_PROFILE"></th>
+                                        <th translate="LBL_DEFAULT"></th>
+                                        <th class="text-right">
+                                            <a href="javascript:void(0)" ng-click="PaymentPlans.addNew = !PaymentPlans.addNew" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                                                <i class="{{ !PaymentPlans.addNew ? 'fa fa-plus':'fa fa-minus' }}"></i>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- new plan -->
+                                    <tr ng-show="PaymentPlans.addNew">
+                                        <!-- Description -->
+                                        <td class="col-md-2">
+                                            <input type="text" ng-model="PaymentPlans.planToSave.PlanesContenidos[0].Descripcion" class="form-control" placeholder="{{'LBL_SPANISH' | translate}}" style="color:white" />
+                                            <input type="text" ng-model="PaymentPlans.planToSave.PlanesContenidos[1].Descripcion" class="form-control" placeholder="{{'LBL_ENGLISH' | translate}}" style="color:white" />
+                                            <input type="text" ng-model="PaymentPlans.planToSave.PlanesContenidos[2].Descripcion" class="form-control" placeholder="{{'LBL_PORTUGUESE' | translate}}" style="color:white" />
+                                        </td>
+                                        <!-- Periodicidades -->
+                                        <td class="col-md-1">
+                                            <select class="form-control form-color-dark" ng-model="PaymentPlans.planToSave.CodigoPeriodicidad">
+                                                <option ng-value="1">Mensual</option>
+                                                <option ng-value="2">Semestral</option>
+                                                <option ng-value="3">Anual</option>
+                                            </select>
+                                        </td>
+                                        <!-- Price -->
+                                        <td class="col-md-1">
+                                            <input type="text" ng-model="PaymentPlans.planToSave.Precio" class="form-control form-color-dark" format="currency" />
+                                        </td>
+                                        <!-- Options -->
+                                        <td class="col-md-1">
+                                            <a ng-click="PaymentPlans.viewOptions(null)" class="btn btn-info" style="margin:0">VER</a>
+                                        </td>
+                                        <!-- Categories -->
+                                        <td class="col-md-1">
+                                            <input type="number" ng-model="PaymentPlans.planToSave.NumeroCategoriasPermisibles" class="form-control form-color-dark" />
+                                        </td>
+                                        <!-- Image -->
+                                        <td class="col-md-1 text-center" style="vertical-align:middle;">
+                                            <a ng-click="PaymentPlans.showModalImagePlan(null)" data-toggle="modal" data-target="#modalNewImagePlan" style="cursor:pointer">
+                                                <img ng-src="{{imageDefault}}" width="50" height="50" style="border-radius:5px;">
+                                            </a>
+                                        </td>
+                                        <!-- Perfil -->
+                                        <td class="col-md-1">
+                                            <div>
+                                                <select class="form-control form-color-dark" ng-model="PaymentPlans.planToSave.CodigoTipoPerfil">
+                                                    <option ng-value="1">{{'LBL_ATHLETES' | translate}}</option>
+                                                    <option ng-value="2">{{'LBL_GROUPS' | translate}}</option>
+                                                    <option ng-value="3">{{'LBL_REPRESENTATIVE' | translate}}</option>
+                                                    <option ng-value="4">{{'LBL_ADVERTISERS' | translate}}</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <!-- Is default -->
+                                        <td class="col-md-1">
+                                            <div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="PaymentPlans.planToSave.PlanDefault">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <!-- Button save -->
+                                        <td class="col-md-2"><a ng-click="PaymentPlans.save(PaymentPlans.planToSave)" 
+                                                                ng-disabled="PaymentPlans.isBusy" style="margin:0" class="btn btn-success" translate="BTN_SAVE"></a></td>
+                                    </tr>
+                                    <!-- List of plans -->
+                                    <tr ng-repeat="plan in PaymentPlans.list">
+                                        <!-- Description -->
+                                        <td class="col-md-2">
+                                            <p ng-hide="editRow" ng-bind="plan.PlanesContenidos[0].Descripcion"></p>
+                                            <div ng-show="editRow">
+                                                <input type="text" ng-model="plan.PlanesContenidos[0].Descripcion" class="form-control" placeholder="Español" style="color:white" />
+                                                <input type="text" ng-model="plan.PlanesContenidos[1].Descripcion" class="form-control" placeholder="Inglés" style="color:white" />
+                                                <input type="text" ng-model="plan.PlanesContenidos[2].Descripcion" class="form-control" placeholder="Portugues" style="color:white" />
+                                            </div>
+                                        </td>
+                                        <!-- Periodicidades -->
+                                        <td class="col-md-1">
+                                            <p ng-hide="editRow" ng-bind="plan.Periodicidades.Descripcion"></p>
+                                            <div ng-show="editRow">
+                                                <select class="form-control form-color-dark" ng-model="plan.CodigoPeriodicidad">
+                                                    <option ng-value="1">Mensual</option>
+                                                    <option ng-value="2">Semestral</option>
+                                                    <option ng-value="3">Anual</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <!-- Price -->
+                                        <td class="col-md-2">
+                                            <p ng-hide="editRow" ng-bind="plan.Precio | currency"></p>
+                                            <div ng-show="editRow">
+                                                <input type="text" ng-model="plan.Precio" class="form-control form-color-dark" />
+                                            </div>
+                                        </td>
+                                        <!-- Options -->
+                                        <td class="col-md-1">
+                                            <a ng-click="PaymentPlans.viewOptions(plan)" class="btn btn-info" style="margin:0" translate="BTN_SEE"></a>
+                                        </td>
+                                        <!-- Categories -->
+                                        <td class="col-md-1">
+                                            <p ng-hide="editRow" ng-bind="plan.NumeroCategoriasPermisibles"></p>
+                                            <div ng-show="editRow">
+                                                <input type="number" ng-model="plan.NumeroCategoriasPermisibles" class="form-control form-color-dark" />
+                                            </div>
+                                        </td>
+                                        <!-- Image -->
+                                        <td class="col-md-1 text-center" style="vertical-align:middle;">
+                                            <a ng-click="PaymentPlans.showModalImagePlan(plan,$index)" data-toggle="modal" data-target="#modalImagePlan" style="cursor:pointer">
+                                                <img ng-src="{{plan.UrlArchivo}}" width="50" height="50" style="border-radius:5px;">
+                                            </a>
+                                        </td>
+                                        <!-- Perfil -->
+                                        <td class="col-md-1">
+                                            <p ng-hide="editRow" ng-bind="PaymentPlans.getProfileById(plan.CodigoTipoPerfil)"></p>
+                                            <div ng-show="editRow">
+                                                <select class="form-control form-color-dark" ng-model="plan.CodigoTipoPerfil">
+                                                    <option ng-value="1">Candidato</option>
+                                                    <option ng-value="2">Grupo</option>
+                                                    <option ng-value="3">Representante</option>
+                                                    <option ng-value="4">Anunciante</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <!-- Is default -->
+                                        <td class="col-md-1">
+                                            <p ng-hide="editRow" ng-bind="plan.PlanDefault === 0 ? 'NO' : 'SI'"></p>
+                                            <div ng-show="editRow">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="plan.PlanDefaultChk">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <!-- Edit Or Delete -->
+                                        <td class="col-md-2" style="padding:8px 0px !important">
+                                            <div ng-hide="editRow">
+                                                <a ng-click="editRow = !editRow" style="margin:0" class="btn-circle">
+                                                    <i class="zmdi zmdi-edit color-warning"></i>
+                                                </a>
+                                                <a ng-click="ToDelete.assign(plan,PaymentPlans.delete)" data-toggle="modal" data-target="#alertWarning" style="margin:0" class="btn-circle">
+                                                    <i class="zmdi zmdi-delete color-danger"></i>
+                                                </a>
+                                            </div>
+                                            <div ng-show="editRow">
+                                                <a ng-click="PaymentPlans.update(plan)" style="margin:0" class="btn-circle">
+                                                    <i class="zmdi zmdi-refresh color-success"></i>
+                                                </a>
+                                                <a ng-click="editRow = !editRow" style="margin:0" class="btn-circle">
+                                                    <i class="zmdi zmdi-close color-danger"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending plans -->
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingPending">
+                <h4 class="panel-title ms-rotate-icon">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePending" aria-expanded="false" aria-controls="collapsePending">
+                        <i class="zmdi zmdi-time"></i> <span translate="LBL_PENDING_PLANS"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapsePending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPending">
+                <div class="panel-body">
+                    <!-- Pagination -->
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li style="float:left">
+                                <a ng-disabled="!PaymentHistory.btnBefore" ng-click="PaymentHistory.getBefore()" href="javascript:void(0)">
+                                    <span aria-hidden="true">«</span> <span translate="BTN_PREVIOUS"></span>
+                                </a>
+                            </li>
+                            <li style="float:right">
+                                <a ng-disabled="!PaymentHistory.btnNext" ng-click="PaymentHistory.getNext()" href="javascript:void(0)">
+                                    <span translate="BTN_NEXT"></span>
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Table -->
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2" translate="LBL_FULLNAME"></th>
+                                    <th class="col-md-2" translate="LBL_PLANS"></th>
+                                    <th class="col-md-1" translate="LBL_PAYMENT_DATE"></th>
+                                    <th class="col-md-2" translate="LBL_REFERENCE"></th>
+                                    <th class="col-md-2" translate="LBL_CUSTOMER_COMMENTS"></th>
+                                    <th class="col-md-1" translate="LBL_STATUS"></th>
+                                    <th class="col-md-1 text-center" translate="LBL_IMAGE"></th>
+                                    <th class="col-md-1 text-center" translate="BTN_UPDATE"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="history in PaymentHistory.list">
+                                    <td class="col-md-2" ng-bind="history.Personas.NombreYApellido"></td>
+                                    <td class="col-md-2" ng-bind="history.Planes.DescripcionIdiomaBuscado"></td>
+                                    <td class="col-md-1" ng-bind="convertToDate(history.FechaPago) | date:'dd/MM/yyyy'"></td>
+                                    <td class="col-md-2" ng-bind="history.ReferenciaPago"></td>
+                                    <td class="col-md-2" ng-bind="history.ObservacionesCliente"></td>
+                                    <td class="col-md-1" ng-bind="PaymentHistory.getStatusById(history.CodigoEstado)"></td>
+                                    <td class="col-md-1">
+                                        <a ng-if="history.UrlImagen !== '' && history.UrlImagen != null" ng-click="PaymentHistory.currentImage = history.UrlImagen" 
+                                           data-toggle="modal" data-target="#modalImageHistory" style="cursor:pointer">
+                                            <img ng-src="{{history.UrlImagen}}" width="50" height="50" />
+                                        </a>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <a ng-show="history.CodigoEstado === 2" ng-click="PaymentHistory.showModalHistory(history)" data-toggle="modal" data-target="#modalHistory" style="margin:0" class="btn-circle">
+                                            <i class="zmdi zmdi-edit color-warning"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section ANGULARJS{
+    <script src="~/Scripts/app/Administration/paymentPlansController.js"></script>
+}

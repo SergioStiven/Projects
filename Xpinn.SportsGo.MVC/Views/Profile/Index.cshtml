@@ -1,0 +1,619 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/profile.css" rel="stylesheet" />
+<link href="~/Content/rzslider.css" rel="stylesheet" />
+<link href="~/Content/ng-img-crop.css" rel="stylesheet" />
+<link href="~/Content/videogular.css" rel="stylesheet" />
+<link href="~/Content/datetimepicker.css" rel="stylesheet" />
+<!-- LOADING -->
+<div id="ms-preload" class="ms-preload">
+    <div id="status">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="ProfileController">
+    
+    <!-- Alert Delete -->
+    <div class="modal modal-warning" id="alertWarning" tabindex="-1" role="dialog" aria-labelledby="alertWarning">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="alertWarning"><i class="zmdi zmdi-alert-triangle"></i> <span translate="LBL_ATTENTION"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <p translate="LBL_MESSAGE_CONFIRM_DELETE"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button ng-click="ToDelete.executeCallback()" type="button" class="btn  btn-warning" translate="BTN_ACCEPT"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Confirmation Of Registration -->
+    <div class="modal modal-success" id="alertConfirmationRegistration" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="alertConfirmationRegistration">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="alertConfirmationRegistration"><i class="zmdi zmdi-check"></i> <span translate="LBL_TITLE_CONFIRMATION_REGRISTRATION"></span></h3>
+                </div>
+                <div class="modal-body text-center">
+                    <p style="font-size:1.5em" translate="LBL_DESCRIPTION_CONFIRMATION_REGRISTRATION"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="~/Authenticate/Logoff/" class="btn  btn-success" translate="BTN_ACCEPT"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Categories -->
+    <div class="modal modal-primary" id="modalInfoCategories" tabindex="-1" role="dialog" aria-labelledby="modalInfoCategoriesLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalInfoCategoriesLabel" translate="LBL_SPORTS"></h3>
+                </div>
+                <div class="modal-body">
+                    <!-- Filter category -->
+                    <div class="form-group" style="margin-top:0px;" ng-show="Categories.newCategory">
+                        <div class="row" style="margin:0">
+                            <div class="imgCategory" ng-class="{'imgCategorySelected': $index == Categories.selected}" ng-repeat="category in Categories.listAvailable">
+                                <img ng-src="{{category.UrlArchivo}}" ng-click="Categories.selectedOption(category,$index);"
+                                     style="width:60px;height:60px;margin: 10px;border-radius: 10px;border: 2px solid #eee;" />
+                                <p class="text-center">
+                                    <em style="font-size:14px;" class="lead lead-sm">{{category.DescripcionIdiomaBuscado}}</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+                    <div class="row text-center"><img ng-show="Abilities.isBusy" src="~/Content/assets/img/ring.gif" width="25" /></div> 
+                    <!-- Abilities -->
+                    <div class="form-group" ng-show="Abilities.showList && Abilities.list.length > 0">
+                        <div class="text-center" style="padding-top:10px;">
+                            <p style="margin:0;"><span class="color-primary" ng-bind="Abilities.currentSelectedStars"></span> / <span class="color-danger">50</span></p>
+                            <p class="lead lead-sm" translate="LBL_SPENT_STARS"></p>
+                        </div>
+                        <div class="panel-group ms-collapse" id="accordionModal" role="tablist" aria-multiselectable="true">
+                            <!-- Fortalezas técnicas -->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingFortalezasTecnicas">
+                                    <h4 class="panel-title ms-rotate-icon">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionModal" href="#FortalezasTecnicas" aria-expanded="false" aria-controls="FortalezasTecnicas">
+                                            <i class="zmdi zmdi-group-work"></i> <span translate="LBL_TECHNICAL_STRENGTHS"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="FortalezasTecnicas" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFortalezasTecnicas">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr ng-repeat="ability in Abilities.list" ng-show="ability.Habilidades.TipoHabilidad == 1">
+                                                            <td>{{ability.Habilidades.DescripcionIdiomaBuscado}}</td>
+                                                            <td class="text-center">
+                                                                <span>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 1)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 1 ? 'color-warning' : ''}}"></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 2)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 2 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 3)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 3 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 4)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 4 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 5)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 5 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 0)" class="zmdi zmdi-close zmdi-hc-2x mr-1 ml-1 color-danger"></i>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Fortalezas técnicas -->
+                            <!-- Fortalezas tácticas -->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingFortalezasTacticas">
+                                    <h4 class="panel-title ms-rotate-icon">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionModal" href="#fortalezasTacticas" aria-expanded="false" aria-controls="fortalezasTacticas">
+                                            <i class="zmdi zmdi-group-work"></i> <span translate="LBL_TACTICAL_STRENGTHS"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="fortalezasTacticas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFortalezasTacticas">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr ng-repeat="ability in Abilities.list" ng-show="ability.Habilidades.TipoHabilidad == 2">
+                                                            <td>{{ability.Habilidades.DescripcionIdiomaBuscado}}</td>
+                                                            <td class="text-center">
+                                                                <span>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 1)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 1 ? 'color-warning' : ''}}"></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 2)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 2 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 3)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 3 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 4)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 4 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 5)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 5 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 0)" class="zmdi zmdi-close zmdi-hc-2x mr-1 ml-1 color-danger"></i>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Fortalezas técnicas -->
+                            <!-- Fortalezas físicas -->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingFortalezasFisicas">
+                                    <h4 class="panel-title ms-rotate-icon">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionModal" href="#fortalezasFisicas" aria-expanded="false" aria-controls="fortalezasFisicas">
+                                            <i class="zmdi zmdi-group-work"></i> <span translate="LBL_PHYSICAL_STRENGTHS"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="fortalezasFisicas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFortalezasFisicas">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr ng-repeat="ability in Abilities.list" ng-show="ability.Habilidades.TipoHabilidad == 3">
+                                                            <td>{{ability.Habilidades.DescripcionIdiomaBuscado}}</td>
+                                                            <td class="text-center">
+                                                                <span>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 1)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 1 ? 'color-warning' : ''}}"></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 2)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 2 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 3)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 3 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 4)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 4 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 5)" class="zmdi zmdi-star zmdi-hc-2x mr-1 ml-1 {{ability.NumeroEstrellas >= 5 ? 'color-warning' : ''}} "></i>
+                                                                    <i ng-click="Abilities.updateNumberStars(ability, 0)" class="zmdi zmdi-close zmdi-hc-2x mr-1 ml-1 color-danger"></i>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Fortalezas técnicas -->
+                            <!-- Sport field -->
+                            <div class="panel panel-primary" ng-if="Categories.havePositionInField">
+                                <div class="panel-heading" role="tab" id="headingSportField">
+                                    <h4 class="panel-title ms-rotate-icon">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionModal" href="#sportField" aria-expanded="false" aria-controls="sportField">
+                                            <i class="zmdi zmdi-group-work"></i> <span translate="LBL_POSITION_FIELD"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="sportField" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSportField">
+                                    <div class="panel-body">
+                                        <soccer-court-candidate ng-if="Categories.category.CodigoCategoria === 3"></soccer-court-candidate>
+                                        <basketball-court-candidate ng-if="Categories.category.CodigoCategoria === 5"></basketball-court-candidate>
+                                        <baseball-court-candidate ng-if="Categories.category.CodigoCategoria === 6"></baseball-court-candidate>
+                                        <volleyball-court-candidate ng-if="Categories.category.CodigoCategoria === 7"></volleyball-court-candidate>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Sport field -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button type="button" class="btn btn-success" 
+                            ng-if="((Categories.havePositionInField && Categories.category.PosicionCampo > 0) || (!Categories.havePositionInField) || (Categories.havePositionInField && !Abilities.showList)) && infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2 && ((Abilities.showList && Abilities.currentSelectedStars > 0) || (!Abilities.showList))"
+                            ng-click="Categories.addcategory()" translate="BTN_ADD"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image profile -->
+    <div class="modal modal-primary" id="modalImageProfile" tabindex="-1" role="dialog" aria-labelledby="modalImageProfileLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalImageProfileLabel" ng-bind="'LBL_PROFILE_IMAGE' | translate"></h3>
+                </div>
+                <div class="modal-body" ng-class="{fullImageProfile: infoUser.user.Consecutivo === -1 || infoUser.user.Consecutivo === -2}">
+                    <div class="text-center" ng-hide="infoUser.user.Consecutivo != -1 || infoUser.user.Consecutivo === -2">
+                        <img ng-src="{{infoUser.user.UrlImagenPerfil === '' ? infoUser.archivosPerfil : infoUser.user.UrlImagenPerfil}}" style="width:100%" >
+                    </div>
+                    <form name="myForm" ng-show="infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFile" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center ">
+                            <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFile  | ngfDataUrl" result-image-size="500"
+                                          result-image="croppedDataUrl2" ng-init="croppedDataUrl2=''">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div>
+                                <img ng-src="{{croppedDataUrl2}}" style="width:100%" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-show="infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2" ng-click="infoUser.updateImage(croppedDataUrl2, picFile.name)" class="btn  btn-success">
+                        <img ng-show="infoUser.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                        {{infoUser.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal image banner -->
+    <div class="modal modal-primary" id="modalImageBanner" tabindex="-1" role="dialog" aria-labelledby="modalImageBannerLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalImageBannerLabel" ng-bind="'LBL_UPDATE_IMAGE' | translate"></h3>
+                </div>
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="col-md-12 text-center">
+                            <button ngf-select ng-model="picFile" accept="image/*" class="btn btn-primary" ng-bind="'BTN_SELECT_IMAGE' | translate"></button>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <ui-cropper image="picFile  | ngfDataUrl" area-type="rectangle" result-image-size="{w: 700, h: 250}"
+                                            aspect-ratio="3" init-max-area="true" 
+                                            result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                </ui-cropper>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div style="background-color:lightgray">
+                                <img ng-src="{{croppedDataUrl}}" style="width:100%" />
+                            </div>
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CLOSE"></button>
+                    <button ng-click="infoUser.updateImageBanner(croppedDataUrl, picFile.name)" class="btn  btn-success">
+                        <img ng-show="infoUser.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                        {{infoUser.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tutor Form -->
+    <div class="modal modal-info" id="modalInfoTutor" tabindex="-1" role="dialog" aria-labelledby="modalInfoTutor">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="modalInfoTutor"><i class="zmdi zmdi-account-box-mail"></i> <span translate="BTN_TUTOR"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label"><span translate="LBL_NAME"></span> (*)</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputName" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.Nombres" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:0px;">
+                                <label for="inputLastName" class="col-md-2 control-label"><span translate="LBL_SURNAMES"></span></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputLastName" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.Apellidos" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:0px;">
+                                <label for="inputEmail" class="col-md-2 control-label"><span translate="LBL_EMAIL"></span> (*)</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputEmail" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.Email" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:0px;">
+                                <label for="inputPhone" class="col-md-2 control-label"><span translate="LBL_CELL_PHONE"></span> (*)</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputPhone" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.TelefonoMovil">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:0px;">
+                                <label for="inputCellPhone" class="col-md-2 control-label"><span translate="LBL_PHONE"></span></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputCellPhone" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.TelefonoFijo">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:0px;">
+                                <label for="inputSkype" class="col-md-2 control-label"><span translate="LBL_SKYPE"></span> (*)</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="inputSkype" ng-model="infoUser.user.CandidatoDeLaPersona.CandidatosResponsables.Skype">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate="BTN_CANCEL"></button>
+                    <button ng-click="Tutor.save()" type="button" class="btn  btn-info" translate="BTN_SAVE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CONTENT -->
+    <div class="sb-site-container">
+        <div class="ms-hero-page-override  ms-bg-fixed" id="divBanner" >
+            <div class="container">
+                <div class="text-center mt-2" id="divImageProfile">
+                    <a data-toggle="modal" data-target="#modalImageProfile" style="cursor:pointer">
+                        <img ng-src="{{infoUser.user.UrlImagenPerfil === '' ? infoUser.archivosPerfil : infoUser.user.UrlImagenPerfil}}" alt="..." class="ms-avatar-hero animated zoomIn animation-delay-7">
+                    </a>
+                    <h1 class="color-black mt-4 animated fadeInUp animation-delay-10" id="fullNameProfile">{{infoUser.user.Nombres +' '+ (infoUser.user.Apellidos == null ? '' : infoUser.user.Apellidos)}}</h1>
+                    <a ng-if="infoUser.user.Consecutivo !== -1 && infoUser.user.Consecutivo !== -2" data-toggle="modal" data-target="#modalImageBanner" id="btnUpdateImageBanner"
+                       class="btn btn-sm btn-raised btn-info" style="margin-right:10px;display:none;"><i class="zmdi zmdi-panorama-horizontal"></i> <span ng-bind="'LBL_UPDATE_COVER_IMAGE' | translate"></span></a>
+
+                    <a ng-if="infoUser.user.Consecutivo === -1 && infoUser.user.Consecutivo !== -2" href="javascript:void(0)" ng-click="Contacts.save()" 
+                       class="btn btn-sm btn-raised {{infoUser.user.YaEstaAgregadaContactos ? 'btn-danger' : 'btn-info'}}">
+                        <i class="zmdi {{infoUser.user.YaEstaAgregadaContactos ? 'zmdi-neg-1' : 'zmdi-account-add'}}"></i> 
+                        {{infoUser.user.YaEstaAgregadaContactos ? ('BTN_DELETE_CONTACT' | translate) : ('BTN_ADD_CONTACT' | translate)}}
+                    </a>
+                </div> 
+            </div>
+        </div>
+        <div class="container">
+            <div class="card card-hero card-primary animated fadeInUp animation-delay-7">
+                <ul ng-if="!loadingPage" class="card-header-100 bg-primary-dark nav nav-tabs nav-tabs-transparent nav-tabs-full nav-tabs-{{infoUser.isAgent ? 2 : 3}} shadow-2dp" role="tablist">
+                    <li id="tabInformation" class="item active" role="presentation"><a ng-click="showBiographyTab(false)" class="withoutripple" href="#home2" aria-controls="home2" role="tab" data-toggle="tab"><i class="zmdi zmdi-home color-white"></i> <span class="hidden-xs color-white" ng-bind="'LBL_INFORMATION' | translate"></span></a></li>
+                    <li ng-if="!infoUser.isAgent" id="tabPost" class="item" role="presentation"><a ng-click="showBiographyTab(true)" class="withoutripple" href="#profile2" aria-controls="profile2" role="tab" data-toggle="tab"><i class="zmdi zmdi-book-image color-white"></i> <span class="hidden-xs color-white" ng-bind="'LBL_BIOGRAPHY' | translate"></span></a></li>
+                    <li id="tabContacts" class="item" role="presentation"><a  ng-click="showBiographyTab(false)" class="withoutripple" href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"><i class="zmdi zmdi-account color-white"></i> <span class="hidden-xs color-white" ng-bind="'LBL_CONTACTS' | translate"></span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Categories & Form personal information -->
+                    <div role="tabpanel" class="tab-pane fade active in" id="home2">
+                        <div class="panel-group ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
+                            <!-- Form Sports -->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingSelectedSports">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#selectedSport" aria-expanded="false" aria-controls="selectedSport">
+                                            <i class="zmdi zmdi-bike"></i> <span ng-bind="'LBL_SPORTS' | translate"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="selectedSport" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSelectedSports">
+                                    <div class="panel-body">
+                                        <div style="float:left;border-radius:10px;border: 2px solid #eee;color: #999;margin-left:0px;" ng-repeat="category in Categories.myListCategories">
+                                            <img ng-src="{{category.Categorias.UrlArchivo}}" ng-click="Categories.showModalCategory(false, category)"
+                                                 style="width:120px;height:120px;margin: 10px;border-radius: 10px;border: 2px solid #eee;" />
+                                            <p class="text-center">
+                                                <em class="lead">{{category.Categorias.DescripcionIdiomaBuscado}}</em>
+                                                <a ng-show="infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-danger" ng-click="Categories.remove(category, $index)" style="float: right;margin-right: 5%;">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <a ng-show="infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2" ng-click="Categories.showModalCategory(true, '')" data-toggle="modal" style="cursor:pointer">
+                                            <div style="float:left;border-radius:10px;border: 2px solid #eee;color: #999;margin-left:0px;">
+                                                <img ng-src="http://mysina.ca/wp-content/uploads/Sina-Plus-300x300.png"
+                                                     style="width:120px;height:120px;margin: 10px;border-radius: 2px;border: 2px solid #eee;" />
+                                                <p class="text-center"><em class="lead" ng-bind="'BTN_ADD' | translate"></em></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Form Sports -->
+
+                            <!-- Form Personal Information -->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingPersonalInformation">
+                                    <h4 class="panel-title ms-rotate-icon">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" ng-click="refreshSlider()"
+                                           href="#selectedPersonalInformation" aria-expanded="false" aria-controls="selectedPersonalInformation">
+                                            <i class="zmdi zmdi-group-work"></i> <span ng-bind="'LBL_PERSONAL_INFORMATION' | translate"></span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="selectedPersonalInformation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPersonalInformation">
+                                    <div class="panel-body">
+                                       
+                                        <!-- Form for edit -->
+                                        <form id="formPersonalInfo" name="formPersonalInfo" ng-show="infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2" novalidate>
+                                            
+                                            <general-information></general-information>
+                                            <info-candidate ng-if="infoUser.isCandidate"></info-candidate>
+                                            <info-group ng-if="infoUser.isGroup"></info-group>
+                                            <info-agent ng-if="infoUser.isAgent"></info-agent>
+                                            
+                                            <div class="form-group" style="float:left;width: 100%;">
+                                                <a ng-disabled="formPersonalInfo.$invalid || infoUser.isBusy" ng-click="infoUser.validateIfEmailExist()" 
+                                                   class="btn btn-block btn-raised btn-primary"> 
+                                                    <img ng-show="infoUser.isBusy" src="~/Content/assets/img/ring.gif" width="25" />
+                                                    <span>{{infoUser.isBusy ? ('BTN_SAVING' | translate) : ('BTN_SAVE' | translate)}}</span>
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </div>
+                                        </form>
+                                        <!-- Information by profile only read -->
+                                        <information-by-profile ng-if="infoUser.user.Consecutivo === -1 || infoUser.user.Consecutivo === -2"></information-by-profile>
+                                             
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Form Personal Information -->
+                        </div>
+                    </div>
+                    <!-- Tab posts -->
+                    <div role="tabpanel" class="tab-pane fade" id="profile2">
+
+                        <!-- Form post by candidate -->
+                        <div ng-show="OperationIsAuthorizedByPlan && infoUser.user.Consecutivo != -1 && infoUser.user.Consecutivo != -2 && infoUser.user.TipoPerfil === 1">
+                            <div class="card-block">
+
+                                <!-- Biography -->
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <p class="lead" ng-bind="infoUser.user.CandidatoDeLaPersona.Biografia"></p>
+                                    </div>
+                                </div>
+
+                                <h2 class="color-primary right-line" ng-bind="'LBL_TITLE_POST' | translate"></h2>
+
+                                <!-- Form -->
+                                <div class="col-md-5" >
+                                    <div class="col-md-12 form-group label-floating" style="margin-bottom:30px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-header mr-1 color-royal"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-username" translate="LBL_TITLE"></label>
+                                            <input type="text" id="ms-form-username" class="form-control" placeholder="" ng-model="PostsCandidate.post.Titulo" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group label-floating" style="margin-top:0;">
+                                        <div class="input-group text-center">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-align-left mr-1 color-success" style="margin-bottom:30px;"></i>
+                                            </span>
+                                            <label class="control-label" for="ms-form-biografia" translate="LBL_DESCRIPTION"></label>
+                                            <textarea rows="2" id="ms-form-biografia" class="form-control" placeholder="" ng-model="PostsCandidate.post.Descripcion"></textarea>
+                                            <br />
+                                            <div ng-hide="PostsCandidate.isBusy">
+                                                <button ngf-select ng-model="picFilePost" ngf-change="PostsCandidate.validateTypeFile(picFilePost)" accept="video/*"
+                                                        class="btn-circle btn-circle-raised btn-circle-warning">
+                                                    <i class="fa fa-paperclip"></i>
+                                                </button>
+                                                <button ng-click="PostsCandidate.uploadFile()" style="margin-left:3px;"
+                                                        class="btn-circle btn-circle-raised btn-circle-success">
+                                                    <i class="fa fa-save"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center" style="padding:10px;" ng-show="PostsCandidate.isBusy">
+                                            <img src="~/Content/assets/img/bar.gif" />
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                <div class="col-md-7">
+                                    <div class="text-center">   
+                                        <img ng-hide="picFilePost || picFilePost.type.includes('video')" src="~/Content/assets/img/rider.png" style="max-width:50%;" />
+                                        <div ng-show="picFilePost.type.includes('video')">
+                                            <video ngf-src="picFilePost" style="width:90%;padding-bottom:15px;"></video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- List Posts -->
+                        <h2 class="color-primary right-line" style="width:98%; padding:20px;" ng-bind="'LBL_MY_POSTS' | translate"></h2>
+
+                        <div class="card-block">
+                            <!-- container -->
+                            <div class="">
+                                <news-list></news-list>
+                                <div class="text-center">
+                                    <img src="~/Content/assets/img/balls_loading.gif" ng-hide="!PostsCandidate.isBusyListPost || PostsCandidate.endList" width="100" height="100" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Contacts -->
+                    <div role="tabpanel" class="tab-pane fade" id="contacts">
+                        <div class="card-block">
+                            <div class="ms-media-list">
+                                <div class="col-md-4 col-sm-6 col-xs-12 media" ng-repeat="contact in Contacts.list" style="margin-top:15px;">
+                                    <div class="media-left media-middle">
+                                        <a href="javascript:void(0)">
+                                            <img class="media-object" 
+                                            ng-src="{{contact.PersonasContacto.UrlImagenPerfil === '' ? infoUser.archivosPerfil : contact.PersonasContacto.UrlImagenPerfil }}">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Eliminar Contacto" 
+                                           ng-click="Contacts.deleteContact(contact,$index)" ng-show="infoUser.user.Consecutivo !== -1 && infoUser.user.Consecutivo !== -2" 
+                                           class="btn-circle btn-circle-xs no-mr-md btn-instagram tooltip-dark" style="float:right;margin:5px;">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </a>
+                                        <h4 style="cursor:pointer" class="media-heading color-warning" ng-click="Contacts.viewProfile(contact)" ng-bind="contact.PersonasContacto.NombreYApellido"></h4>
+                                        <p class="color-primary lead lead-sm" style="margin-bottom:0;" ng-bind="getDescriptionProfile(contact.PersonasContacto.TipoPerfil)"></p>
+                                        <div class="">
+                                            <img ng-src="{{contact.PersonasContacto.Paises.UrlArchivo}}"
+                                                 style="width:25px;height:17px;" />
+                                            <em ng-bind="contact.PersonasContacto.Paises.DescripcionIdiomaBuscado"></em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:20px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-back-top">
+            <a href="javascript:void(0)" data-scroll id="back-top" class="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+                <i class="zmdi zmdi-long-arrow-up"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+@section ANGULARJS{
+
+    <!-- Resources translations -->
+    <script src="~/Scripts/app/Profile/translations.js"></script>
+    <!-- Date time picker-->
+    <script src="~/Scripts/app/lib/datetimepicker.js"></script>
+    <script src="~/Scripts/app/lib/datetimepicker.templates.js"></script>
+    <!-- Upload JS -->
+    <script src="~/Scripts/app/lib/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/app/lib/ng-file-upload.js"></script>
+    <!-- Images -->
+    <script src="~/Scripts/app/lib/ui-cropper.js"></script>
+    <!-- Video JS -->
+    <script src="~/Scripts/app/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular/videogular.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-poster/vg-poster.js"></script>
+    <script src="~/Scripts/app/lib/bower_components/videogular-buffering/vg-buffering.min.js"></script>
+    <!-- Slider -->
+    <script src="~/Scripts/app/lib/rzslider.min.js"></script>    
+    
+    <!-- AngularJS -->
+    <script src="~/Scripts/app/Profile/profile.js"></script>
+
+
+}

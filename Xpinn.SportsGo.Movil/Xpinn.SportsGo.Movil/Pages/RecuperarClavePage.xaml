@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             x:Class="Xpinn.SportsGo.Movil.Pages.RecuperarClavePage"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle=""
+             Title="{markup:Translate Recuperacion}">
+
+    <AbsoluteLayout>
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0,10,0,0"
+              BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
+                   Text="{markup:Translate EscribeEmailUsuario}" FontAttributes="Bold" TextColor="Black"
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                   HorizontalTextAlignment="Center"/>
+            <xfx:XfxEntry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="{markup:Translate Usuario}" PlaceholderColor="#000000" TextColor="#000000" 
+                          VerticalOptions="CenterAndExpand" 
+                          FontSize="Small" Text="{Binding Usuario, Mode=TwoWay}" />
+            <xfx:XfxEntry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Placeholder="Email" PlaceholderColor="#000000" TextColor="#000000" 
+                          VerticalOptions="CenterAndExpand" Keyboard="Email"
+                          FontSize="Small" Text="{Binding Email, Mode=TwoWay}" />
+            <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                    Text="{markup:Translate UsarCorreo}" TextColor="#FFFFFF" FontSize="Small"
+                    VerticalOptions="CenterAndExpand" BorderRadius="3" 
+                    BackgroundColor="{StaticResource PrimaryAppColor}" Command="{Binding RecuperarConCorreo}" />
+            <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
+                    Text="{markup:Translate UsarHuella}" TextColor="#FFFFFF" FontSize="Small"
+                    VerticalOptions="CenterAndExpand" BorderRadius="3" IsVisible="{Binding AceptaHuella}"
+                    BackgroundColor="{StaticResource PrimaryAppColor}" Command="{Binding RecuperarConHuella}" />
+        </Grid>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     VerticalOptions="Start" BackgroundColor="Red" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label HorizontalOptions="Center" TextColor="White" Text="{markup:Translate ConexionPerdida}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:markup="clr-namespace:Xpinn.SportsGo.Movil.MarkupExtension"
+             xmlns:effects="clr-namespace:Xpinn.SportsGo.Movil.Effects"
+             xmlns:app="clr-namespace:Xpinn.SportsGo.Movil"
+             xmlns:converter="clr-namespace:Xpinn.SportsGo.Movil.Converter"
+             xmlns:helpers="clr-namespace:Xpinn.SportsGo.Movil.Helpers"
+             xmlns:renderers="clr-namespace:Xpinn.SportsGo.Movil.Renderers"
+             xmlns:controls="clr-namespace:Xpinn.SportsGo.Movil.Controls"
+             xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:util="clr-namespace:Xpinn.SportsGo.Util.Portable;assembly=Xpinn.SportsGo.Util.Portable"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             x:Class="Xpinn.SportsGo.Movil.Pages.PersonaPage"
+             x:Name="ContentPageInformacion"
+             Title="{Binding TituloPage}"
+             BackgroundColor="{StaticResource PagePrimaryBackgroundColor}"
+             NavigationPage.BackButtonTitle="">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="negateConverter" />
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="GridLayoutStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="55"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="{markup:Translate Guardar}" Icon="ic_save.png" Command="{Binding GuardarPersona}" Parent="{x:Reference ContentPageInformacion}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" Padding="0,0,0,20">
+            <StackLayout>
+                <StackLayout Spacing="0">
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35">
+                        <ffimageloading:CachedImage Source="ic_info_personal.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate InformacionPersonal}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <StackLayout Padding="5" Spacing="3">
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Nombre}" Style="{StaticResource LabelStyle}" >
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding EsGrupo, Mode=TwoWay}" Value="True">
+                                        <Setter Property="Text" Value="{markup:Translate NombreEmpresa}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.Nombres}" Placeholder="{markup:Translate EscribeTuNombre}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.Nombres}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}" IsVisible="{Binding EsCandidatoOEsRepresentante}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Apellido}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.Apellidos}" Placeholder="{markup:Translate EscribeTuApellido}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" >
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.Apellidos}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Telefono}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.Telefono}" Placeholder="{markup:Translate EscribeTuTelefono}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" Keyboard="Telephone">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.Telefono}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Skype" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.Skype}" Placeholder="{markup:Translate EscribeTuSkype}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{Binding Persona.Skype}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}" Margin="0,0,0,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Email" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.Usuarios.Email}" Placeholder="{markup:Translate EscribeTuEmail}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" Keyboard="Email">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.Usuarios.Email}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" Margin="0,5,0,0">
+                        <ffimageloading:CachedImage Source="ic_region.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate InformacionRegion}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <StackLayout Padding="5" Spacing="3">
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Pais}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <ffimageloading:CachedImage Source="{Binding ImagenPais}" Aspect="Fill" Style="{StaticResource RemoteImageStyle}" 
+                                                            HeightRequest="25" WidthRequest="35" DownsampleToViewSize="True" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding EsMiPersonaOPrimerRegistro}">
+                                    <Picker ItemsSource="{Binding Paises}" ItemDisplayBinding="{Binding DescripcionIdiomaBuscado}" SelectedItem="{Binding PaisSeleccionado}"
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                                    <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red" />
+                                </StackLayout>
+                                <Label Text="{Binding PaisSeleccionado.DescripcionIdiomaBuscado}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Idioma}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Picker ItemsSource="{Static app:App.ListaIdioma}" ItemDisplayBinding="{Binding NombreIdioma}" SelectedItem="{Binding IdiomaSeleccionado}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                        IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding IdiomaSeleccionado.NombreIdioma}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Ciudad}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CiudadResidencia}" Placeholder="{markup:Translate EscribeTuCiudad}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.CiudadResidencia}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" Margin="0,5,0,0">
+                    <ffimageloading:CachedImage Source="ic_perfil.png" Style="{StaticResource iconTitleStyle}" />
+                    <Label Text="{markup:Translate InformacionPerfil}" Style="{StaticResource labelTitleStyle}" />
+                </StackLayout>
+                <StackLayout IsVisible="{Binding EsCandidato}" Spacing="3">
+                    <Grid Style="{StaticResource GridLayoutStyle}" Padding="5,5,5,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Alias}" Style="{StaticResource LabelStyle}" />
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <Entry Text="{Binding Persona.CandidatoDeLaPersona.Alias}" Placeholder="{markup:Translate EscribeTuAlias}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                <Entry.Effects>
+                                    <effects:ClearEntryEffect/>
+                                </Entry.Effects>
+                            </Entry>
+                            <Label Text="{Binding Persona.CandidatoDeLaPersona.Alias}" Style="{StaticResource LabelStyle}"
+                                   IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Style="{StaticResource GridLayoutStyle}" Padding="5,5,5,0" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate FechaNacimiento}" Style="{StaticResource LabelStyle}" />
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <DatePicker MinimumDate="{Static util:AppConstants.MinimumDate}" MaximumDate="{Binding FechaMaxima}" 
+                                        Date="{Binding FechaNacimiento}" Format="{Static util:AppConstants.DateFormat}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}"
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                   IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                            <Label Text="{Binding FechaNacimientoString}" Style="{StaticResource LabelStyle}"
+                                   IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Orientation="Horizontal" Padding="5,0,5,0">
+                        <ffimageloading:CachedImage VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                                    Source="CandidatoPesoEstatura.png" Aspect="Fill" 
+                                                    HeightRequest="{Binding AlturaImagen}" WidthRequest="{Binding AnchoImagen}"/>
+                        
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="10,0,0,0">
+                            <Label Text="{markup:Translate Altura}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Style="{StaticResource LabelStyle}"/>
+                            <forms:RangeSlider MinimumValue="130" MaximumValue="220" MinThumbHidden="True" UpperValue="{Binding AlturaCandidato, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" 
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" TextSize="13" ShowTextAboveThumbs="True" />
+                            <Label Text="{markup:Translate Peso}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Style="{StaticResource LabelStyle}"/>
+                            <forms:RangeSlider MinimumValue="20" MaximumValue="120" MinThumbHidden="True" UpperValue="{Binding PesoCandidato, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" 
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" TextSize="13" ShowTextAboveThumbs="True" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" Margin="0,5,0,0">
+                        <ffimageloading:CachedImage Source="ic_gender.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate Genero}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="5"
+                                     fe:TappedGestureAttached.Command="{Binding SeleccionarGenero}" fe:TappedGestureAttached.CommandParameter="{Static helpers:BooleanHelper.True}">
+                            <Label Text="{markup:Translate Hombre}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Style="{StaticResource LabelStyle}" />
+                            <renderers:IconView Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" 
+                                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" 
+                                            IsVisible="{Binding EsHombre}" HeightRequest="20" WidthRequest="20" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="5"
+                                     fe:TappedGestureAttached.Command="{Binding SeleccionarGenero}" fe:TappedGestureAttached.CommandParameter="{Static helpers:BooleanHelper.False}">
+                            <Label Text="{markup:Translate Mujer}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Style="{StaticResource LabelStyle}" />
+                            <renderers:IconView Source="ic_check.png" Foreground="{StaticResource PrimaryAppColor}" 
+                                                VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" 
+                                                HeightRequest="20" WidthRequest="20"
+                                                IsVisible="{Binding EsHombre, Converter={StaticResource negateConverter} }"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" Margin="0,5,0,0">
+                        <ffimageloading:CachedImage Source="ic_biografia.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate Biografia}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <ContentView HeightRequest="150" Padding="5,5,5,0" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" >
+                        <Editor Text="{Binding Persona.CandidatoDeLaPersona.Biografia}" 
+                                HorizontalOptions="FillAndExpand" HeightRequest="150" />
+                    </ContentView>
+                    <ContentView Padding="5,5,5,0" IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" >
+                        <Label Text="{Binding Persona.CandidatoDeLaPersona.Biografia}" HorizontalOptions="FillAndExpand" Style="{StaticResource LabelStyle}" />
+                    </ContentView>
+                    <StackLayout Style="{StaticResource stackLayoutTitleStyle}" HeightRequest="35" Margin="0,5,0,0" IsVisible="{Binding RequiereTutor}">
+                        <ffimageloading:CachedImage Source="ic_biografia.png" Style="{StaticResource iconTitleStyle}" />
+                        <Label Text="{markup:Translate ResponsableCandidato}" Style="{StaticResource labelTitleStyle}" />
+                    </StackLayout>
+                    <StackLayout Padding="5" Spacing="3" IsVisible="{Binding RequiereTutor}">
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Nombre}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Nombres}" Placeholder="{markup:Translate EscribeNombreResponsable}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Nombres}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}" IsVisible="{Binding EsCandidatoOEsRepresentante}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate Apellido}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Apellidos}" Placeholder="{markup:Translate EscribeApellidoResponsable}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" >
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Apellidos}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate TelefonoFijo}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.TelefonoFijo}" Placeholder="{markup:Translate EscribeTelefonoFijo}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" Keyboard="Telephone">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.TelefonoFijo}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate TelefonoMovil}" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.TelefonoMovil}" Placeholder="{markup:Translate EscribeTelefonoMovil}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}" Keyboard="Telephone">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.TelefonoMovil}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Skype" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Skype}" Placeholder="{markup:Translate EscribeSkypeResponsable}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Skype}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Style="{StaticResource GridLayoutStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Email" Style="{StaticResource LabelStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Entry Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Email}" Placeholder="{markup:Translate EscribeEmailResponsable}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                                       Style="{StaticResource EntryStyle}">
+                                    <Entry.Effects>
+                                        <effects:ClearEntryEffect/>
+                                    </Entry.Effects>
+                                </Entry>
+                                <Label Text="{markup:Translate Obligatorio}" VerticalOptions="Start" FontSize="Micro" TextColor="Red"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro}" />
+                                <Label Text="{Binding Persona.CandidatoDeLaPersona.CandidatosResponsables.Email}" Style="{StaticResource LabelStyle}"
+                                       IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+                <Grid Style="{StaticResource GridLayoutStyle}" Padding="5" IsVisible="{Binding EsGrupo}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate NombreContacto}" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Persona.GrupoDeLaPersona.NombreContacto}" Placeholder="{markup:Translate EscribeTuNombreContacto}" 
+                               IsVisible="{Binding EsMiPersonaOPrimerRegistro}" Style="{StaticResource EntryStyle}">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                        <Label Text="{Binding Persona.GrupoDeLaPersona.NombreContacto}" Style="{StaticResource LabelStyle}"
+                               IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                    </StackLayout>
+                </Grid>
+                <Grid Style="{StaticResource GridLayoutStyle}" Padding="5" IsVisible="{Binding EsRepresentante}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{markup:Translate NumeroIdentificacion}" Style="{StaticResource LabelStyle}" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Persona.RepresentanteDeLaPersona.NumeroIdentificacion}" Placeholder="{markup:Translate EscribeTuNumeroIdentificacion}" IsVisible="{Binding EsMiPersonaOPrimerRegistro}" 
+                               Style="{StaticResource EntryStyle}">
+                            <Entry.Effects>
+                                <effects:ClearEntryEffect/>
+                            </Entry.Effects>
+                        </Entry>
+                        <Label Text="{Binding Persona.RepresentanteDeLaPersona.NumeroIdentificacion}" Style="{StaticResource LabelStyle}"
+                               IsVisible="{Binding EsMiPersonaOPrimerRegistro, Converter={StaticResource negateConverter} }" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+
+        <ContentView AbsoluteLayout.LayoutBounds="0, 0, 1.0, 0.10" AbsoluteLayout.LayoutFlags="All" 
+                     Style="{StaticResource NoConexionMessageContentViewStyle}" IsVisible="{Binding IsNotConnected, Mode=OneWay}">
+            <Label Style="{StaticResource NoConexionMessageLabelStyle}" >
+                <Label.Effects>
+                    <effects:SizeFontToFitEffect />
+                </Label.Effects>
+            </Label>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+
+</ContentPage>
